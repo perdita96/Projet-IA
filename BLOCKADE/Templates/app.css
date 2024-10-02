@@ -1,18 +1,13 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     color: #333;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+    height: 50vh;
 }
 
 header {
@@ -43,9 +38,22 @@ p {
 }
 
 footer {
-    position: absolute;
-    bottom: 10px;
     text-align: center;
     width: 100%;
     color: #7f8c8d;
+}
+
+table {
+    width: 80vh;
+    height: 80vh;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    border-spacing: 0px;
+}
+
+td {
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid gray;
 }
