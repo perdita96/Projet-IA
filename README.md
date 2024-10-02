@@ -2,7 +2,7 @@
 
 Groupe:
 - Buret Lucien
-- Marchand Romain
+- Marchand Romain (it's me!)
 - Desiron Anaïs
 
 ceci est un test
