@@ -1,10 +1,16 @@
 # Projet-IA
+***
+Concevoir un jeu à travers une application web (Framework Flask)
+Mettre en place une Intelligence Artificielle (et l’implémenter avec du Q-Learning)
+***
+## Technologies
+- Python Version 3.12
+- Flask 3.0.3
+## Installation
+### Flask
+- pip install flask
 
-Groupe:
-- Buret Lucien (test)
-- Marchand Romain (it's me!)
+## Collaboration
+- Buret Lucien
+- Marchand Romain
 - Desiron Anaïs
-
-utiliser du JS dans les templates pour si on change de framework
-
-ceci est un test
