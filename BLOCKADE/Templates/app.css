@@ -73,14 +73,3 @@ td {
     vertical-align: middle;
     border: 1px solid gray;
 }
-
-.playButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-input[type="button"] {
-    font-size: 20px;
-    padding: 10px 20px;
-}
