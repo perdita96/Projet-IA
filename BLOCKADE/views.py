@@ -3,7 +3,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     "return index template"
-    return render_template('index.html') #pas besoin du chemin vers le dossier?
+    return render_template('index.html')
 
 @app.route('/game')
 def game():
