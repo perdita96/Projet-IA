@@ -9,3 +9,7 @@ def index():
 def game():
     "return game template"
     return render_template('game.html')
+
+@app.route('/app.css')
+def send_css():
+    return render_template('app.css')
