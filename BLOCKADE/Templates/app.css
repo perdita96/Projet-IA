@@ -39,8 +39,24 @@ p {
 
 footer {
     text-align: center;
+    margin-top: 2vh;
     width: 100%;
     color: #7f8c8d;
+}
+
+#playButtonDiv {
+    margin: auto;
+    text-align: center;
+}
+
+input {
+    padding: 2vh;
+    margin: 2vh;
+    background-color: #2165a9;
+    color: white;
+    width: 18vh;
+    height: 10vh;
+    font-weight: bolder;
 }
 
 table {
