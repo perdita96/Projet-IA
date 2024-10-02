@@ -1,7 +1,7 @@
 # Projet-IA
 
 Groupe:
-- Buret Lucien
+- Buret Lucien (test)
 - Marchand Romain (it's me!)
 - Desiron Anaïs
 
