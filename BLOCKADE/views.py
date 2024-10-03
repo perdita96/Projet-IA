@@ -1,9 +1,12 @@
 from flask import Flask, render_template
 import config
 
-print("BOARD_SIZE:", config.BOARD_SIZE) #test ok
-
 app = Flask(__name__)
+
+app.config.from_object(config)
+
+print("BOARD_SIZE:", app.config['BOARD_SIZE']) #test
+
 @app.route('/')
 def index():
     "return index template"
