@@ -12,46 +12,39 @@ def index():
     "return index template"
     return render_template('index.html')
 
-@app.route('/move', methods=['GET', 'POST'])
+@app.route('/move', methods=[ 'POST'])
 def move():
     data = request.get_json()
-    game_id = data['gameId']
-    player = data['player']
+    game_id = data['game']
+    player_id = data['player']
     direction = data['direction']
-
-    game = Game.query.get(game_id)
+    
+    game = db.session.query(Game).get(game_id)
     if game is None:
         return jsonify({"error": "Game not found"}), 404
 
-    if player not in [game.player_1, game.player_2]:
+    if player_id not in [game.player_1, game.player_2]:
         return jsonify({"error": "Player is not part of the game"}), 403
 
     try:
-        updated_game = business.move(game, player, direction)
-        if(updated_game.turn_player_1):
+        game = business.move(game, player_id, direction)
+        if(game.turn_player_1):
             next_player_id = game.player_1_id
         else:
             next_player_id = game.player_2_id
-        next_player = Player.query.get(next_player_id)
+        next_player = db.session.query(Player).get(next_player_id)
         #if not next_player.is_human:
             # ai_move = ai.move(updated_game)
             # updated_game = business.move(updated_game, ai, ai_move)
         db.session.commit()
-        return jsonify(updated_game)
+        return jsonify(game)
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
 
 # doit etre modifier
-@app.route('/game', methods=['GET', 'POST'])
+@app.route('/game')
 def game():
-    data = request.get_json()
-    player = data['player']
-    #creer game
-    game = createGame(player, config.BOARD_SIZE)
-    #si joueur 1 est 1 ffaire jouer ia
-
-    "return game template"
-    return render_template('game.html', game, player);
+    return render_template('game.html');
 
 @app.route('/app.css')
 def send_css():
