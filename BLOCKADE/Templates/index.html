@@ -1,11 +1,45 @@
 {% extends 'base.html'%}
 
 {%block content%}
-    <script type="text/javascript">
-	    function runGame() {
-	        location.href = './game';
-	    }
-    </script>
-
     <div id="playButtonDiv"><input type="button" value="Jouer" onclick="runGame()"/></div>
+
+    <script type="text/javascript">
+        window.onload = function() {
+            let button = document.getElementById("playButtonDiv");
+
+            let url = "http://127.0.0.1:5000/game";
+            let players = {
+                player_1: "Bob",
+                player_2: "Bot"
+            };
+
+            button.addEventListener("click", async function(url, players) {
+                //location.href = './game';
+                //requête pour créer une partie, on envoie le nom des 2 joueurs, on reçoit la page HTML
+                await fetch(url, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(players),
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+                    }
+                    if (!response.headers.get('Content-Type').includes('text/html')) {
+                        throw new Error('Error: No HTML page returned by server');
+                    } else {
+                        return response.text();
+                    }
+                })
+                .then(html => {
+                    document.open();
+                    document.write(html);
+                    document.close();
+                })
+                .catch(error => {
+                    console.error(error);
+                })
+            });
+        }
+    </script>
 {%endblock%}
