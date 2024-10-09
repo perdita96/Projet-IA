@@ -16,7 +16,12 @@ class Player(db.Model) :
     player_id = db.Column(db.Integer, primary_key=True)
     nickname = db.Column(db.String(25), nullable=True, unique=True)
     is_human = db.Column(db.Boolean, nullable=False)
-    games = db.relationship("Game", back_populates="players")
+     # Relation avec les jeux où ce joueur est Player 1
+    games_as_player_1 = db.relationship("Game", foreign_keys='Game.player_1_id', back_populates="player_1")
+    
+    # Relation avec les jeux où ce joueur est Player 2
+    games_as_player_2 = db.relationship("Game", foreign_keys='Game.player_2_id', back_populates="player_2")
+
 
     def __init__(self, is_human, nickname=None) :
         self.is_human = is_human
@@ -35,7 +40,10 @@ class Game(db.Model) :
     winner_player_1 = db.Column(db.Boolean, nullable=True)
     player_1_id = db.Column(db.Integer, db.ForeignKey('players.player_id'))
     player_2_id = db.Column(db.Integer, db.ForeignKey('players.player_id'))
-    players = db.relationship("Player", back_populates="games")
+
+    # Définir les relations pour chaque joueur
+    player_1 = db.relationship("Player", foreign_keys=[player_1_id], back_populates="games_as_player_1")
+    player_2 = db.relationship("Player", foreign_keys=[player_2_id], back_populates="games_as_player_2")
 
     def __init__(self, player_1, player_2, size) :
         self.size = size
@@ -45,3 +53,5 @@ class Game(db.Model) :
         self.board_state = "1" + "0"*((size**2)-2) + "2"
         self.player_1_id = player_1
         self.player_2_id = player_2
+
+
