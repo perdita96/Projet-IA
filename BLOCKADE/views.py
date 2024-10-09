@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, flash
+from flask import Flask, render_template, redirect, url_for, jsonify
 from BLOCKADE.models import Player, db, Game  # Assurez-vous d'importer db
 import config
 
@@ -55,5 +55,13 @@ def create_game(player_1_nickname, player_2_nickname, size=config.BOARD_SIZE) :
     new_game = Game(player_1=player_1_id, player_2=player_2_id, size=size)
     db.session.add(new_game)
     db.session.commit()
-    return redirect(url_for('game'))  
+
+    game_data = {
+        'game_id': new_game.game_id,
+        'player_1': player_1_nickname,
+        'player_2': player_2_nickname,
+        'size': new_game.size,
+    }
+    #return redirect(url_for('game', game_data))  
+    return jsonify(game_data)
 
