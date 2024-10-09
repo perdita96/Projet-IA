@@ -36,7 +36,7 @@ def id_searched_player(nickname):
 #précondition : le pseudo d'un joueur qui n'est pas encore présent dans la base de données est fourni en argument
 #postcondition : le joueur est rajouté à la base de données
 def add_player(nickname): 
-    new_player = Player(is_human= nickname!= 'AI', nickname=nickname) 
+    new_player = Player(is_human= nickname!= 'IA', nickname=nickname) 
     db.session.add(new_player)  
     db.session.commit()
 
