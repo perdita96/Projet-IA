@@ -53,6 +53,9 @@ class Game(db.Model) :
         self.board_state = "1" + "0"*((size**2)-2) + "2"
         self.player_1_id = player_1
         self.player_2_id = player_2
+<<<<<<< HEAD
     
+=======
+>>>>>>> e71433e (Créer partie)
 
 
