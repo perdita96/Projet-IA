@@ -2,7 +2,7 @@
 
 {%block content%}
     <script type="text/javascript">
-        let BOARD_SIZE = 5;
+        let BOARD_SIZE = parseInt('{{config["BOARD_SIZE"]}}');
 
         let body = document.getElementsByTagName("body")[0];
 
