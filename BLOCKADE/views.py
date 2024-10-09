@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, jsonify
-from . import Game, Player
+from flask import Flask, render_template, redirect, url_for, flash, request, jsonify
+from .models import Player, db, Game  # Assurez-vous d'importer db
 from . import business
 import config
 
@@ -36,7 +36,7 @@ def move():
         #if not next_player.is_human:
             # ai_move = ai.move(updated_game)
             # updated_game = business.move(updated_game, ai, ai_move)
-        #db.session.commit()
+        db.session.commit()
         return jsonify(updated_game)
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
