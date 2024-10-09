@@ -7,11 +7,11 @@
         window.onload = function() {
             let button = document.getElementById("playButtonDiv");
 
-            let url = "http://127.0.0.1:5000/game";
             let players = {
                 player_1: "Bob",
                 player_2: "Bot"
             };
+            let url = "http://127.0.0.1:5000/game/" + players[player_1] + "/" + players[player_2];
 
             button.addEventListener("click", async function(event) {
                 //location.href = './game';
