@@ -43,7 +43,7 @@ def add_player(nickname):
 #précondition : les pseudos de deux joueurs sont données en argument même si il n'existe pas dans la DB. La taille de la grille du jeu peut aussi être donnée
 #postcondition : une partie de la taille passée en argument ou de 5X5 par défaut est créée avec les joueurs passés en arguments
 @app.route('/createGame/<player_1_nickname>/<player_2_nickname>', methods=['GET'])
-def create_game(player_1_nickname, player_2_nickname, size=config.BOARD_SIZE) :
+def create_game(player_1_nickname, player_2_nickname='IA', size=config.BOARD_SIZE) :
     if not player_exists(player_1_nickname) :
         add_player(player_1_nickname)
     if not player_exists(player_2_nickname) :
@@ -56,12 +56,17 @@ def create_game(player_1_nickname, player_2_nickname, size=config.BOARD_SIZE) :
     db.session.add(new_game)
     db.session.commit()
 
-    game_data = {
+    """
+    game_state = {
         'game_id': new_game.game_id,
-        'player_1': player_1_nickname,
-        'player_2': player_2_nickname,
-        'size': new_game.size,
+        'board_state' : new_game.board_state,
+        'pos_player_1' : new_game.pos_player_1,
+        'pos_player_2' : new_game.pos_player_2,
+        'turn_player_1' : new_game.turn_player_1,
+        'winner_player_1' : new_game.winner_player_1
     }
-    #return redirect(url_for('game', game_data))  
-    return jsonify(game_data)
+    """
+    return redirect(url_for('game', game_state=game, player_id=player_1_id))  
+    #return jsonify(game_state)
+    
 
