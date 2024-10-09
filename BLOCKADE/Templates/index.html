@@ -1,7 +1,7 @@
 {% extends 'base.html'%}
 
 {%block content%}
-    <div id="playButtonDiv"><input type="button" value="Jouer" onclick="runGame()"/></div>
+    <div id="playButtonDiv"><input type="button" value="Jouer"/></div>
 
     <script type="text/javascript">
         window.onload = function() {
@@ -13,7 +13,7 @@
                 player_2: "Bot"
             };
 
-            button.addEventListener("click", async function(url, players) {
+            button.addEventListener("click", async function(event) {
                 //location.href = './game';
                 //requête pour créer une partie, on envoie le nom des 2 joueurs, on reçoit la page HTML
                 await fetch(url, {
