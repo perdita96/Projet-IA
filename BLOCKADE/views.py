@@ -1,12 +1,12 @@
 from flask import Flask, render_template, redirect, url_for, flash, request, jsonify
-from .models import Player, db, Game  # Assurez-vous d'importer db
+from .models import Player, db, Game
 from . import business
 import config
 
 app = Flask(__name__)
 app.config.from_object(config)
 
-db.init_app(app)  # Ajoutez cette ligne pour l'initialisation
+db.init_app(app) 
 
 @app.route('/')
 def index():
@@ -42,10 +42,11 @@ def move():
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
 
-# doit etre modifier
 @app.route('/game')
 def game():
-    return render_template('game.html');
+    game = request.args.get('game')
+    player_id = request.args.get('player_id')
+    return render_template('game.html', game=game, player_id=player_id)
 
 @app.route('/app.css')
 def send_css():
@@ -72,8 +73,8 @@ def add_player(nickname):
 
 #précondition : les pseudos de deux joueurs sont données en argument même si il n'existe pas dans la DB. La taille de la grille du jeu peut aussi être donnée
 #postcondition : une partie de la taille passée en argument ou de 5X5 par défaut est créée avec les joueurs passés en arguments
-@app.route('/createGame/<player_1_nickname>/<player_2_nickname>', methods=['GET'])
-def create_game(player_1_nickname, player_2_nickname='IA', size=config.BOARD_SIZE) :
+@app.route('/createGame', methods=['GET'])
+def create_game(player_1_nickname, player_2_nickname='IA') :
     if not player_exists(player_1_nickname) :
         add_player(player_1_nickname)
     if not player_exists(player_2_nickname) :
@@ -82,21 +83,10 @@ def create_game(player_1_nickname, player_2_nickname='IA', size=config.BOARD_SIZ
     player_1_id = id_searched_player(player_1_nickname)
     player_2_id = id_searched_player(player_2_nickname)
 
-    new_game = Game(player_1=player_1_id, player_2=player_2_id, size=size)
+    new_game = Game(player_1=player_1_id, player_2=player_2_id, size=config.BOARD_SIZE)
     db.session.add(new_game)
     db.session.commit()
 
-    """
-    game_state = {
-        'game_id': new_game.game_id,
-        'board_state' : new_game.board_state,
-        'pos_player_1' : new_game.pos_player_1,
-        'pos_player_2' : new_game.pos_player_2,
-        'turn_player_1' : new_game.turn_player_1,
-        'winner_player_1' : new_game.winner_player_1
-    }
-    """
-    return redirect(url_for('game', game_state=game, player_id=player_1_id))  
-    #return jsonify(game_state)
+    return redirect(url_for('game', game=new_game, player_id=player_1_id))
     
 
