@@ -17,7 +17,7 @@ Mettre en place une Intelligence Artificielle (et l’implémenter avec du Q-Lea
 - pip install flask_sqlalchemy
 
 ## Initialisation de la base de données
-- FLASK_APP=run.py flask init_db 
+- lance le script initDB.py
 
 ## Collaboration
 - Buret Lucien
