@@ -21,27 +21,64 @@ def game(game_state, player_id):
 def send_css():
     return render_template('app.css')
 
-#précondition : le pseudo d'un joueur est passé en argument 
-#postcondition : si le joueur est présent dans la base de données la fonction retourne vrai sinon faux
+    """
+    Vérifier si un joueur existe dans la base de données.
+
+    Préconditions:
+    - 'nickname' est une chaîne de caractères représentant le pseudo d'un joueur.
+    - La base de données est accessible via 'db.session'.
+    - Il faut que la fonction ait accès au modèle Player
+
+    Postconditions:
+    - Retourne True si un joueur avec ce pseudo existe dans la base de données.
+    - Retourne False si aucun joueur avec ce pseudo n'est trouvé.
+    """
 def player_exists(nickname):
     if db.session.query(Player).filter_by(nickname=nickname).first() == None:
         return False
     return True
 
-#précondition : le pseudo du joueur doit exister dans la base de données
-#postcondition : L'id du joueur ayant le pseudo en question est renvoyé
+    """
+    Renvoier l'ID du joueur ayant le pseudo donné.
+
+    Préconditions:
+    - 'nickname' doit être une chaîne de caractères représentant un pseudo existant dans la base de données.
+    - La base de données est accessible via 'db.session'.
+    - Il faut que la fonction ait accès au modèle Player
+
+    Postconditions:
+    - Retourne l'ID ('player_id') du joueur correspondant au pseudo.
+    """
 def id_searched_player(nickname):
     return db.session.query(Player).filter_by(nickname=nickname).first().player_id
 
-#précondition : le pseudo d'un joueur qui n'est pas encore présent dans la base de données est fourni en argument
-#postcondition : le joueur est rajouté à la base de données
+    """
+    Ajouter un nouveau joueur dans la base de données.
+
+    Préconditions:
+    - 'nickname' doit être une chaîne de caractères qui n'existe pas encore dans la base de données.
+    - La base de données est accessible via 'db.session'.
+    - Il faut que la fonction ait accès au modèle Player
+
+    Postconditions:
+    - Un nouveau joueur est ajouté à la base de données.
+    """
 def add_player(nickname): 
     new_player = Player(is_human= nickname!= 'IA', nickname=nickname) 
     db.session.add(new_player)  
     db.session.commit()
 
-#précondition : les pseudos de deux joueurs sont données fourni en JSON même si il n'existe pas dans la DB. La taille de la grille du jeu peut aussi être donnée
-#postcondition : une partie de la taille passée en argument ou de 5X5 par défaut est créée avec les joueurs passés en arguments
+    """
+    Créer une partie avec deux joueurs
+
+    Préconditions:
+    - 'data' doit être un dictionnaire contenant au moins deux champs 'player_1' et 'player_2' (pseudos des joueurs).
+
+    Postconditions:
+    - Si les joueurs n'existent pas dans la base de données, ils sont créés.
+    - Une nouvelle partie est créée avec la taille de la grille spécifiée (5x5)
+    - La partie est ajoutée et sauvegardée dans la base de données.
+    """
 @app.route('/createGame', methods=['POST','GET'])
 def create_game() :
     
