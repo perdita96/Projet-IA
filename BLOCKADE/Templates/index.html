@@ -9,13 +9,14 @@
 
             let players = {
                 player_1: "Bob",
-                player_2: "Bot"
+                player_2: "Alice"
             };
-            let url = "http://127.0.0.1:5000/game/" + players[player_1] + "/" + players[player_2];
+            let url = "http://127.0.0.1:5000/createGame";
 
             button.addEventListener("click", async function(event) {
                 //location.href = './game';
-                //requête pour créer une partie, on envoie le nom des 2 joueurs, on reçoit la page HTML
+                //Requête pour créer une partie, on envoie le nom du ou des joueurs (si IA ou non) en JSON au serveur, puis on reçoit et on 
+                //affiche la page de jeu que nous renvoie le serveur
                 await fetch(url, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
