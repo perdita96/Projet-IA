@@ -62,10 +62,9 @@ def move():
     #Les paramètres game et player_id sont présents dans l'URL
 #Post-conditions :
     #La fonction renvoie le template game.html avec les paramètres game et player_id
-@app.route('/game')
-def game():
-    game = request.args.get('game')
-    player_id = request.args.get('player_id')
+@app.route('/game/<game>/<player_id>', methods=['GET'])
+def game(game, player_id):
+    "return game template"
     return render_template('game.html', game=game, player_id=player_id)
 
 #Post-conditions :
@@ -121,7 +120,7 @@ def create_game() :
     db.session.add(new_game)
     db.session.commit()
 
-    return redirect(url_for('game', game_state='new_game', player_id=player_1_id))
+    return redirect(url_for('game', game=new_game, player_id=player_1_id))
     
         
 
