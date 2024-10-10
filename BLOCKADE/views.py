@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 from flask import Flask, render_template, redirect, url_for, request
+=======
+from flask import Flask, render_template, redirect, url_for, flash
+>>>>>>> 8b4243c969cea7b273f06abc751805e7e910816d
 from BLOCKADE.models import Player, db, Game  # Assurez-vous d'importer db
 import config
 
@@ -15,19 +19,28 @@ def index():
 @app.route('/game/<game_state>/<player_id>', methods=['GET'])
 def game(game_state, player_id):
     "return game template"
+<<<<<<< HEAD
     return render_template('game.html')
+=======
+    return render_template('game.html', size=config.BOARD_SIZE)
+>>>>>>> 8b4243c969cea7b273f06abc751805e7e910816d
 
 @app.route('/app.css')
 def send_css():
     return render_template('app.css')
 
+<<<<<<< HEAD
 #précondition : le pseudo d'un joueur est passé en argument 
 #postcondition : si le joueur est présent dans la base de données la fonction retourne vrai sinon faux
+=======
+
+>>>>>>> 8b4243c969cea7b273f06abc751805e7e910816d
 def player_exists(nickname):
     if db.session.query(Player).filter_by(nickname=nickname).first() == None:
         return False
     return True
 
+<<<<<<< HEAD
 #précondition : le pseudo du joueur doit exister dans la base de données
 #postcondition : L'id du joueur ayant le pseudo en question est renvoyé
 def id_searched_player(nickname):
@@ -54,10 +67,23 @@ def create_game() :
     else : 
         player_2_nickname = 'IA'
 
+=======
+def id_searched_player(nickname):
+    return db.session.query(Player).filter_by(nickname=nickname).first().player_id
+
+def add_player(nickname): 
+    new_player = Player(is_human=True, nickname=nickname) 
+    db.session.add(new_player)  
+    db.session.commit()
+
+@app.route('/createGame/<player_1_nickname>/<player_2_nickname>', methods=['GET'])
+def create_game(player_1_nickname, player_2_nickname, size=config.BOARD_SIZE) :
+>>>>>>> 8b4243c969cea7b273f06abc751805e7e910816d
     if not player_exists(player_1_nickname) :
         add_player(player_1_nickname)
     if not player_exists(player_2_nickname) :
         add_player(player_2_nickname)
+<<<<<<< HEAD
         
     player_1_id = id_searched_player(player_1_nickname)
     player_2_id = id_searched_player(player_2_nickname)
@@ -71,3 +97,14 @@ def create_game() :
         
 
     
+=======
+    
+    player_1_id = id_searched_player(player_1_nickname)
+    player_2_id = id_searched_player(player_2_nickname)
+
+    new_game = Game(player_1=player_1_id, player_2=player_2_id, size=size)
+    db.session.add(new_game)
+    db.session.commit()
+    return redirect(url_for('index'))  
+
+>>>>>>> 8b4243c969cea7b273f06abc751805e7e910816d
