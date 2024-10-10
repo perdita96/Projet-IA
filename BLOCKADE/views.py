@@ -12,7 +12,7 @@ def index():
     "return index template"
     return render_template('index.html')
 
-@app.route('/game')
+@app.route('/game/<game_state>/<player_id>', methods=['GET'])
 def game(game_state, player_id):
     "return game template"
     return render_template('game.html', size=config.BOARD_SIZE)
@@ -42,15 +42,15 @@ def add_player(nickname):
 
 #précondition : les pseudos de deux joueurs sont données fourni en JSON même si il n'existe pas dans la DB. La taille de la grille du jeu peut aussi être donnée
 #postcondition : une partie de la taille passée en argument ou de 5X5 par défaut est créée avec les joueurs passés en arguments
-@app.route('/createGame', methods=['POST'])
+@app.route('/createGame', methods=['POST','GET'])
 def create_game() :
     
     request_data = request.get_json()
 
-    player_1_nickname = request_data['player_1_nickname']
+    player_1_nickname = request_data['player_1']
 
-    if 'player_2_nickname' in request_data :
-        player_2_nickname = request_data['player_2_nickname']
+    if 'player_2' in request_data :
+        player_2_nickname = request_data['player_2']
     else : 
         player_2_nickname = 'IA'
 
@@ -66,7 +66,7 @@ def create_game() :
     db.session.add(new_game)
     db.session.commit()
 
-    return redirect(url_for('game', game_state=new_game, player_id=player_1_id))  
+    return redirect(url_for('game', game_state='new_game', player_id=player_1_id))
     
         
 
