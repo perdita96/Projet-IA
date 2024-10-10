@@ -32,6 +32,7 @@ def index():
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #Pré-condition :
     #la requête est de type POST
     #Les données de la requête sont au format JSON
@@ -53,11 +54,14 @@ def move():
     if game is None:
         return jsonify({"error": "Game not found"}), 404
 =======
+=======
+>>>>>>> d1f71e15680e9b3456a5e391f1b375e3bf9e3d3b
 @app.route('/game')
 def game():
     game = request.args.get('game')
     player_id = request.args.get('player_id')
     return render_template('game.html', game=game, player_id=player_id)
+<<<<<<< HEAD
 >>>>>>> d1f71e1 (ttt)
 
     if int(player_id) not in [int(game.player_1_id), int(game.player_2_id)]:
@@ -130,15 +134,20 @@ def game(game_state, player_id):
     "return game template"
     return render_template('game.html')
 >>>>>>> f27a56e (postCondition)
+=======
+>>>>>>> d1f71e15680e9b3456a5e391f1b375e3bf9e3d3b
 
 @app.route('/app.css')
 def send_css():
     return render_template('app.css')
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 >>>>>>> e71433e (Créer partie)
 =======
+=======
+>>>>>>> d1f71e15680e9b3456a5e391f1b375e3bf9e3d3b
     """
     Vérifier si un joueur existe dans la base de données.
 
@@ -151,7 +160,10 @@ def send_css():
     - Retourne True si un joueur avec ce pseudo existe dans la base de données.
     - Retourne False si aucun joueur avec ce pseudo n'est trouvé.
     """
+<<<<<<< HEAD
 >>>>>>> f27a56e (postCondition)
+=======
+>>>>>>> d1f71e15680e9b3456a5e391f1b375e3bf9e3d3b
 def player_exists(nickname):
     if db.session.query(Player).filter_by(nickname=nickname).first() == None:
         return False
@@ -159,8 +171,11 @@ def player_exists(nickname):
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> f27a56e (postCondition)
+=======
+>>>>>>> d1f71e15680e9b3456a5e391f1b375e3bf9e3d3b
     """
     Renvoier l'ID du joueur ayant le pseudo donné.
 
