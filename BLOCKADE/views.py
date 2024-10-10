@@ -31,6 +31,7 @@ def index():
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #Pré-condition :
     #la requête est de type POST
     #Les données de la requête sont au format JSON
@@ -51,6 +52,13 @@ def move():
     game = db.session.query(Game).get(game_id)
     if game is None:
         return jsonify({"error": "Game not found"}), 404
+=======
+@app.route('/game')
+def game():
+    game = request.args.get('game')
+    player_id = request.args.get('player_id')
+    return render_template('game.html', game=game, player_id=player_id)
+>>>>>>> d1f71e1 (ttt)
 
     if int(player_id) not in [int(game.player_1_id), int(game.player_2_id)]:
         return jsonify({"error": "Player is not part of the game"}), 403
