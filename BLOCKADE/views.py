@@ -69,5 +69,5 @@ def create_game(player_1_nickname, player_2_nickname='IA', size=config.BOARD_SIZ
     """
     return redirect(url_for('game', game_state=new_game, player_id=player_1_id))  
     #return jsonify(game_state)
-    
 
+    
