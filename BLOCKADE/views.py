@@ -1,11 +1,6 @@
-<<<<<<< HEAD
 from flask import Flask, render_template, redirect, url_for, flash, request, jsonify
 from .models import Player, db, Game
 from . import business
-=======
-from flask import Flask, render_template, redirect, url_for, request
-from BLOCKADE.models import Player, db, Game  # Assurez-vous d'importer db
->>>>>>> main
 import config
 
 app = Flask(__name__)
@@ -19,7 +14,6 @@ def index():
     "return index template"
     return render_template('index.html')
 
-<<<<<<< HEAD
 #Pré-condition :
     #la requête est de type POST
     #Les données de la requête sont au format JSON
@@ -73,12 +67,6 @@ def game():
     game = request.args.get('game')
     player_id = request.args.get('player_id')
     return render_template('game.html', game=game, player_id=player_id)
-=======
-@app.route('/game/<game_state>/<player_id>', methods=['GET'])
-def game(game_state, player_id):
-    "return game template"
-    return render_template('game.html')
->>>>>>> main
 
 #Post-conditions :
     # La fonction renvoie le fichier CSS app.css
@@ -109,10 +97,6 @@ def add_player(nickname):
 
 #précondition : les pseudos de deux joueurs sont données fourni en JSON même si il n'existe pas dans la DB. La taille de la grille du jeu peut aussi être donnée
 #postcondition : une partie de la taille passée en argument ou de 5X5 par défaut est créée avec les joueurs passés en arguments
-<<<<<<< HEAD
-@app.route('/createGame', methods=['GET'])
-def create_game(player_1_nickname, player_2_nickname='IA') :
-=======
 @app.route('/createGame', methods=['POST','GET'])
 def create_game() :
     
@@ -125,7 +109,6 @@ def create_game() :
     else : 
         player_2_nickname = 'IA'
 
->>>>>>> main
     if not player_exists(player_1_nickname) :
         add_player(player_1_nickname)
     if not player_exists(player_2_nickname) :
@@ -138,11 +121,7 @@ def create_game() :
     db.session.add(new_game)
     db.session.commit()
 
-<<<<<<< HEAD
-    return redirect(url_for('game', game=new_game, player_id=player_1_id))
-=======
     return redirect(url_for('game', game_state='new_game', player_id=player_1_id))
->>>>>>> main
     
         
 
