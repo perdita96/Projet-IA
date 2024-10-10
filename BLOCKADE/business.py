@@ -1,3 +1,5 @@
+###test
+
 #Pré-conditions
     # game est un objet Game valide
     # player est un ID de joueur 
