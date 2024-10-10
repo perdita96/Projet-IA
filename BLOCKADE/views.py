@@ -40,43 +40,34 @@ def add_player(nickname):
     db.session.add(new_player)  
     db.session.commit()
 
-#précondition : les pseudos de deux joueurs sont données en argument même si il n'existe pas dans la DB. La taille de la grille du jeu peut aussi être donnée
+#précondition : les pseudos de deux joueurs sont données fourni en JSON même si il n'existe pas dans la DB. La taille de la grille du jeu peut aussi être donnée
 #postcondition : une partie de la taille passée en argument ou de 5X5 par défaut est créée avec les joueurs passés en arguments
-
-
-"""
-@app.route('/createGame/<player_1_nickname>/', methods=['GET'])
-@app.route('/createGame/<player_1_nickname>/<player_2_nickname>', methods=['GET'])
-"""
 @app.route('/createGame/', methods=['GET'])
 def create_game() :
     
     request_data = request.get_json()
-    print(request_data)
-    if request_data : 
 
-        player_1_nickname = request_data['player_1_nickname']
+    player_1_nickname = request_data['player_1_nickname']
 
-        if 'player_2_nickname' in request_data :
-            player_2_nickname = request_data['player_2_nickname']
-        else : 
-            player_2_nickname = 'IA'
-
-        if not player_exists(player_1_nickname) :
-            add_player(player_1_nickname)
-        if not player_exists(player_2_nickname) :
-            add_player(player_2_nickname)
-        
-        player_1_id = id_searched_player(player_1_nickname)
-        player_2_id = id_searched_player(player_2_nickname)
-
-        new_game = Game(player_1=player_1_id, player_2=player_2_id, size=config.BOARD_SIZE)
-        db.session.add(new_game)
-        db.session.commit()
-
-        return redirect(url_for('game', game_state=new_game, player_id=player_1_id))  
+    if 'player_2_nickname' in request_data :
+        player_2_nickname = request_data['player_2_nickname']
     else : 
-        return redirect(url_for('game', error = 504))
+        player_2_nickname = 'IA'
+
+    if not player_exists(player_1_nickname) :
+        add_player(player_1_nickname)
+    if not player_exists(player_2_nickname) :
+        add_player(player_2_nickname)
+        
+    player_1_id = id_searched_player(player_1_nickname)
+    player_2_id = id_searched_player(player_2_nickname)
+
+    new_game = Game(player_1=player_1_id, player_2=player_2_id, size=config.BOARD_SIZE)
+    db.session.add(new_game)
+    db.session.commit()
+
+    return redirect(url_for('game', game_state=new_game, player_id=player_1_id))  
+    
         
 
     
