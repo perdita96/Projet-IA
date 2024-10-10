@@ -1,4 +1,5 @@
+import random
+
 def get_move():
-    """return move chose by ai.
-    Currently empty"""
-    pass
+    directions = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight']
+    return random.choice(directions)

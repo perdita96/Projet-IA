@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, flash, request, jsonify
 from .models import Player, db, Game
+from .ai import get_move
 from . import business
 import config
 
@@ -46,8 +47,8 @@ def move():
             next_player_id = game.player_2_id
         next_player = db.session.query(Player).get(next_player_id)
         #if (game.winner_player_1  is None and not next_player.is_human):
-            # ai_move = ai.move(updated_game)
-            # updated_game = business.move(updated_game, ai, ai_move)
+            #ai_move = get_move(updated_game)
+            #updated_game = business.move(updated_game, ai, ai_move)
         db.session.commit()
 
         if  game.winner_player_1  is None:
@@ -57,6 +58,8 @@ def move():
             return jsonify({"winner": game.winner_player_1 })
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
+    
+
 
 #Pré-conditions :
     #Les paramètres game et player_id sont présents dans l'URL

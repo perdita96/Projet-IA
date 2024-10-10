@@ -32,13 +32,14 @@ def move(game, player, direction):
             x, y = map(int, current_player_pos.split(","))
             if direction == "ArrowUp":
                 new_x, new_y = x - 1, y
-            elif direction == "ArrowDow":
+            elif direction == "ArrowDown":
                 new_x, new_y = x + 1, y
             elif direction == "ArrowLeft":
                 new_x, new_y = x, y - 1
             elif direction == "ArrowRight":
                 new_x, new_y = x, y + 1
             else:
+                print("test")
                 raise ValueError("Direction non valide")
             if (0 <= new_x < size) and (0 <= new_y < size):
                 target_case = board_state[new_x * size + new_y]
