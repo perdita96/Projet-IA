@@ -1,10 +1,14 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 from flask import Flask, render_template, redirect, url_for, flash, request, jsonify
 from .models import Player, db, Game
 from .ai import get_move
 from . import business
 =======
 from flask import Flask, render_template, redirect, url_for, flash
+=======
+from flask import Flask, render_template, redirect, url_for, request
+>>>>>>> f27a56e (postCondition)
 from BLOCKADE.models import Player, db, Game  # Assurez-vous d'importer db
 >>>>>>> e71433e (Créer partie)
 import config
@@ -25,6 +29,7 @@ def index():
     "return index template"
     return render_template('index.html')
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #Pré-condition :
     #la requête est de type POST
@@ -111,19 +116,43 @@ def send_static(path):
 def game():
     "return game template"
     return render_template('game.html', size=config.BOARD_SIZE)
+=======
+@app.route('/game/<game_state>/<player_id>', methods=['GET'])
+def game(game_state, player_id):
+    "return game template"
+    return render_template('game.html')
+>>>>>>> f27a56e (postCondition)
 
 @app.route('/app.css')
 def send_css():
     return render_template('app.css')
 
+<<<<<<< HEAD
 
 >>>>>>> e71433e (Créer partie)
+=======
+    """
+    Vérifier si un joueur existe dans la base de données.
+
+    Préconditions:
+    - 'nickname' est une chaîne de caractères représentant le pseudo d'un joueur.
+    - La base de données est accessible via 'db.session'.
+    - Il faut que la fonction ait accès au modèle Player
+
+    Postconditions:
+    - Retourne True si un joueur avec ce pseudo existe dans la base de données.
+    - Retourne False si aucun joueur avec ce pseudo n'est trouvé.
+    """
+>>>>>>> f27a56e (postCondition)
 def player_exists(nickname):
     if db.session.query(Player).filter_by(nickname=nickname).first() == None:
         return False
     return True
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> f27a56e (postCondition)
     """
     Renvoier l'ID du joueur ayant le pseudo donné.
 
@@ -177,6 +206,7 @@ def create_game() :
     else : 
         player_2_nickname = 'IA'
 
+<<<<<<< HEAD
 =======
 def id_searched_player(nickname):
     return db.session.query(Player).filter_by(nickname=nickname).first().player_id
@@ -189,11 +219,12 @@ def add_player(nickname):
 @app.route('/createGame/<player_1_nickname>/<player_2_nickname>', methods=['GET'])
 def create_game(player_1_nickname, player_2_nickname, size=config.BOARD_SIZE) :
 >>>>>>> e71433e (Créer partie)
+=======
+>>>>>>> f27a56e (postCondition)
     if not player_exists(player_1_nickname) :
         add_player(player_1_nickname)
     if not player_exists(player_2_nickname) :
         add_player(player_2_nickname)
-<<<<<<< HEAD
         
     player_1_id = id_searched_player(player_1_nickname)
     player_2_id = id_searched_player(player_2_nickname)
@@ -206,6 +237,7 @@ def create_game(player_1_nickname, player_2_nickname, size=config.BOARD_SIZE) :
     
         
 
+<<<<<<< HEAD
     
 =======
     
@@ -218,3 +250,6 @@ def create_game(player_1_nickname, player_2_nickname, size=config.BOARD_SIZE) :
     return redirect(url_for('index'))  
 
 >>>>>>> e71433e (Créer partie)
+=======
+    
+>>>>>>> f27a56e (postCondition)
