@@ -49,8 +49,7 @@ class Game(db.Model) :
         self.size = size
         self.pos_player_1 = "0,0"
         self.pos_player_2 = str(size - 1) + "," + str(size - 1)
-        #self.turn_player_1 = random.choice([True, False])
-        self.turn_player_1 = True
+        self.turn_player_1 = random.choice([True, False])
         self.board_state = "1" + "0"*((size**2)-2) + "2"
         self.player_1_id = player_1
         self.player_2_id = player_2
