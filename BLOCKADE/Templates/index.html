@@ -1,17 +1,17 @@
 {% extends 'base.html'%}
 
 {%block content%}
-    <div id="playButtonDiv"><input type="button" value="Jouer"/></div>
+    <div id="playButtonDiv"><input id="playButton" type="button" value="Jouer"/></div>
 
     <script type="text/javascript">
         window.onload = function() {
-            let button = document.getElementById("playButtonDiv");
+            let button = document.getElementById("playButton");
 
             let players = {
                 player_1: "Bob",
                 player_2: "Alice"
             };
-            let url = "http://127.0.0.1:5000/createGame";
+            let url = 'http://177.0.0.1:5000/createGame';
 
             button.addEventListener("click", async function(event) {
                 //location.href = './game';
@@ -22,7 +22,7 @@
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(players),
                 })
-                .then(response => {
+                /*.then(response => {
                     if (!response.ok) {
                         throw new Error(`Error: ${response.status} - ${response.statusText}`);
                     }
@@ -39,7 +39,7 @@
                 })
                 .catch(error => {
                     console.error(error);
-                })
+                })*/
             });
         }
     </script>
