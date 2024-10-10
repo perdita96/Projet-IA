@@ -38,7 +38,8 @@ def move(game, player, direction):
                 board_state[new_x * size + new_y] = current_player
                 game.board_state = "".join(board_state)
                 game.turn_player_1 = not game.turn_player_1
-
+                if "0" not in board_state:
+                    game.winner_player_1 = board_state.count("1") > size ** 2 // 2
                 return game
             else:
                 raise ValueError("Mouvement non autorisé")

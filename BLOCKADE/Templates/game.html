@@ -32,10 +32,13 @@
                 event.key == 'ArrowLeft'||
                 event.key == 'ArrowRight'){
                     window.removeEventListener('keydown', handleKeyPress);
-                    // verifier si le mouvement est autorise
-
                     await sendMoveRequest(event.key);
-                    ColorBoard();
+                    if (game.error == null) {
+                        alert(game.error);
+                    }else{
+                        if(game.winner)
+                        ColorBoard();
+                    }
                     window.addEventListener('keydown', handleKeyPress);
                 }
         }

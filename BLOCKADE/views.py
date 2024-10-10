@@ -8,11 +8,22 @@ app.config.from_object(config)
 
 db.init_app(app) 
 
+#Post-conditions : La fonction renvoie le template index.html
 @app.route('/')
 def index():
     "return index template"
     return render_template('index.html')
 
+#Pré-condition :
+    #la requête est de type POST
+    #Les données de la requête sont au format JSON
+    #Les données de la requête contiennent les clés game, player et direction
+#Post-condition:
+    # Si le jeu n'existe pas, la fonction renvoie une erreur 404 avec un message "Game not found"
+    # Si le joueur n'est pas partie du jeu, la fonction renvoie une erreur 403 avec un message "Player is not part of the game"
+    # Si le mouvement n'est pas valide, la fonction renvoie une erreur 400 avec un message
+    # Si le mouvement est valide, la fonction met à jour le jeu, fait jouer IA si c'est son tour et renvoie les données du jeu sous forme de JSON
+    # Si le jeu est terminé, la fonction redirige vers la page ??
 @app.route('/move', methods=[ 'POST'])
 def move():
     data = request.get_json()
@@ -34,23 +45,36 @@ def move():
         else:
             next_player_id = game.player_2_id
         next_player = db.session.query(Player).get(next_player_id)
-        #if not next_player.is_human:
+        #if (game.winner_player_1  is None and not next_player.is_human):
             # ai_move = ai.move(updated_game)
             # updated_game = business.move(updated_game, ai, ai_move)
         db.session.commit()
-        return jsonify(game)
+        if  game.winner_player_1  is None:
+            return jsonify(game)
+        else:
+            #a modifier quand on aura la page de fin
+            return jsonify({"winner": game.winner_player_1 })
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
 
+#Pré-conditions :
+    #La requête est de type GET
+    #Les paramètres game et player_id sont présents dans l'URL
+#Post-conditions :
+    #La fonction renvoie le template game.html avec les paramètres game et player_id
 @app.route('/game')
 def game():
     game = request.args.get('game')
     player_id = request.args.get('player_id')
     return render_template('game.html', game=game, player_id=player_id)
 
+#Post-conditions :
+    # La fonction renvoie le fichier CSS app.css
 @app.route('/app.css')
 def send_css():
     return render_template('app.css')
+
+####
 
 #précondition : le pseudo d'un joueur est passé en argument 
 #postcondition : si le joueur est présent dans la base de données la fonction retourne vrai sinon faux
