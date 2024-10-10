@@ -11,10 +11,8 @@
                 player_1: "Bob",
                 player_2: "Alice"
             };
-            let url = '/createGame';
 
             button.addEventListener("click", async function(event) {
-                //location.href = './game';
                 //Requête pour créer une partie, on envoie le nom du ou des joueurs (si IA ou non) en JSON au serveur, puis on reçoit et on 
                 //affiche la page de jeu que nous renvoie le serveur
                 await fetch('/createGame', {
@@ -22,7 +20,7 @@
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(players),
                 })
-                /*.then(response => {
+                .then(response => {
                     if (!response.ok) {
                         throw new Error(`Error: ${response.status} - ${response.statusText}`);
                     }
@@ -39,7 +37,7 @@
                 })
                 .catch(error => {
                     console.error(error);
-                })*/
+                })
             });
         }
     </script>

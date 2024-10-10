@@ -15,7 +15,7 @@ def index():
 @app.route('/game/<game_state>/<player_id>', methods=['GET'])
 def game(game_state, player_id):
     "return game template"
-    return render_template('game.html', size=config.BOARD_SIZE)
+    return render_template('game.html')
 
 @app.route('/app.css')
 def send_css():
