@@ -42,11 +42,7 @@ def add_player(nickname):
 
 #précondition : les pseudos de deux joueurs sont données fourni en JSON même si il n'existe pas dans la DB. La taille de la grille du jeu peut aussi être donnée
 #postcondition : une partie de la taille passée en argument ou de 5X5 par défaut est créée avec les joueurs passés en arguments
-<<<<<<< HEAD
-@app.route('/createGame/', methods=['POST', 'GET'])
-=======
 @app.route('/createGame', methods=['POST','GET'])
->>>>>>> 491303c59ee68d18e986775d1780f219702eb286
 def create_game() :
     
     request_data = request.get_json()
