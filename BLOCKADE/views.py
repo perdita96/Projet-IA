@@ -12,10 +12,11 @@ def index():
     "return index template"
     return render_template('index.html')
 
-@app.route('/game/<game_state>/<player_id>', methods=['GET'])
-def game(game_state, player_id):
-    "return game template"
-    return render_template('game.html')
+@app.route('/game')
+def game():
+    game = request.args.get('game')
+    player_id = request.args.get('player_id')
+    return render_template('game.html', game=game, player_id=player_id)
 
 @app.route('/app.css')
 def send_css():

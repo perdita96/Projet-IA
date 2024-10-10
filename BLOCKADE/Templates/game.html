@@ -1,13 +1,17 @@
 {% extends 'base.html'%}
 
 {%block content%}
+    <h1>Tu es sur la page game</h1>
+
     <script type="text/javascript">
-        let BOARD_SIZE = parseInt('{{config["BOARD_SIZE"]}}');
+        console.log(player_id)
+
+        let BOARD_SIZE = game.size;
 
         let body = document.getElementsByTagName("body")[0];
 
         let table = document.createElement("table");
-            
+
         for (let i = 0; i < BOARD_SIZE; i++) {
             let row = document.createElement("tr");
 
@@ -20,5 +24,95 @@
         }
 
         body.appendChild(table);
+
+        ColorBoard();
+
+        window.addEventListener('keydown', handleKeyPress);
+        
+        async function handleKeyPress(event) {
+            event.preventDefault();
+            if (event.key == 'ArrowUp' ||
+                event.key == 'ArrowDown' ||
+                event.key == 'ArrowLeft'||
+                event.key == 'ArrowRight'){
+                    window.removeEventListener('keydown', handleKeyPress);
+                    await sendMoveRequest(event.key);
+                    if (game.error == null) {
+                        alert(game.error);
+                    }else{
+                        if(game.winner)
+                        ColorBoard();
+                    }
+                    window.addEventListener('keydown', handleKeyPress);
+                }
+        }
+
+        async function sendMoveRequest(direction) {
+            const reponse = await fetch('/move', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    game: game,
+                    player_id: player_id,
+                    direction: direction
+                })
+            })
+            game = await reponse.json();
+        }
+
+        function ColorBoard() {
+            const boardState = game.board_state;
+            const pos1 = getPositionFromString(game.pos_player_1);
+            const pos2 = getPositionFromString(game.pos_player_2);
+
+            for (let i = 0; i < BOARD_SIZE; i++) {
+                for (let j = 0; j < BOARD_SIZE; j++) {
+                    let index = i * BOARD_SIZE + j;
+                    let cellValue = boardState[index];
+
+                    let cell = table.rows[i].cells[j];
+
+                    cell.classList.remove('player1', 'player2', 'neutral');
+
+                    if (cellValue === '0') {
+                        cell.classList.add('neutral');
+                    } else if (cellValue === '1') {
+                        cell.classList.add('player1');
+                    } else if (cellValue === '2') {
+                        cell.classList.add('player2');
+                    }
+
+                    if(cell.firstChild) {
+                        cell.removeChild(cell.firstChild);
+                    }
+                }
+            }
+
+            let player1Cell = table.rows[pos1.x].cells[pos1.y];
+            let img1 = document.createElement("img");
+            img1.src = "/static/pion.jpg";
+            img1.alt = "Joueur 1";
+            img1.width = 40;
+            img1.height = 40;
+            player1Cell.appendChild(img1);
+
+            let player2Cell = table.rows[pos2.x].cells[pos2.y];
+            let img2 = document.createElement("img");
+            img2.src = "/static/pion.jpg";
+            img2.alt = "Joueur 2";
+            img2.width = 40;
+            img2.height = 40;
+            player2Cell.appendChild(img2);
+        }
+
+        function getPositionFromString(positionString) {
+            let posArray = positionString.split(",");
+            return {
+                x: parseInt(posArray[0]),
+                y: parseInt(posArray[1])
+            };
+        }
     </script>
 {%endblock%}
