@@ -6,7 +6,7 @@ Mettre en place une Intelligence Artificielle (et l’implémenter avec du Q-Lea
 ## Technologies
 - Python Version 3.12
 - Flask 3.0.3
-- SQLite 3
+- SQLite 3²
 - SQLAlchemy
 ## Installation
 - pip3 install -r requirements.txt
