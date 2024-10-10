@@ -1,25 +1,84 @@
-from flask import Flask, render_template, redirect, url_for, request
-from BLOCKADE.models import Player, db, Game  # Assurez-vous d'importer db
+from flask import Flask, render_template, redirect, url_for, flash, request, jsonify
+from .models import Player, db, Game
+from . import business
 import config
 
 app = Flask(__name__)
 app.config.from_object(config)
 
-db.init_app(app)  # Ajoutez cette ligne pour l'initialisation
+db.init_app(app) 
 
+#Post-conditions : La fonction renvoie le template index.html
 @app.route('/')
 def index():
     "return index template"
     return render_template('index.html')
 
-@app.route('/game/<game_state>/<player_id>', methods=['GET'])
-def game(game_state, player_id):
-    "return game template"
-    return render_template('game.html')
+#Pré-condition :
+    #la requête est de type POST
+    #Les données de la requête sont au format JSON
+    #Les données de la requête contiennent les clés game, player et direction
+#Post-condition:
+    # Si le jeu n'existe pas, la fonction renvoie une erreur 404 avec un message "Game not found"
+    # Si le joueur n'est pas partie du jeu, la fonction renvoie une erreur 403 avec un message "Player is not part of the game"
+    # Si le mouvement n'est pas valide, la fonction renvoie une erreur 400 avec un message
+    # Si le mouvement est valide, la fonction met à jour le jeu, fait jouer IA si c'est son tour et renvoie les données du jeu sous forme de JSON
+    # Si le jeu est terminé, la fonction redirige vers la page ??
+@app.route('/move', methods=[ 'POST'])
+def move():
+    data = request.get_json()
+    game_id = data['game']
+    player_id = data['player']
+    direction = data['dir']
+    
+    game = db.session.query(Game).get(game_id)
+    if game is None:
+        return jsonify({"error": "Game not found"}), 404
 
-@app.route('/app.css')
-def send_css():
-    return render_template('app.css')
+    if int(player_id) not in [int(game.player_1_id), int(game.player_2_id)]:
+        return jsonify({"error": "Player is not part of the game"}), 403
+
+    try:
+        game = business.move(game, player_id, direction)
+        if(game.turn_player_1):
+            next_player_id = game.player_1_id
+        else:
+            next_player_id = game.player_2_id
+        next_player = db.session.query(Player).get(next_player_id)
+        #if (game.winner_player_1  is None and not next_player.is_human):
+            # ai_move = ai.move(updated_game)
+            # updated_game = business.move(updated_game, ai, ai_move)
+        db.session.commit()
+
+        if  game.winner_player_1  is None:
+            return jsonify({'boardState': game.board_state,'pos_player_1': game.pos_player_1,'pos_player_2': game.pos_player_2 })
+        else:
+            #a modifier quand on aura la page de fin
+            return jsonify({"winner": game.winner_player_1 })
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
+
+#Pré-conditions :
+    #Les paramètres game et player_id sont présents dans l'URL
+#Post-conditions :
+    #La fonction renvoie le template game.html avec les paramètres game et player_id
+@app.route('/game/<int:game_id>/<int:player_id>')
+def game(game_id, player_id):
+    # Chercher la game et le player dans la base de données
+    game = db.session.query(Game).get(game_id)
+    if game is None:
+        return jsonify({"error": "Game not found"}), 404
+    if player_id not in [game.player_1_id, game.player_2_id]:
+        return jsonify({"error": "Player is not part of the game"}), 403
+    return render_template('game.html', game=game, player_id=player_id)
+
+#Post-conditions :
+    # La fonction renvoie le fichier CSS app.css
+@app.route('/static/<path:path>')
+def send_static(path):
+    return render_template('static', path)
+
+####
 
 #précondition : le pseudo d'un joueur est passé en argument 
 #postcondition : si le joueur est présent dans la base de données la fonction retourne vrai sinon faux
@@ -42,7 +101,7 @@ def add_player(nickname):
 
 #précondition : les pseudos de deux joueurs sont données fourni en JSON même si il n'existe pas dans la DB. La taille de la grille du jeu peut aussi être donnée
 #postcondition : une partie de la taille passée en argument ou de 5X5 par défaut est créée avec les joueurs passés en arguments
-@app.route('/createGame', methods=['POST','GET'])
+@app.route('/createGame', methods=['POST'])
 def create_game() :
     
     request_data = request.get_json()
@@ -66,7 +125,7 @@ def create_game() :
     db.session.add(new_game)
     db.session.commit()
 
-    return redirect(url_for('game', game_state='new_game', player_id=player_1_id))
+    return jsonify({'game_id': new_game.game_id, 'player_id': player_1_id})
     
         
 

@@ -73,3 +73,21 @@ td {
     vertical-align: middle;
     border: 1px solid gray;
 }
+
+
+.neutral {
+    background-color: #CCCCCC;
+  }
+  
+  .player1 {
+    background-color: #FF0000; 
+  }
+  
+  .player2 {
+    background-color: #0000FF;
+  }
+  
+  img {
+    width: 20px;
+    height: 20px;
+  }
