@@ -16,33 +16,30 @@ def move(game, player, direction):
     board_state = game.board_state
     size = game.size
 
-    directions = ["up", "down", "left", "right"]
+    directions = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight']
     if direction in directions:
-        if player == player_1.player_id:
+        if int(player) == player_1.player_id:
             current_player = "1"
             current_player_pos = game.pos_player_1
-        elif player == player_2.player_id:
+        elif int(player) == player_2.player_id:
             current_player = "2"
             current_player_pos = game.pos_player_2
         else:
             raise ValueError("Player is not in the game")
         if (game.turn_player_1 and current_player == "1") or (not game.turn_player_1 and current_player == "2"):
             x, y = map(int, current_player_pos.split(","))
-
-            if direction == "up":
+            if direction == "ArrowUp":
                 new_x, new_y = x - 1, y
-            elif direction == "down":
+            elif direction == "ArrowDow":
                 new_x, new_y = x + 1, y
-            elif direction == "left":
+            elif direction == "ArrowLeft":
                 new_x, new_y = x, y - 1
-            elif direction == "right":
+            elif direction == "ArrowRight":
                 new_x, new_y = x, y + 1
             else:
                 raise ValueError("Direction non valide")
-
             if (0 <= new_x < size) and (0 <= new_y < size):
                 target_case = board_state[new_x * size + new_y]
-
                 if (target_case == "0" or target_case == current_player):
                     if current_player == 1:
                         game.pos_player_1 = f"{new_x},{new_y}"

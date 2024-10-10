@@ -29,13 +29,13 @@ def move():
     data = request.get_json()
     game_id = data['game']
     player_id = data['player']
-    direction = data['direction']
+    direction = data['dir']
     
     game = db.session.query(Game).get(game_id)
     if game is None:
         return jsonify({"error": "Game not found"}), 404
 
-    if player_id not in [game.player_1, game.player_2]:
+    if int(player_id) not in [int(game.player_1_id), int(game.player_2_id)]:
         return jsonify({"error": "Player is not part of the game"}), 403
 
     try:
@@ -49,8 +49,9 @@ def move():
             # ai_move = ai.move(updated_game)
             # updated_game = business.move(updated_game, ai, ai_move)
         db.session.commit()
+
         if  game.winner_player_1  is None:
-            return jsonify(game)
+            return jsonify(game.board_state)
         else:
             #a modifier quand on aura la page de fin
             return jsonify({"winner": game.winner_player_1 })
@@ -58,20 +59,24 @@ def move():
         return jsonify({"error": str(e)}), 400
 
 #Pré-conditions :
-    #La requête est de type GET
     #Les paramètres game et player_id sont présents dans l'URL
 #Post-conditions :
     #La fonction renvoie le template game.html avec les paramètres game et player_id
-@app.route('/game/<game>/<player_id>', methods=['GET'])
-def game(game, player_id):
-    "return game template"
+@app.route('/game/<int:game_id>/<int:player_id>')
+def game(game_id, player_id):
+    # Chercher la game et le player dans la base de données
+    game = db.session.query(Game).get(game_id)
+    if game is None:
+        return jsonify({"error": "Game not found"}), 404
+    if player_id not in [game.player_1_id, game.player_2_id]:
+        return jsonify({"error": "Player is not part of the game"}), 403
     return render_template('game.html', game=game, player_id=player_id)
 
 #Post-conditions :
     # La fonction renvoie le fichier CSS app.css
-@app.route('/app.css')
-def send_css():
-    return render_template('app.css')
+@app.route('/static/<path:path>')
+def send_static(path):
+    return render_template('static', path)
 
 ####
 
@@ -96,7 +101,7 @@ def add_player(nickname):
 
 #précondition : les pseudos de deux joueurs sont données fourni en JSON même si il n'existe pas dans la DB. La taille de la grille du jeu peut aussi être donnée
 #postcondition : une partie de la taille passée en argument ou de 5X5 par défaut est créée avec les joueurs passés en arguments
-@app.route('/createGame', methods=['POST','GET'])
+@app.route('/createGame', methods=['POST'])
 def create_game() :
     
     request_data = request.get_json()
@@ -120,7 +125,7 @@ def create_game() :
     db.session.add(new_game)
     db.session.commit()
 
-    return redirect(url_for('game', game=new_game, player_id=player_1_id))
+    return jsonify({'game_id': new_game.game_id, 'player_id': player_1_id})
     
         
 
