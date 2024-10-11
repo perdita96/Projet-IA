@@ -63,7 +63,7 @@ def move():
             return jsonify({'boardState': game.board_state,'pos_player_1': game.pos_player_1,'pos_player_2': game.pos_player_2 })
         else:
             #a modifier quand on aura la page de fin
-            return jsonify({"winner": game.winner_player_1 })
+            return jsonify({"winner": game.winner_player_1,'boardState': game.board_state,'pos_player_1': game.pos_player_1,'pos_player_2': game.pos_player_2 })
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
     
