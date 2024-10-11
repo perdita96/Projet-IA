@@ -50,6 +50,10 @@ def move():
         else:
             next_player_id = game.player_2_id
         next_player = db.session.query(Player).get(next_player_id)
+            #verifier si tout ia et faire jouer
+            #while ...
+            #mouvment ia ia.getmove()
+            #buisness.move(game,id_ia,mouvment ia)
         #if (game.winner_player_1  is None and not next_player.is_human):
             #ai_move = get_move(updated_game)
             #updated_game = business.move(updated_game, ai, ai_move)
@@ -80,6 +84,9 @@ def game(game_id, player_id):
         return jsonify({"error": "Player is not part of the game"}), 403
     #vérifier si la partie n'est pas finie
     #verifier si tout ia et faire jouer
+    #while ...
+    #mouvment ia ia.getmove()
+    #buisness.move(game,id_ia,mouvment ia)
     return render_template('game.html', game=game, player_id=player_id)
 
 """
