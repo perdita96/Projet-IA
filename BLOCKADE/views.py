@@ -52,6 +52,8 @@ def move():
         db.session.commit()
 
         if  game.winner_player_1  is None:
+            print(game.pos_player_1)
+            print(game.pos_player_2)
             return jsonify({'boardState': game.board_state,'pos_player_1': game.pos_player_1,'pos_player_2': game.pos_player_2 })
         else:
             #a modifier quand on aura la page de fin

@@ -39,12 +39,11 @@ def move(game, player, direction):
             elif direction == "ArrowRight":
                 new_x, new_y = x, y + 1
             else:
-                print("test")
                 raise ValueError("Direction non valide")
             if (0 <= new_x < size) and (0 <= new_y < size):
                 target_case = board_state[new_x * size + new_y]
                 if (target_case == "0" or target_case == current_player):
-                    if current_player == 1:
+                    if current_player == "1":
                         game.pos_player_1 = f"{new_x},{new_y}"
                     else:
                         game.pos_player_2 = f"{new_x},{new_y}"
