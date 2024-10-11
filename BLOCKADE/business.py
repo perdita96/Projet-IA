@@ -1,17 +1,18 @@
-###test
 
-#Pré-conditions
-    # game est un objet Game valide
-    # player est un ID de joueur 
-    # direction est une chaîne
-    # Le jeu n'est pas déjà terminé (c'est-à-dire que game.winner_player_1 est None)
-# Post-conditions :
-    # Si le déplacement est valide, la fonction met à jour l'état du jeu en conséquence :
-    # Met à jour la position du joueur (game.pos_player_1 ou game.pos_player_2)
-    # Met à jour l'état du plateau (game.board_state)
-    # Met à jour indicateur game.turn_player_1
-    # Si le jeu est terminé, définit game.winner_player_1
-    # Lance un valueErreur si une valeur n'est pas valide ou un mouvement impossible
+"""
+Pré-conditions
+    game est un objet Game valide
+    player est un ID de joueur 
+    direction est une chaîne
+    Le jeu n'est pas déjà terminé (c'est-à-dire que game.winner_player_1 est None)
+Post-conditions :
+    Si le déplacement est valide, la fonction met à jour l'état du jeu en conséquence :
+        Met à jour la position du joueur (game.pos_player_1 ou game.pos_player_2)
+        Met à jour l'état du plateau (game.board_state)
+        Met à jour indicateur game.turn_player_1
+        Si le jeu est terminé, définit game.winner_player_1
+    Lance un valueErreur si une valeur n'est pas valide ou un mouvement impossible
+"""
 def move(game, player, direction):
     player_1 = game.player_1
     player_2 = game.player_2
