@@ -45,18 +45,18 @@ def move():
 
     try:
         game = business.move(game, player_id, direction)
-        if(game.turn_player_1):
+        if(game.turn_player_1): #quelle interêt?
             next_player_id = game.player_1_id
         else:
             next_player_id = game.player_2_id
         next_player = db.session.query(Player).get(next_player_id)
-            #verifier si tout ia et faire jouer
-            #while ...
-            #mouvment ia ia.getmove()
-            #buisness.move(game,id_ia,mouvment ia)
-        #if (game.winner_player_1  is None and not next_player.is_human):
-            #ai_move = get_move(updated_game)
-            #updated_game = business.move(updated_game, ai, ai_move)
+        
+        if  game.winner_player_1 is None:
+            if not game.turn_player_1 :
+                direction = get_move()
+                while not is_move_possible(game, game.player_2_id, direction) : 
+                    direction = get_move()
+                business.move(game,game.player_2_id,direction)
         db.session.commit()
 
         if  game.winner_player_1  is None:
@@ -76,18 +76,22 @@ Post-conditions :
     Si sinon la fonction renvoie le template game.html avec les paramètres game et player_id
 """
 @app.route('/game/<int:game_id>/<int:player_id>')
-def game(game_id, player_id):
+def game(game_id, player_id): #pas moyen de sauvegarder player_1_id dans la page html?  Car sinon inutile ici
     game = db.session.query(Game).get(game_id)
     if game is None:
         return jsonify({"error": "Game not found"}), 404
     if player_id not in [game.player_1_id, game.player_2_id]:
         return jsonify({"error": "Player is not part of the game"}), 403
-    #vérifier si la partie n'est pas finie
-    #verifier si tout ia et faire jouer
-    #while ...
-    #mouvment ia ia.getmove()
-    #buisness.move(game,id_ia,mouvment ia)
+    if game.winner_player_1 == None : 
+        if not game.turn_player_1 :
+            move = get_move()
+            while not is_move_possible(game, game.player_2_id, move) : 
+                move = get_move()
+
+            business.move(game,game.player_2_id,move) #pas besoin de faire de return car muable + gérer exception?
+            db.session.commit()
     return render_template('game.html', game=game, player_id=player_id)
+            
 
 """
 Post-conditions :
@@ -97,6 +101,42 @@ Post-conditions :
 def send_static(path):
     return render_template('static', path)
 
+"""
+Post-conditions :
+    L'id du joueur qui fait le mouvement doit être l'id d'un joueur présent dans la game
+    Le mouvement doit être [ArrowUp, ArrowDown,ArrowLeft,ArrowRight]
+"""
+def is_move_possible(game, player_id, move) : #fusioner avec get_move dans ai.py? + le tant que is_move_possible?
+    board_state = game.board_state
+    size = game.size
+    is_possible = True
+
+    if player_id == game.player_1_id : 
+        current_player = "1"
+        current_pos = game.pos_player_1
+    else :
+        current_player = "2"
+        current_pos = game.pos_player_2
+
+    x, y = map(int, current_pos.split(","))
+
+    if move == "ArrowUp":
+        new_x, new_y = x - 1, y
+    elif move == "ArrowDown":
+        new_x, new_y = x + 1, y
+    elif move == "ArrowLeft":
+        new_x, new_y = x, y - 1
+    elif move == "ArrowRight":
+        new_x, new_y = x, y + 1
+
+    is_possible = (0 <= new_x < size) and (0 <= new_y < size)
+    if is_possible : 
+        target_case = board_state[new_x * size + new_y]
+        is_possible = (target_case == "0" or target_case == current_player)
+        
+    return is_possible
+              
+    
 """
 Préconditions:
 - 'nickname' est une chaîne de caractères représentant le pseudo d'un joueur.
