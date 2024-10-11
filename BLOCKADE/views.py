@@ -88,7 +88,7 @@ def game(game_id, player_id): #pas moyen de sauvegarder player_1_id dans la page
             while not is_move_possible(game, game.player_2_id, move) : 
                 move = get_move()
 
-            business.move(game,game.player_2_id,move) #pas besoin de faire de return car muable + gérer exception?
+            business.move(game,game.player_2_id,move) #pas besoin de faire de return car muable + comment gérer l'exception (devrait pas y avoir d'erreur)?
             db.session.commit()
     return render_template('game.html', game=game, player_id=player_id)
             
