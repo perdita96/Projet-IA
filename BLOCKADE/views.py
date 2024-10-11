@@ -102,9 +102,11 @@ def send_static(path):
     return render_template('static', path)
 
 """
-Post-conditions :
+Pré-conditions :
     L'id du joueur qui fait le mouvement doit être l'id d'un joueur présent dans la game
     Le mouvement doit être [ArrowUp, ArrowDown,ArrowLeft,ArrowRight]
+Post-conditions : 
+    Retourne le true ou false en fonction de si le mouvement est valide
 """
 def is_move_possible(game, player_id, move) : #fusioner avec get_move dans ai.py? + le tant que is_move_possible?
     board_state = game.board_state
