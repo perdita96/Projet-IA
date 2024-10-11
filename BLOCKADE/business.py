@@ -1,17 +1,18 @@
-###test
 
-#Pré-conditions
-    # game est un objet Game valide
-    # player est un ID de joueur 
-    # direction est une chaîne
-    # Le jeu n'est pas déjà terminé (c'est-à-dire que game.winner_player_1 est None)
-# Post-conditions :
-    # Si le déplacement est valide, la fonction met à jour l'état du jeu en conséquence :
-    # Met à jour la position du joueur (game.pos_player_1 ou game.pos_player_2)
-    # Met à jour l'état du plateau (game.board_state)
-    # Met à jour indicateur game.turn_player_1
-    # Si le jeu est terminé, définit game.winner_player_1
-    # Lance un valueErreur si une valeur n'est pas valide ou un mouvement impossible
+"""
+Pré-conditions
+    game est un objet Game valide
+    player est un ID de joueur 
+    direction est une chaîne
+    Le jeu n'est pas déjà terminé (c'est-à-dire que game.winner_player_1 est None)
+Post-conditions :
+    Si le déplacement est valide, la fonction met à jour l'état du jeu en conséquence :
+        Met à jour la position du joueur (game.pos_player_1 ou game.pos_player_2)
+        Met à jour l'état du plateau (game.board_state)
+        Met à jour indicateur game.turn_player_1
+        Si le jeu est terminé, définit game.winner_player_1
+    Lance un valueErreur si une valeur n'est pas valide ou un mouvement impossible
+"""
 def move(game, player, direction):
     player_1 = game.player_1
     player_2 = game.player_2
@@ -39,12 +40,11 @@ def move(game, player, direction):
             elif direction == "ArrowRight":
                 new_x, new_y = x, y + 1
             else:
-                print("test")
                 raise ValueError("Direction non valide")
             if (0 <= new_x < size) and (0 <= new_y < size):
                 target_case = board_state[new_x * size + new_y]
                 if (target_case == "0" or target_case == current_player):
-                    if current_player == 1:
+                    if current_player == "1":
                         game.pos_player_1 = f"{new_x},{new_y}"
                     else:
                         game.pos_player_2 = f"{new_x},{new_y}"

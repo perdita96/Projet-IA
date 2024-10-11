@@ -9,22 +9,26 @@ app.config.from_object(config)
 
 db.init_app(app) 
 
-#Post-conditions : La fonction renvoie le template index.html
+"""
+Post-conditions : La fonction renvoie le template index.html
+"""
 @app.route('/')
 def index():
     "return index template"
     return render_template('index.html')
 
-#Pré-condition :
-    #la requête est de type POST
-    #Les données de la requête sont au format JSON
-    #Les données de la requête contiennent les clés game, player et direction
-#Post-condition:
-    # Si le jeu n'existe pas, la fonction renvoie une erreur 404 avec un message "Game not found"
-    # Si le joueur n'est pas partie du jeu, la fonction renvoie une erreur 403 avec un message "Player is not part of the game"
-    # Si le mouvement n'est pas valide, la fonction renvoie une erreur 400 avec un message
-    # Si le mouvement est valide, la fonction met à jour le jeu, fait jouer IA si c'est son tour et renvoie les données du jeu sous forme de JSON
-    # Si le jeu est terminé, la fonction redirige vers la page ??
+"""
+Pré-condition :
+    la requête est de type POST
+    Les données de la requête sont au format JSON
+    Les données de la requête contiennent les clés game, player et direction
+Post-condition:
+    Si le jeu n'existe pas, la fonction renvoie une erreur 404 avec un message "Game not found"
+    Si le joueur n'est pas partie du jeu, la fonction renvoie une erreur 403 avec un message "Player is not part of the game"
+    Si le mouvement n'est pas valide, la fonction renvoie une erreur 400 avec un message
+    Si le mouvement est valide, la fonction met à jour le jeu, fait jouer IA si c'est son tour et renvoie les données du jeu sous forme de JSON
+    Si le jeu est terminé, la fonction redirige vers la page ??
+"""
 @app.route('/move', methods=[ 'POST'])
 def move():
     data = request.get_json()
@@ -46,6 +50,10 @@ def move():
         else:
             next_player_id = game.player_2_id
         next_player = db.session.query(Player).get(next_player_id)
+            #verifier si tout ia et faire jouer
+            #while ...
+            #mouvment ia ia.getmove()
+            #buisness.move(game,id_ia,mouvment ia)
         #if (game.winner_player_1  is None and not next_player.is_human):
             #ai_move = get_move(updated_game)
             #updated_game = business.move(updated_game, ai, ai_move)
@@ -59,89 +67,87 @@ def move():
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
     
-
-
-#Pré-conditions :
-    #Les paramètres game et player_id sont présents dans l'URL
-#Post-conditions :
-    #La fonction renvoie le template game.html avec les paramètres game et player_id
+"""
+Pré-conditions :
+    Les paramètres game et player_id sont présents dans l'URL
+Post-conditions :
+    Si la game est finie la fonction renvoie vers la page ???
+    Fait jouer l'IA si besoin
+    Si sinon la fonction renvoie le template game.html avec les paramètres game et player_id
+"""
 @app.route('/game/<int:game_id>/<int:player_id>')
 def game(game_id, player_id):
-    # Chercher la game et le player dans la base de données
     game = db.session.query(Game).get(game_id)
     if game is None:
         return jsonify({"error": "Game not found"}), 404
     if player_id not in [game.player_1_id, game.player_2_id]:
         return jsonify({"error": "Player is not part of the game"}), 403
+    #vérifier si la partie n'est pas finie
+    #verifier si tout ia et faire jouer
+    #while ...
+    #mouvment ia ia.getmove()
+    #buisness.move(game,id_ia,mouvment ia)
     return render_template('game.html', game=game, player_id=player_id)
 
-#Post-conditions :
-    # La fonction renvoie le fichier CSS app.css
+"""
+Post-conditions :
+    La fonction renvoie le fichier CSS
+"""
 @app.route('/static/<path:path>')
 def send_static(path):
     return render_template('static', path)
 
-####
+"""
+Préconditions:
+- 'nickname' est une chaîne de caractères représentant le pseudo d'un joueur.
+- La base de données est accessible via 'db.session'.
+- Il faut que la fonction ait accès au modèle Player
 
-    """
-    Vérifier si un joueur existe dans la base de données.
-
-    Préconditions:
-    - 'nickname' est une chaîne de caractères représentant le pseudo d'un joueur.
-    - La base de données est accessible via 'db.session'.
-    - Il faut que la fonction ait accès au modèle Player
-
-    Postconditions:
-    - Retourne True si un joueur avec ce pseudo existe dans la base de données.
-    - Retourne False si aucun joueur avec ce pseudo n'est trouvé.
-    """
+Postconditions:
+- Retourne True si un joueur avec ce pseudo existe dans la base de données.
+- Retourne False si aucun joueur avec ce pseudo n'est trouvé.
+"""
 def player_exists(nickname):
     if db.session.query(Player).filter_by(nickname=nickname).first() == None:
         return False
     return True
 
-    """
-    Renvoier l'ID du joueur ayant le pseudo donné.
+"""
+Préconditions:
+- 'nickname' doit être une chaîne de caractères représentant un pseudo existant dans la base de données.
+- La base de données est accessible via 'db.session'.
+- Il faut que la fonction ait accès au modèle Player
 
-    Préconditions:
-    - 'nickname' doit être une chaîne de caractères représentant un pseudo existant dans la base de données.
-    - La base de données est accessible via 'db.session'.
-    - Il faut que la fonction ait accès au modèle Player
-
-    Postconditions:
-    - Retourne l'ID ('player_id') du joueur correspondant au pseudo.
-    """
+Postconditions:
+- Retourne l'ID ('player_id') du joueur correspondant au pseudo.
+"""
 def id_searched_player(nickname):
     return db.session.query(Player).filter_by(nickname=nickname).first().player_id
 
-    """
-    Ajouter un nouveau joueur dans la base de données.
+"""
+Préconditions:
+- 'nickname' doit être une chaîne de caractères qui n'existe pas encore dans la base de données.
+- La base de données est accessible via 'db.session'.
+- Il faut que la fonction ait accès au modèle Player
 
-    Préconditions:
-    - 'nickname' doit être une chaîne de caractères qui n'existe pas encore dans la base de données.
-    - La base de données est accessible via 'db.session'.
-    - Il faut que la fonction ait accès au modèle Player
-
-    Postconditions:
-    - Un nouveau joueur est ajouté à la base de données.
-    """
+Postconditions:
+- Un nouveau joueur est ajouté à la base de données.
+"""
 def add_player(nickname): 
     new_player = Player(is_human= nickname!= 'IA', nickname=nickname) 
     db.session.add(new_player)  
     db.session.commit()
 
-    """
-    Créer une partie avec deux joueurs
+"""
+Préconditions:
+- 'data' doit être un dictionnaire contenant au moins deux champs 'player_1' et 'player_2' (pseudos des joueurs).
 
-    Préconditions:
-    - 'data' doit être un dictionnaire contenant au moins deux champs 'player_1' et 'player_2' (pseudos des joueurs).
-
-    Postconditions:
-    - Si les joueurs n'existent pas dans la base de données, ils sont créés.
-    - Une nouvelle partie est créée avec la taille de la grille spécifiée (5x5)
-    - La partie est ajoutée et sauvegardée dans la base de données.
-    """
-@app.route('/createGame', methods=['POST','GET'])
+Postconditions:
+- Si les joueurs n'existent pas dans la base de données, ils sont créés.
+- Une nouvelle partie est créée avec la taille de la grille spécifiée (5x5)
+- La partie est ajoutée et sauvegardée dans la base de données.
+"""
+@app.route('/createGame', methods=['POST'])
 def create_game() :
     
     request_data = request.get_json()
@@ -166,7 +172,3 @@ def create_game() :
     db.session.commit()
 
     return jsonify({'game_id': new_game.game_id, 'player_id': player_1_id})
-    
-        
-
-    
