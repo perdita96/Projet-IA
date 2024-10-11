@@ -15,24 +15,13 @@
             button.addEventListener("click", async function(event) {
                 //Requête pour créer une partie, on envoie le nom du ou des joueurs (si IA ou non) en JSON au serveur, puis on reçoit et on 
                 //affiche la page de jeu que nous renvoie le serveur
-                await fetch('/createGame', {
+                let answer = await fetch('/createGame', {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(players),
                 })
-                .then(response => {
-                    console.log('test0')
-                    if (!response.ok) {
-                    throw new Error(`Error: ${response.status} - ${response.statusText}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    window.location.href = `/game/${data.game_id}/${data.player_id}`;
-                })
-                .catch(error => {
-                    console.error(error);
-                })
+                let data  = await answer.json();
+                window.location.href = `/game/${data.game_id}/${data.player_id}`;
             });
         }
     </script>
