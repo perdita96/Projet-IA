@@ -29,7 +29,7 @@ Post-condition:
     Si le mouvement est valide, la fonction met à jour le jeu, fait jouer IA si c'est son tour et renvoie les données du jeu sous forme de JSON
     Si le jeu est terminé, la fonction redirige vers la page ??
 """
-@app.route('/move', methods=[ 'POST'])
+@app.route('/move', methods=['POST'])
 def move():
     data = request.get_json()
     game_id = data['game']
@@ -45,13 +45,13 @@ def move():
 
     try:
         game = business.move(game, player_id, direction)
-        if(game.turn_player_1): #quelle interêt?
+        if (game.turn_player_1): #quel intérêt?
             next_player_id = game.player_1_id
         else:
             next_player_id = game.player_2_id
         next_player = db.session.query(Player).get(next_player_id)
         
-        if  game.winner_player_1 is None:
+        if game.winner_player_1 is None:
             if not game.turn_player_1 :
                 direction = get_move()
                 while not is_move_possible(game, game.player_2_id, direction) : 
@@ -59,7 +59,7 @@ def move():
                 business.move(game,game.player_2_id,direction)
         db.session.commit()
 
-        if  game.winner_player_1  is None:
+        if  game.winner_player_1 is None:
             return jsonify({'boardState': game.board_state,'pos_player_1': game.pos_player_1,'pos_player_2': game.pos_player_2 })
         else:
             #a modifier quand on aura la page de fin
@@ -73,7 +73,7 @@ Pré-conditions :
 Post-conditions :
     Si la game est finie la fonction renvoie vers la page ???
     Fait jouer l'IA si besoin
-    Si sinon la fonction renvoie le template game.html avec les paramètres game et player_id
+    Sinon la fonction renvoie le template game.html avec les paramètres game et player_id
 """
 @app.route('/game/<int:game_id>/<int:player_id>')
 def game(game_id, player_id): #pas moyen de sauvegarder player_1_id dans la page html?  Car sinon inutile ici
@@ -104,11 +104,11 @@ def send_static(path):
 """
 Pré-conditions :
     L'id du joueur qui fait le mouvement doit être l'id d'un joueur présent dans la game
-    Le mouvement doit être [ArrowUp, ArrowDown,ArrowLeft,ArrowRight]
+    Le mouvement doit être [ArrowUp,ArrowDown,ArrowLeft,ArrowRight]
 Post-conditions : 
-    Retourne le true ou false en fonction de si le mouvement est valide
+    Retourne true ou false en fonction de si le mouvement est valide
 """
-def is_move_possible(game, player_id, move) : #fusioner avec get_move dans ai.py? + le tant que is_move_possible?
+def is_move_possible(game, player_id, move) : #fusionner avec get_move dans ai.py? + le tant que is_move_possible?
     board_state = game.board_state
     size = game.size
     is_possible = True
@@ -176,7 +176,7 @@ Postconditions:
 - Un nouveau joueur est ajouté à la base de données.
 """
 def add_player(nickname): 
-    new_player = Player(is_human= nickname!= 'IA', nickname=nickname) 
+    new_player = Player(is_human= nickname != 'IA', nickname=nickname) 
     db.session.add(new_player)  
     db.session.commit()
 

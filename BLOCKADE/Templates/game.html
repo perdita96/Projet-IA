@@ -3,7 +3,7 @@
 {%block content%}
     <script type="text/javascript">
         const game_id = "{{game.game_id}}";
-        const player_id = "{{ player_id }}";
+        const player_id = "{{player_id}}";
         const board_size = "{{game.size}}"; 
         let boardState = "{{game.board_state}}";
         let pos1 = getPositionFromString("{{game.pos_player_1}}");
@@ -36,13 +36,13 @@
                 event.key == 'ArrowLeft'||
                 event.key == 'ArrowRight'){
                     window.removeEventListener('keydown', handleKeyPress);
-                    let reponce = await sendMoveRequest(event.key);
-                    if (reponce.error != null) {
-                        alert(reponce.error);
-                    }else{
-                        boardState = reponce.boardState;
-                        pos1 = getPositionFromString(reponce.pos_player_1);
-                        pos2 = getPositionFromString(reponce.pos_player_2);
+                    let response = await sendMoveRequest(event.key);
+                    if (response.error != null) {
+                        alert(response.error);
+                    } else {
+                        boardState = response.boardState;
+                        pos1 = getPositionFromString(response.pos_player_1);
+                        pos2 = getPositionFromString(response.pos_player_2);
                         ColorBoard();
                     }
                     window.addEventListener('keydown', handleKeyPress);
@@ -50,7 +50,7 @@
         }
 
         async function sendMoveRequest(direction) {
-            const reponse = await fetch('/move', {
+            const response = await fetch('/move', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -61,7 +61,7 @@
                     dir: direction
                 })
             })
-            return await reponse.json();
+            return await response.json();
         }
 
         function ColorBoard() {
@@ -83,7 +83,7 @@
                         cell.classList.add('player2');
                     }
 
-                    if(cell.firstChild) {
+                    if (cell.firstChild) {
                         cell.removeChild(cell.firstChild);
                     }
                 }
