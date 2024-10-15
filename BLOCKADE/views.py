@@ -45,16 +45,16 @@ def move():
 
     try:
         game = business.move(game, player_id, direction)
-        if (game.turn_player_1): #quel intérêt?
+        if (game.turn_player_1): 
             next_player_id = game.player_1_id
         else:
             next_player_id = game.player_2_id
         next_player = db.session.query(Player).get(next_player_id)
 
-        #if(! next_player.is_human)
+        
         
         if game.winner_player_1 is None:
-            if not game.turn_player_1 :
+            if(not next_player.is_human) :
                 direction = get_move()
                 while not is_move_possible(game, game.player_2_id, direction) : 
                     direction = get_move()
