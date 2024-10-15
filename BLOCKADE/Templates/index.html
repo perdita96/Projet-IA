@@ -20,7 +20,7 @@
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(players),
                 })
-                let data  = await answer.json();
+                let data = await answer.json();
                 window.location.href = `/game/${data.game_id}/${data.player_id}`; //C'est pas mieux une redirection? Puis pourquoi on envoie plus une requête au serveur?
             });
         }
