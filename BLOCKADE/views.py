@@ -50,15 +50,13 @@ def move():
         else:
             next_player_id = game.player_2_id
         next_player = db.session.query(Player).get(next_player_id)
-
-        
         
         if game.winner_player_1 is None:
             if(not next_player.is_human) :
                 direction = get_move()
-                while not is_move_possible(game, game.player_2_id, direction) : 
+                while not is_move_possible(game, next_player.player_id, direction) : 
                     direction = get_move()
-                game = business.move(game,game.player_2_id,direction)
+                game = business.move(game,next_player.player_id,direction)
         db.session.commit()
 
         if  game.winner_player_1 is None:
@@ -84,13 +82,20 @@ def game(game_id, player_id):
         return jsonify({"error": "Game not found"}), 404
     if player_id not in [game.player_1_id, game.player_2_id]:
         return jsonify({"error": "Player is not part of the game"}), 403
+    
+    if (game.turn_player_1): 
+        current_player_id = game.player_1_id
+    else:
+        current_player_id = game.player_2_id
+    current_player = db.session.query(Player).get(current_player_id)
+
     if game.winner_player_1 == None : 
-        if not game.turn_player_1 :
+        if not current_player.is_human :
             move = get_move()
-            while not is_move_possible(game, game.player_2_id, move) : 
+            while not is_move_possible(game, current_player.player_id, move) : 
                 move = get_move()
 
-            game = business.move(game,game.player_2_id,move) #pas besoin de faire de return car muable
+            game = business.move(game,current_player.player_id,move) 
             db.session.commit()
     return render_template('game.html', game=game, player_id=player_id)
             
@@ -102,6 +107,7 @@ Post-conditions :
 @app.route('/static/<path:path>')
 def send_static(path):
     return render_template('static', path)
+
 
 """
 Pré-conditions :
@@ -138,8 +144,7 @@ def is_move_possible(game, player_id, move) : #fusionner avec get_move dans ai.p
         target_case = board_state[new_x * size + new_y]
         is_possible = (target_case == "0" or target_case == current_player)
         
-    return is_possible
-              
+    return is_possible    
     
 """
 Préconditions:
@@ -178,7 +183,7 @@ Postconditions:
 - Un nouveau joueur est ajouté à la base de données.
 """
 def add_player(nickname): 
-    new_player = Player(is_human= nickname != 'IA', nickname=nickname) 
+    new_player = Player(is_human = (nickname != 'IA' and nickname != 'Alice'), nickname=nickname) 
     db.session.add(new_player)  
     db.session.commit()
 

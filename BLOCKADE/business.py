@@ -29,7 +29,7 @@ def move(game, player, direction):
             current_player_pos = game.pos_player_2
         else:
             raise ValueError("Player is not in the game")
-        print(str(game.turn_player_1) + ' ' + current_player)
+
         if (game.turn_player_1 and current_player == "1") or (not game.turn_player_1 and current_player == "2"):
             x, y = map(int, current_player_pos.split(","))
             if direction == "ArrowUp":
