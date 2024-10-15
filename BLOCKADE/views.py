@@ -50,13 +50,15 @@ def move():
         else:
             next_player_id = game.player_2_id
         next_player = db.session.query(Player).get(next_player_id)
+
+        #if(! next_player.is_human)
         
         if  game.winner_player_1 is None:
             if not game.turn_player_1 :
                 direction = get_move()
                 while not is_move_possible(game, game.player_2_id, direction) : 
                     direction = get_move()
-                business.move(game,game.player_2_id,direction)
+                game = business.move(game,game.player_2_id,direction)
         db.session.commit()
 
         if  game.winner_player_1  is None:
@@ -76,7 +78,7 @@ Post-conditions :
     Si sinon la fonction renvoie le template game.html avec les paramètres game et player_id
 """
 @app.route('/game/<int:game_id>/<int:player_id>')
-def game(game_id, player_id): #pas moyen de sauvegarder player_1_id dans la page html?  Car sinon inutile ici
+def game(game_id, player_id): 
     game = db.session.query(Game).get(game_id)
     if game is None:
         return jsonify({"error": "Game not found"}), 404
@@ -88,7 +90,7 @@ def game(game_id, player_id): #pas moyen de sauvegarder player_1_id dans la page
             while not is_move_possible(game, game.player_2_id, move) : 
                 move = get_move()
 
-            business.move(game,game.player_2_id,move) #pas besoin de faire de return car muable + comment gérer l'exception (devrait pas y avoir d'erreur)?
+            game = business.move(game,game.player_2_id,move) #pas besoin de faire de return car muable
             db.session.commit()
     return render_template('game.html', game=game, player_id=player_id)
             
