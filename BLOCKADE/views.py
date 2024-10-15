@@ -53,10 +53,7 @@ def move():
         
         if game.winner_player_1 is None:
             if(not next_player.is_human) :
-                direction = get_move()
-                while not is_move_possible(game, next_player.player_id, direction) : 
-                    direction = get_move()
-                game = business.move(game,next_player.player_id,direction)
+                game = business.move(game,next_player.player_id,get_move(game, next_player.player_id))
         db.session.commit()
 
         if  game.winner_player_1 is None:
@@ -91,15 +88,9 @@ def game(game_id, player_id):
 
     if game.winner_player_1 == None : 
         if not current_player.is_human :
-            move = get_move()
-            while not is_move_possible(game, current_player.player_id, move) : 
-                move = get_move()
-
-            game = business.move(game,current_player.player_id,move) 
+            game = business.move(game,current_player.player_id,get_move(game, current_player.player_id)) 
             db.session.commit()
-    return render_template('game.html', game=game, player_id=player_id)
-            
-
+    return render_template('game.html', game=game, player_id=player_id)         
 """
 Post-conditions :
     La fonction renvoie le fichier CSS
@@ -108,43 +99,6 @@ Post-conditions :
 def send_static(path):
     return render_template('static', path)
 
-
-"""
-Pré-conditions :
-    L'id du joueur qui fait le mouvement doit être l'id d'un joueur présent dans la game
-    Le mouvement doit être [ArrowUp,ArrowDown,ArrowLeft,ArrowRight]
-Post-conditions : 
-    Retourne true ou false en fonction de si le mouvement est valide
-"""
-def is_move_possible(game, player_id, move) : #fusionner avec get_move dans ai.py? + le tant que is_move_possible?
-    board_state = game.board_state
-    size = game.size
-    is_possible = True
-
-    if player_id == game.player_1_id : 
-        current_player = "1"
-        current_pos = game.pos_player_1
-    else :
-        current_player = "2"
-        current_pos = game.pos_player_2
-
-    x, y = map(int, current_pos.split(","))
-
-    if move == "ArrowUp":
-        new_x, new_y = x - 1, y
-    elif move == "ArrowDown":
-        new_x, new_y = x + 1, y
-    elif move == "ArrowLeft":
-        new_x, new_y = x, y - 1
-    elif move == "ArrowRight":
-        new_x, new_y = x, y + 1
-
-    is_possible = (0 <= new_x < size) and (0 <= new_y < size)
-    if is_possible : 
-        target_case = board_state[new_x * size + new_y]
-        is_possible = (target_case == "0" or target_case == current_player)
-        
-    return is_possible    
     
 """
 Préconditions:
