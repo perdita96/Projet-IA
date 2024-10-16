@@ -14,7 +14,7 @@ Mettre en place une Intelligence Artificielle (et l’implémenter avec du Q-Lea
 ## Initialisation de la base de données
 - lancer le script initDB.py
 ## Lancer le jeu
-- lancer le script run.py
+- lancer le script: python run.py
 
 ## Collaboration
 - Buret Lucien
