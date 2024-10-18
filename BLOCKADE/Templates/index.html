@@ -1,9 +1,11 @@
 {% extends 'base.html'%}
 
 {%block content%}
-    <div id="playButtonDiv"><input id="playButton" type="button" value="Jouer"/></div>
-
+    {% block end_game %}
+        <div id="playButtonDiv"><input id="playButton" type="button" value="Jouer"/></div>
+    {% endblock %}
     <script type="text/javascript">
+
         window.onload = function() {
             let button = document.getElementById("playButton");
 
@@ -21,7 +23,7 @@
                     body: JSON.stringify(players),
                 })
                 let data = await answer.json();
-                window.location.href = `/game/${data.game_id}/${data.player_id}`; //C'est pas mieux une redirection? Puis pourquoi on envoie plus une requête au serveur?
+                window.location.href = `/game/${data.game_id}/${data.player_id}`; 
             });
         }
     </script>

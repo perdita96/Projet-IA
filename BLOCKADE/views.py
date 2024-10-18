@@ -59,8 +59,8 @@ def move():
         if  game.winner_player_1 is None:
             return jsonify({'boardState': game.board_state,'pos_player_1': game.pos_player_1,'pos_player_2': game.pos_player_2 })
         else:
-            #a modifier quand on aura la page de fin
-            return jsonify({"winner": game.winner_player_1,'boardState': game.board_state,'pos_player_1': game.pos_player_1,'pos_player_2': game.pos_player_2 })
+            is_winner = (game.winner_player_1 and game.player_1_id == player_id) or (not game.winner_player_1 and game.player_2_id == player_id)
+            return jsonify({'url' : 'endGame', 'is_winner' : is_winner, 'player_id' : player_id})
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
     
@@ -175,3 +175,10 @@ def create_game() :
     db.session.commit()
 
     return jsonify({'game_id': new_game.game_id, 'player_id': player_1_id})
+
+
+@app.route('/endGame/<string:is_winner>/<int:player_id>')
+def end_game(is_winner, player_id):
+    is_winner = is_winner == 'True'
+    return render_template('endGame.html', is_winner = is_winner, player_id = player_id)
+      
