@@ -94,3 +94,23 @@ td {
     width: 20px;
     height: 20px;
   }
+
+  #winner {
+    font-weight: bold;
+  }
+
+  #win {
+    color: gold;
+    text-decoration: gold underline;
+    font-weight: bolder;
+  }
+
+  #win a {
+    color: gold;
+  }
+
+  #lose {
+    color: red;
+    text-decoration: red underline;
+    font-weight: bolder;
+  }
