@@ -59,7 +59,7 @@ def move():
         if  game.winner_player_1 is None:
             return jsonify({'boardState': game.board_state,'pos_player_1': game.pos_player_1,'pos_player_2': game.pos_player_2 })
         else:
-            is_winner = (game.winner_player_1 and game.player_1_id == player_id) or (not game.winner_player_1 and game.player_2_id == player_id)
+            is_winner = (game.winner_player_1 and int(game.player_1_id) == int(player_id) or (not game.winner_player_1 and int(game.player_2_id) == int(player_id))) 
             return jsonify({'url' : 'endGame', 'is_winner' : is_winner, 'player_id' : player_id})
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
@@ -179,6 +179,7 @@ def create_game() :
 
 @app.route('/endGame/<string:is_winner>/<int:player_id>')
 def end_game(is_winner, player_id):
-    is_winner = is_winner == 'True'
+    is_winner = is_winner == 'true'
+    print(is_winner)
     return render_template('endGame.html', is_winner = is_winner, player_id = player_id)
       
