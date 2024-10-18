@@ -16,10 +16,9 @@ class Player(db.Model) :
     player_id = db.Column(db.Integer, primary_key=True)
     nickname = db.Column(db.String(25), nullable=True, unique=True)
     is_human = db.Column(db.Boolean, nullable=False)
-     # Relation avec les jeux où ce joueur est Player 1
+
     games_as_player_1 = db.relationship("Game", foreign_keys='Game.player_1_id', back_populates="player_1")
     
-    # Relation avec les jeux où ce joueur est Player 2
     games_as_player_2 = db.relationship("Game", foreign_keys='Game.player_2_id', back_populates="player_2")
 
 
@@ -41,7 +40,6 @@ class Game(db.Model) :
     player_1_id = db.Column(db.Integer, db.ForeignKey('players.player_id'))
     player_2_id = db.Column(db.Integer, db.ForeignKey('players.player_id'))
 
-    # Définir les relations pour chaque joueur
     player_1 = db.relationship("Player", foreign_keys=[player_1_id], back_populates="games_as_player_1")
     player_2 = db.relationship("Player", foreign_keys=[player_2_id], back_populates="games_as_player_2")
 
