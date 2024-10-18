@@ -1,5 +1,5 @@
-
-"""
+def move(game, player, direction):
+    """
 Pré-conditions
     game est un objet Game valide
     player est un ID de joueur 
@@ -12,8 +12,7 @@ Post-conditions :
         Met à jour l'indicateur game.turn_player_1
         Si le jeu est terminé, définit game.winner_player_1
     Lance un valueError si une valeur n'est pas valide ou un mouvement impossible
-"""
-def move(game, player, direction):
+    """
     player_1 = game.player_1
     player_2 = game.player_2
     board_state = game.board_state

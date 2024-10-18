@@ -9,12 +9,12 @@ Mettre en place une Intelligence Artificielle (et l’implémenter avec du Q-Lea
 - SQLite 3
 - SQLAlchemy
 ## Installation des technologies
-- pip3 install -r requirements.txt
+```pip3 install -r requirements.txt```
 
 ## Initialisation de la base de données
-- lancer le script initDB.py
+```python initDB.py```
 ## Lancer le jeu
-- lancer le script: python run.py
+```python run.py```
 
 ## Collaboration
 - Buret Lucien
