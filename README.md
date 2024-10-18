@@ -20,7 +20,3 @@ Mettre en place une Intelligence Artificielle (et l’implémenter avec du Q-Lea
 - Buret Lucien
 - Desiron Anaïs
 - Marchand Romain
-
-#test
-
-##test2
