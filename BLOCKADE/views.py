@@ -194,6 +194,5 @@ def end_game(is_winner, player_id):
         - retourne le booléen qui indique si on a gagné ainsi que l'id du joueur
     """
     is_winner = is_winner == 'true'
-    print(is_winner)
     return render_template('endGame.html', is_winner = is_winner, player_id = player_id)
       
