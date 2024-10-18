@@ -1,11 +1,12 @@
 import random
-"""
-Pré-conditions :
-    L'id du joueur qui fait le mouvement doit être l'id d'un joueur présent dans la game
-Post-conditions : 
-    Retourne un mouvement valide sur la plateau du jeu
-"""
+
 def get_move(game, player_id):
+    """
+    Pré-conditions :
+        L'id du joueur qui fait le mouvement doit être l'id d'un joueur présent dans la game
+    Post-conditions : 
+        Retourne un mouvement valide sur la plateau du jeu
+    """
     directions = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight']
 
     move =  random.choice(directions)
@@ -13,15 +14,16 @@ def get_move(game, player_id):
          move =  random.choice(directions)
     return move
 
-"""
-Pré-conditions :
-    L'id du joueur qui fait le mouvement doit être l'id d'un joueur présent dans la game
-    Le mouvement doit être [ArrowUp,ArrowDown,ArrowLeft,ArrowRight]
-Post-conditions : 
-    Retourne true ou false en fonction de si le mouvement est valide
-"""
+
 
 def is_move_possible(game, player_id, move) : 
+    """
+    Pré-conditions :
+        L'id du joueur qui fait le mouvement doit être l'id d'un joueur présent dans la game
+        Le mouvement doit être [ArrowUp,ArrowDown,ArrowLeft,ArrowRight]
+    Post-conditions : 
+        Retourne true ou false en fonction de si le mouvement est valide
+    """
     board_state = game.board_state
     size = game.size
     is_possible = True
