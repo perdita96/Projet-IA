@@ -1,3 +1,7 @@
+
+from math import sqrt
+
+
 def move(game, player, direction):
     """
     Pré-conditions
@@ -66,5 +70,37 @@ def move(game, player, direction):
         raise ValueError("Direction non valide")
 
 
-def is_within_board(x, y , board_size) :
+def is_within_board(x, y, board_size) :
     return (0 <= x < board_size) and (0 <= y < board_size)
+
+
+def is_move_valid(player_number, case_state) : 
+    return player_number == case_state
+
+def box_is_accessible(board_state, i_case, player_number) : 
+    return player_number in [0, board_state[i_case]]
+
+def reachable_cases(opponent_number, opponent_pos, board_state) : 
+    board_size = len(board_state)
+    side_size = sqrt(board_size)
+
+    reachable = [False] * board_size
+
+    x,y = map(int, opponent_pos.split(","))
+    queue = [board_state[x * board_size + y]]
+
+    while queue : #vérif la condition?
+        todo = queue.popleft()
+
+        neighbor_case = [todo - side_size, todo + side_size, todo + 1, todo - 1]
+
+        i_neighbor = 0
+        while(neighbor_case[i_neighbor] < 4) :
+            i_case = neighbor_case[i_neighbor]
+            if i_case < board_size and i_case >= 0 and not reachable[i_case] and box_is_accessible(board_state, i_case, opponent_number) : 
+                reachable[i_case] = True
+                queue.append(i_case)
+
+            i_case +=1
+
+    return reachable
