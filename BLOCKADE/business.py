@@ -41,7 +41,7 @@ def move(game, player, direction):
                 new_x, new_y = x, y + 1
             else:
                 raise ValueError("Direction non valide")
-            if (0 <= new_x < size) and (0 <= new_y < size):
+            if (is_within_board(new_x, new_y , size)):
                 target_case = board_state[new_x * size + new_y]
                 if (target_case == "0" or target_case == current_player):
                     if current_player == "1":
@@ -64,3 +64,7 @@ def move(game, player, direction):
             raise ValueError("Ce n'est pas au tour du joueur")
     else:
         raise ValueError("Direction non valide")
+
+
+def is_within_board(x, y , board_size) :
+    return (0 <= x < board_size) and (0 <= y < board_size)
