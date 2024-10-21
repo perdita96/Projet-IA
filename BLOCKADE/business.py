@@ -1,4 +1,3 @@
-
 from math import sqrt
 
 
@@ -61,7 +60,8 @@ def move(game, player, direction):
                     board_state[new_x * size + new_y] = current_player
 
                     board_state = board_state_with_pen(opponent_player, opponent_player_pos, board_state)
-
+                    
+                    
                     game.board_state = "".join(board_state)
                     game.turn_player_1 = not game.turn_player_1
                     if "0" not in board_state:

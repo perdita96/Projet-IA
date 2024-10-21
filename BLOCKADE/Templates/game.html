@@ -4,7 +4,10 @@
     <script type="text/javascript">
         const game_id = "{{game.game_id}}";
         const player_id = "{{player_id}}";
-        const board_size = "{{game.size}}"; 
+        const board_size = "{{game.size}}";
+        const pictures = ["pion.jpg","image1.jpg","image2.jpg","image3.jpg"]
+        let player_1_picture = pictures[getRandomInt(pictures.length)];
+        let player_2_picture = pictures[getRandomInt(pictures.length)];
         let boardState = "{{game.board_state}}";
         let pos1 = getPositionFromString("{{game.pos_player_1}}");
         let pos2 = getPositionFromString("{{game.pos_player_2}}");
@@ -71,6 +74,10 @@
             return await response.json();
         }
 
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+
         function ColorBoard() {
             for (let i = 0; i < board_size; i++) {
                 for (let j = 0; j < board_size; j++) {
@@ -98,13 +105,13 @@
 
             let player1Cell = table.rows[pos1.x].cells[pos1.y];
             let img1 = document.createElement("img");
-            img1.src = "/static/pion.jpg";
+            img1.src = "/static/" + player_1_picture;
             img1.alt = "Joueur 1";
             player1Cell.appendChild(img1);
 
             let player2Cell = table.rows[pos2.x].cells[pos2.y];
             let img2 = document.createElement("img");
-            img2.src = "/static/pion.jpg";
+            img2.src = "/static/" + player_2_picture;
             img2.alt = "Joueur 2";
             player2Cell.appendChild(img2);
         }
