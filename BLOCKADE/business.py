@@ -77,7 +77,7 @@ def move(game, player, direction):
         raise ValueError("Direction non valide")
 
 
-def is_within_board(x, y, side_size) : #dommage qu'il n'y ait pas de surcharge 
+def is_within_board(x, y, side_size) : 
     return (0 <= x < side_size) and (0 <= y < side_size)
 
 

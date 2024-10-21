@@ -48,7 +48,8 @@ def is_move_possible(game, player_id, move) :
     elif move == "ArrowRight":
         new_x, new_y = x, y + 1
 
-    is_possible = business.is_within_board(new_x, new_y , size) #bonne idée?
+    is_possible =  (0 <= new_x < size) and (0 <= new_y < size)
+
     if is_possible : 
         target_case = board_state[new_x * size + new_y]
         is_possible = (target_case == "0" or target_case == current_player)
