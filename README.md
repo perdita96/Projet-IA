@@ -19,4 +19,8 @@ Mettre en place une Intelligence Artificielle (et l’implémenter avec du Q-Lea
 ## Collaboration
 - Buret Lucien
 - Desiron Anaïs
+<<<<<<< HEAD
 - Marchand Romain
+=======
+- Marchand Romain
+>>>>>>> origin/dev
