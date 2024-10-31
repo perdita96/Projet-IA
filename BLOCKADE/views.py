@@ -112,7 +112,7 @@ def player_exists(nickname):
     - Retourne True si un joueur avec ce pseudo existe dans la base de données.
     - Retourne False si aucun joueur avec ce pseudo n'est trouvé.
     """
-    # Mettre plutôt "return db.session.query(Player).filter_by(nickname=nickname).first() != None" ?
+    # Mettre plutôt "return db.session.query(Player).filter_by(nickname=nickname).first() != None" ? ooui on peux
     if db.session.query(Player).filter_by(nickname=nickname).first() == None:
         return False
     return True
