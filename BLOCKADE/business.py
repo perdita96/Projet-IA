@@ -58,7 +58,7 @@ def move(game, player, direction):
         raise ValueError("Mouvement en dehors du plateau")
     
     target_case = board_state[new_x * size + new_y]
-    if (not is_move_valid(target_case, current_player)): #à tester
+    if (not is_move_valid(target_case, current_player)): 
         raise ValueError("Mouvement non autorisé")
     
     if current_player == "1":
@@ -103,24 +103,12 @@ def reachable_cases(opponent_number, opponent_pos, board_state) :
 
         neighbor_cases = [(x_case - 1, y_case), (x_case , y_case-1), (x_case + 1, y_case), (x_case, y_case + 1) ]
 
-        # par plus eficasse d'utiliser un for ?
         for x_neighbor, y_neighbor in neighbor_cases :
             i_case = x_neighbor * side_size + y_neighbor
 
-        if is_within_board(x_neighbor, y_neighbor, side_size) and not reachable[i_case] and is_move_valid(board_state[i_case], opponent_number) : 
-            reachable[i_case] = True
-            queue.append((x_neighbor, y_neighbor)) 
-
-        '''i_neighbor = 0
-        while(i_neighbor < 4) :
-            x_neighbor, y_neighbor = neighbor_cases[i_neighbor]
-            i_case = x_neighbor * side_size + y_neighbor
-            
             if is_within_board(x_neighbor, y_neighbor, side_size) and not reachable[i_case] and is_move_valid(board_state[i_case], opponent_number) : 
                 reachable[i_case] = True
-                queue.append((x_neighbor, y_neighbor))
-
-            i_neighbor +=1'''
+                queue.append((x_neighbor, y_neighbor)) 
 
     return reachable
 
@@ -134,16 +122,9 @@ def board_state_with_pen(opponent_number, opponent_pos, board_state) :
         
     board_size = len(board_state)
 
-    #idem pouor for?
     for i_case in range(board_size) :
         if(not reachable[i_case]) :
             board_state[i_case] = current_player_number
-            
-    '''i_case = 0
-    while i_case < board_size : 
-        if(not reachable[i_case]) :
-            board_state[i_case] = current_player_number
-        i_case +=1'''
 
     return board_state
 
