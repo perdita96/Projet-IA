@@ -99,64 +99,11 @@ def send_static(path):
     """
     return render_template('static', path)
 
-<<<<<<< HEAD
-=======
-    
-def player_exists(nickname):
-    """
-    Pré-conditions:
-    - 'nickname' est une chaîne de caractères représentant le pseudo d'un joueur.
-    - La base de données est accessible via 'db.session'.
-    - Il faut que la fonction ait accès au modèle Player
-
-    Post-conditions:
-    - Retourne True si un joueur avec ce pseudo existe dans la base de données.
-    - Retourne False si aucun joueur avec ce pseudo n'est trouvé.
-    """
-    return db.session.query(Player).filter_by(nickname=nickname).first() != None
-
-
-
-def id_searched_player(nickname):
-    """
-    Pré-conditions:
-    - 'nickname' doit être une chaîne de caractères représentant un pseudo existant dans la base de données.
-    - La base de données est accessible via 'db.session'.
-    - Il faut que la fonction ait accès au modèle Player
-
-    Post-conditions:
-    - Retourne l'ID ('player_id') du joueur correspondant au pseudo.
-    """
-    return db.session.query(Player).filter_by(nickname=nickname).first().player_id
-
-
-def add_player(nickname): 
-    """
-    Pré-conditions:
-    - 'nickname' doit être une chaîne de caractères qui n'existe pas encore dans la base de données.
-    - La base de données est accessible via 'db.session'.
-    - Il faut que la fonction ait accès au modèle Player
-
-    Post-conditions:
-    - Un nouveau joueur est ajouté à la base de données.
-    """
-    new_player = Player(is_human = (nickname != 'IA' and nickname != 'Alice'), nickname=nickname) 
-    db.session.add(new_player)  
-    db.session.commit()
-
->>>>>>> 84c8657887feef383bfc10c11a2cd92da4457b13
-
-@app.route('/createGame', methods=['POST'])
+app.route('/createGame', methods=['POST'])
 def create_game():
     """
-<<<<<<< HEAD
-    Préconditions:
-    - 'data' doit être un dictionnaire contenant au moins deux champs 'player_1' (pseudos du joueurs)
-    - 'player_2'  est optionnel dans le cas ou il n'y à pas de player 2, il s'agit d'un partie contre l'IA
-=======
     Pré-conditions:
     - 'data' doit être un dictionnaire contenant au moins deux champs 'player_1'  'player_2' (pseudos des joueurs).
->>>>>>> 84c8657887feef383bfc10c11a2cd92da4457b13
 
     Post-conditions:
     - Si les joueurs n'existent pas dans la base de données, ils sont créés.
