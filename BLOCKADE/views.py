@@ -19,11 +19,11 @@ def index():
 @app.route('/move', methods=['POST'])
 def move():
     """
-    Pré-condition :
+    Pré-conditions :
         la requête est de type POST
         Les données de la requête sont au format JSON
         Les données de la requête contiennent les clés game, player et direction
-    Post-condition:
+    Post-conditions :
         Si le jeu n'existe pas, la fonction renvoie une erreur 404 avec un message "Game not found"
         Si le joueur n'est pas partie du jeu, la fonction renvoie une erreur 403 avec un message "Player is not part of the game"
         Si le mouvement n'est pas valide, la fonction renvoie une erreur 400 avec un message
@@ -50,16 +50,16 @@ def move():
             next_player_id = game.player_2_id
         next_player = db.session.query(Player).get(next_player_id)
         
-        if game.winner_player_1 is None:
-            if(not next_player.is_human) :
-                game = business.move(game,next_player.player_id,get_move(game, next_player.player_id))
+        if game.winner_player_1 is None and not next_player.is_human:
+            game = business.move(game, next_player.player_id, get_move(game, next_player.player_id))
         db.session.commit()
 
-        if  game.winner_player_1 is None:
-            return jsonify({'boardState': game.board_state,'pos_player_1': game.pos_player_1,'pos_player_2': game.pos_player_2 })
+        if game.winner_player_1 is None:
+            return jsonify({'boardState': game.board_state, 'pos_player_1': game.pos_player_1, 'pos_player_2': game.pos_player_2})
         else:
-            is_winner = (game.winner_player_1 and int(game.player_1_id) == int(player_id) or (not game.winner_player_1 and int(game.player_2_id) == int(player_id))) 
-            return jsonify({'url' : 'endGame', 'is_winner' : is_winner, 'player_id' : player_id})
+            is_winner = (game.winner_player_1 and int(game.player_1_id) == int(player_id) 
+                         or (not game.winner_player_1 and int(game.player_2_id) == int(player_id))) 
+            return jsonify({'url': 'endGame', 'is_winner': is_winner, 'player_id': player_id})
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
     
@@ -86,10 +86,9 @@ def game(game_id, player_id):
         current_player_id = game.player_2_id
     current_player = db.session.query(Player).get(current_player_id)
 
-    if game.winner_player_1 == None : 
-        if not current_player.is_human :
-            game = business.move(game,current_player.player_id,get_move(game, current_player.player_id)) 
-            db.session.commit()
+    if game.winner_player_1 == None and not current_player.is_human: 
+        game = business.move(game, current_player.player_id, get_move(game, current_player.player_id)) 
+        db.session.commit()
     return render_template('game.html', game=game, player_id=player_id)         
 
 @app.route('/static/<path:path>')
@@ -100,15 +99,66 @@ def send_static(path):
     """
     return render_template('static', path)
 
+<<<<<<< HEAD
+=======
+    
+def player_exists(nickname):
+    """
+    Pré-conditions:
+    - 'nickname' est une chaîne de caractères représentant le pseudo d'un joueur.
+    - La base de données est accessible via 'db.session'.
+    - Il faut que la fonction ait accès au modèle Player
+
+    Post-conditions:
+    - Retourne True si un joueur avec ce pseudo existe dans la base de données.
+    - Retourne False si aucun joueur avec ce pseudo n'est trouvé.
+    """
+    return db.session.query(Player).filter_by(nickname=nickname).first() != None
+
+
+
+def id_searched_player(nickname):
+    """
+    Pré-conditions:
+    - 'nickname' doit être une chaîne de caractères représentant un pseudo existant dans la base de données.
+    - La base de données est accessible via 'db.session'.
+    - Il faut que la fonction ait accès au modèle Player
+
+    Post-conditions:
+    - Retourne l'ID ('player_id') du joueur correspondant au pseudo.
+    """
+    return db.session.query(Player).filter_by(nickname=nickname).first().player_id
+
+
+def add_player(nickname): 
+    """
+    Pré-conditions:
+    - 'nickname' doit être une chaîne de caractères qui n'existe pas encore dans la base de données.
+    - La base de données est accessible via 'db.session'.
+    - Il faut que la fonction ait accès au modèle Player
+
+    Post-conditions:
+    - Un nouveau joueur est ajouté à la base de données.
+    """
+    new_player = Player(is_human = (nickname != 'IA' and nickname != 'Alice'), nickname=nickname) 
+    db.session.add(new_player)  
+    db.session.commit()
+
+>>>>>>> 84c8657887feef383bfc10c11a2cd92da4457b13
 
 @app.route('/createGame', methods=['POST'])
-def create_game() :
+def create_game():
     """
+<<<<<<< HEAD
     Préconditions:
     - 'data' doit être un dictionnaire contenant au moins deux champs 'player_1' (pseudos du joueurs)
     - 'player_2'  est optionnel dans le cas ou il n'y à pas de player 2, il s'agit d'un partie contre l'IA
+=======
+    Pré-conditions:
+    - 'data' doit être un dictionnaire contenant au moins deux champs 'player_1'  'player_2' (pseudos des joueurs).
+>>>>>>> 84c8657887feef383bfc10c11a2cd92da4457b13
 
-    Postconditions:
+    Post-conditions:
     - Si les joueurs n'existent pas dans la base de données, ils sont créés.
     - Une nouvelle partie est créée avec la taille de la grille spécifiée (5x5)
     - La partie est ajoutée et sauvegardée dans la base de données.
@@ -117,14 +167,14 @@ def create_game() :
 
     player_1_nickname = request_data['player_1']
 
-    if 'player_2' in request_data :
+    if 'player_2' in request_data:
         player_2_nickname = request_data['player_2']
     else : 
         player_2_nickname = 'IA'
 
-    if not player_exists(player_1_nickname) :
+    if not player_exists(player_1_nickname):
         add_player(player_1_nickname)
-    if not player_exists(player_2_nickname) :
+    if not player_exists(player_2_nickname):
         add_player(player_2_nickname)
         
     player_1_id = id_searched_player(player_1_nickname)
@@ -140,16 +190,16 @@ def create_game() :
 @app.route('/endGame/<string:is_winner>/<int:player_id>')
 def end_game(is_winner, player_id):
     """
-    Préconditions:
+    Pré-conditions:
         - player_id doit être un entier qui identifie le joueur
         - is_winner doit être un booléen qui indique si le joueur player_id a gagné
 
-    Postconditions:
+    Post-conditions:
         - retourne la route à prendre
         - retourne le booléen qui indique si on a gagné ainsi que l'id du joueur
     """
     is_winner = is_winner == 'true'
-    return render_template('endGame.html', is_winner = is_winner, player_id = player_id)
+    return render_template('endGame.html', is_winner=is_winner, player_id=player_id)
       
 
 def player_exists(nickname):

@@ -11,8 +11,6 @@ Mettre en place une Intelligence Artificielle (et l’implémenter avec du Q-Lea
 ## Installation des technologies
 ```pip3 install -r requirements.txt```
 
-## Initialisation de la base de données
-```python initDB.py```
 ## Lancer le jeu
 ```python run.py```
 
@@ -20,3 +18,6 @@ Mettre en place une Intelligence Artificielle (et l’implémenter avec du Q-Lea
 - Buret Lucien
 - Desiron Anaïs
 - Marchand Romain
+
+## Initialisation de la base de données
+En cas de problème avec la base de données exécuté ```python initDB.py``` pour la réinitialiser

@@ -36,6 +36,11 @@
         window.addEventListener('keydown', handleKeyPress);
         
         async function handleKeyPress(event) {
+        /**
+        * Fonction pour gérer les pressions sur les touches de direction
+        * Pré-condition : L'utilisateur appuie sur une touche fléchée
+        * Post-condition : Envoie une requête pour déplacer le joueur, met à jour le plateau ou affiche une erreur
+        */
             if (event.key == 'ArrowUp' ||
                 event.key == 'ArrowDown' ||
                 event.key == 'ArrowLeft'||
@@ -60,6 +65,11 @@
         }
 
         async function sendMoveRequest(direction) {
+         /**
+         * Fonction pour envoyer la requête de déplacement au serveur
+         * Pré-condition : Une touche de direction est appuyée et envoyée en paramètre
+         * Post-condition : Retourne la réponse du serveur sous forme d'objet JSON contenant l'état du plateau
+         */
             const response = await fetch('/move', {
                 method: 'POST',
                 headers: {
@@ -75,10 +85,20 @@
         }
 
         function getRandomInt(max) {
+        /**
+        * Fonction pour générer un nombre aléatoire entier
+        * Pré-condition : `max` est un entier positif
+        * Post-condition : Retourne un entier aléatoire entre 0 et `max - 1`
+        */
             return Math.floor(Math.random() * max);
         }
 
         function ColorBoard() {
+        /**
+        * Fonction pour colorier le plateau en fonction de l'état du jeu
+        * Pré-condition : `boardState`, `pos1`, et `pos2` contiennent les données actuelles du jeu
+        * Post-condition : Met à jour les cellules du plateau avec les positions des joueurs et les cases neutres
+        */
             for (let i = 0; i < board_size; i++) {
                 for (let j = 0; j < board_size; j++) {
                     let index = i * board_size + j;
@@ -117,6 +137,11 @@
         }
 
         function getPositionFromString(positionString) {
+        /**
+        * Fonction pour convertir une chaîne de position en objet de coordonnées
+        * Pré-condition : `positionString` est une chaîne de la forme "x,y"
+        * Post-condition : Retourne un objet avec les coordonnées `x` et `y`
+        */
             let posArray = positionString.split(",");
             return {
                 x: parseInt(posArray[0]),

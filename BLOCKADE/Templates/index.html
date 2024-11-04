@@ -15,8 +15,11 @@
             };
 
             button.addEventListener("click", async function(event) {
-                //Requête pour créer une partie, on envoie le nom du ou des joueurs (si IA ou non) en JSON au serveur, puis on reçoit et on 
-                //affiche la page de jeu que nous renvoie le serveur
+            /**
+            * Fonction pour créer une partie au clic du bouton "Jouer"
+            * Pré-condition : L'utilisateur a cliqué sur le bouton
+            * Post-condition : Envoie une requête POST pour créer une partie avec nom du ou des joueurs (si IA ou non), puis redirige vers la page de jeu
+            */
                 let answer = await fetch('/createGame', {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
