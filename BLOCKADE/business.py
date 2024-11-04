@@ -3,6 +3,8 @@ from math import sqrt
 
 def move(game, player, direction):
     """
+    Fonction qui bouge le joueur sur le  plateau de jeu.
+
     Pré-conditions :
         game est un objet Game valide
         player est un ID de joueur 
@@ -81,13 +83,22 @@ def move(game, player, direction):
 
 
 def is_within_board(x, y, side_size) : 
+    """
+    Fonction qui vérifie si la case est dans le plateau
+    """
     return (0 <= x < side_size) and (0 <= y < side_size)
 
 
 def is_move_valid(target_case, player_number) : 
+    """
+    Fonction qui vérifie si le mouvement est valide
+    """
     return target_case == "0" or target_case == player_number
 
 def reachable_cases(opponent_number, opponent_pos, board_state) : 
+    """
+    Fonction qui trouve les cases acessibles ou non par un joueur
+    """
 
     board_size = len(board_state)
     side_size = int(sqrt(board_size))
@@ -114,6 +125,9 @@ def reachable_cases(opponent_number, opponent_pos, board_state) :
     return reachable
 
 def board_state_with_pen(opponent_number, opponent_pos, board_state) :
+    """
+    Fonction qui met a jour l'état du plateau avec les enclos (case inaxessible par l'adverssaire)
+    """
     reachable = reachable_cases(opponent_number, opponent_pos, board_state)
 
     if opponent_number == "1" : 

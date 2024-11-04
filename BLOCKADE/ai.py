@@ -3,6 +3,7 @@ import random
 
 def get_move(game, player_id):
     """
+    Fonction qui revoir le mouvement choisit par l'IA
     Pré-conditions :
         L'id du joueur qui fait le mouvement doit être l'id d'un joueur présent dans la game
     Post-conditions : 
@@ -26,6 +27,8 @@ def get_move(game, player_id):
 
 def is_move_possible(game, player_id, move) : 
     """
+    Fonction qui vérifie si le  mouvement est possible
+
     Pré-conditions :
         L'id du joueur qui fait le mouvement doit être l'id d'un joueur présent dans la game
         Le mouvement doit être [ArrowUp,ArrowDown,ArrowLeft,ArrowRight]
