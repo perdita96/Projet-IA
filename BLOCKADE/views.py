@@ -99,11 +99,15 @@ def send_static(path):
     """
     return render_template('static', path)
 
-app.route('/createGame', methods=['POST'])
+@app.route('/createGame', methods=['POST'])
 def create_game():
     """
+    Préconditions:
+    - 'data' doit être un dictionnaire contenant au moins le champ 'player_1' (pseudos du joueurs)
+    - 'player_2' est optionnel dans le cas ou il n'y à pas de player 2, il s'agit d'un partie contre l'IA
+
     Pré-conditions:
-    - 'data' doit être un dictionnaire contenant au moins deux champs 'player_1'  'player_2' (pseudos des joueurs).
+    - 'request_data' doit être un dictionnaire contenant au moins le champ 'player_1' et évententuellement 'player_2' (pseudos des joueurs).
 
     Post-conditions:
     - Si les joueurs n'existent pas dans la base de données, ils sont créés.
