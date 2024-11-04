@@ -20,4 +20,4 @@ Mettre en place une Intelligence Artificielle (et l’implémenter avec du Q-Lea
 - Marchand Romain
 
 ## Initialisation de la base de données
-```En cas de problème avec la base de données exécuté "python initDB.py" pour la réinitialiser```
+En cas de problème avec la base de données exécuté ```python initDB.py``` pour la réinitialiser
