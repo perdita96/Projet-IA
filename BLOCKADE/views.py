@@ -12,6 +12,8 @@ db.init_app(app)
 @app.route('/')
 def index():
     """
+    Route qui renvoie la page d'accueil 
+
     Post-conditions : La fonction renvoie le template index.html
     """
     return render_template('index.html')
@@ -19,6 +21,8 @@ def index():
 @app.route('/move', methods=['POST'])
 def move():
     """
+    Route qui permet de traiter le mouvement d'un joueur sur le plateau du jeu
+
     Pré-conditions :
         la requête est de type POST
         Les données de la requête sont au format JSON
@@ -50,15 +54,15 @@ def move():
             next_player_id = game.player_2_id
         next_player = db.session.query(Player).get(next_player_id)
         
-        if game.winner_player_1 is None and not next_player.is_human:
+        if not game.winner and not next_player.is_human:
             game = business.move(game, next_player.player_id, get_move(game, next_player.player_id))
         db.session.commit()
 
-        if game.winner_player_1 is None:
+        if not game.winner:
             return jsonify({'boardState': game.board_state, 'pos_player_1': game.pos_player_1, 'pos_player_2': game.pos_player_2})
         else:
-            is_winner = (game.winner_player_1 and int(game.player_1_id) == int(player_id) 
-                         or (not game.winner_player_1 and int(game.player_2_id) == int(player_id))) 
+            is_winner = (game.winner == 1 and int(game.player_1_id) == int(player_id) 
+                         or (game.winner == 2 and int(game.player_2_id) == int(player_id))) 
             return jsonify({'url': 'endGame', 'is_winner': is_winner, 'player_id': player_id})
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
@@ -67,6 +71,8 @@ def move():
 @app.route('/game/<int:game_id>/<int:player_id>')
 def game(game_id, player_id): 
     """
+    Route qui 
+
     Pré-conditions :
         Les paramètres game et player_id sont présents dans l'URL
     Post-conditions :
@@ -86,7 +92,7 @@ def game(game_id, player_id):
         current_player_id = game.player_2_id
     current_player = db.session.query(Player).get(current_player_id)
 
-    if game.winner_player_1 == None and not current_player.is_human: 
+    if not game.winner and not current_player.is_human: 
         game = business.move(game, current_player.player_id, get_move(game, current_player.player_id)) 
         db.session.commit()
     return render_template('game.html', game=game, player_id=player_id)         
@@ -102,12 +108,11 @@ def send_static(path):
 @app.route('/createGame', methods=['POST'])
 def create_game():
     """
+    Route pour créer une partie 
+
     Préconditions:
     - 'data' doit être un dictionnaire contenant au moins le champ 'player_1' (pseudos du joueurs)
     - 'player_2' est optionnel dans le cas ou il n'y à pas de player 2, il s'agit d'un partie contre l'IA
-
-    Pré-conditions:
-    - 'request_data' doit être un dictionnaire contenant au moins le champ 'player_1' et évententuellement 'player_2' (pseudos des joueurs).
 
     Post-conditions:
     - Si les joueurs n'existent pas dans la base de données, ils sont créés.
