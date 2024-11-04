@@ -165,5 +165,3 @@ def board_state_with_pen(opponent_number, opponent_pos, board_state) :
 
     return board_state
 
-        
-

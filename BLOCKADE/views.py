@@ -100,57 +100,13 @@ def send_static(path):
     """
     return render_template('static', path)
 
-    
-def player_exists(nickname):
-    """
-    Préconditions:
-    - 'nickname' est une chaîne de caractères représentant le pseudo d'un joueur.
-    - La base de données est accessible via 'db.session'.
-    - Il faut que la fonction ait accès au modèle Player
-
-    Postconditions:
-    - Retourne True si un joueur avec ce pseudo existe dans la base de données.
-    - Retourne False si aucun joueur avec ce pseudo n'est trouvé.
-    """
-
-    if db.session.query(Player).filter_by(nickname=nickname).first() == None:
-        return False
-    return True
-
-
-def id_searched_player(nickname):
-    """
-    Préconditions:
-    - 'nickname' doit être une chaîne de caractères représentant un pseudo existant dans la base de données.
-    - La base de données est accessible via 'db.session'.
-    - Il faut que la fonction ait accès au modèle Player
-
-    Postconditions:
-    - Retourne l'ID ('player_id') du joueur correspondant au pseudo.
-    """
-    return db.session.query(Player).filter_by(nickname=nickname).first().player_id
-
-
-def add_player(nickname): 
-    """
-    Préconditions:
-    - 'nickname' doit être une chaîne de caractères qui n'existe pas encore dans la base de données.
-    - La base de données est accessible via 'db.session'.
-    - Il faut que la fonction ait accès au modèle Player
-
-    Postconditions:
-    - Un nouveau joueur est ajouté à la base de données.
-    """
-    new_player = Player(is_human = (nickname != 'IA' and nickname != 'Alice'), nickname=nickname) 
-    db.session.add(new_player)  
-    db.session.commit()
-
 
 @app.route('/createGame', methods=['POST'])
 def create_game() :
     """
     Préconditions:
-    - 'data' doit être un dictionnaire contenant au moins deux champs 'player_1' et 'player_2' (pseudos des joueurs).
+    - 'data' doit être un dictionnaire contenant au moins deux champs 'player_1' (pseudos du joueurs)
+    - 'player_2'  est optionnel dans le cas ou il n'y à pas de player 2, il s'agit d'un partie contre l'IA
 
     Postconditions:
     - Si les joueurs n'existent pas dans la base de données, ils sont créés.
@@ -196,3 +152,44 @@ def end_game(is_winner, player_id):
     return render_template('endGame.html', is_winner = is_winner, player_id = player_id)
       
 
+def player_exists(nickname):
+    """
+    Préconditions:
+    - 'nickname' est une chaîne de caractères représentant le pseudo d'un joueur.
+    - La base de données est accessible via 'db.session'.
+    - Il faut que la fonction ait accès au modèle Player
+
+    Postconditions:
+    - Retourne True si un joueur avec ce pseudo existe dans la base de données.
+    - Retourne False si aucun joueur avec ce pseudo n'est trouvé.
+    """
+
+    if db.session.query(Player).filter_by(nickname=nickname).first() == None:
+        return False
+    return True
+
+def add_player(nickname): 
+    """
+    Préconditions:
+    - 'nickname' doit être une chaîne de caractères qui n'existe pas encore dans la base de données.
+    - La base de données est accessible via 'db.session'.
+    - Il faut que la fonction ait accès au modèle Player
+
+    Postconditions:
+    - Un nouveau joueur est ajouté à la base de données.
+    """
+    new_player = Player(is_human = (nickname != 'IA' and nickname != 'Alice'), nickname=nickname) 
+    db.session.add(new_player)  
+    db.session.commit()
+
+def id_searched_player(nickname):
+    """
+    Préconditions:
+    - 'nickname' doit être une chaîne de caractères représentant un pseudo existant dans la base de données.
+    - La base de données est accessible via 'db.session'.
+    - Il faut que la fonction ait accès au modèle Player
+
+    Postconditions:
+    - Retourne l'ID ('player_id') du joueur correspondant au pseudo.
+    """
+    return db.session.query(Player).filter_by(nickname=nickname).first().player_id
