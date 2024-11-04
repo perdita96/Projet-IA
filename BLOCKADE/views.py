@@ -12,6 +12,8 @@ db.init_app(app)
 @app.route('/')
 def index():
     """
+    Route qui renvoie la page d'accueil 
+
     Post-conditions : La fonction renvoie le template index.html
     """
     return render_template('index.html')
@@ -19,6 +21,8 @@ def index():
 @app.route('/move', methods=['POST'])
 def move():
     """
+    Route qui permet de traiter le mouvement d'un joueur sur le plateau du jeu
+
     Pré-conditions :
         la requête est de type POST
         Les données de la requête sont au format JSON
@@ -67,6 +71,8 @@ def move():
 @app.route('/game/<int:game_id>/<int:player_id>')
 def game(game_id, player_id): 
     """
+    Route qui 
+
     Pré-conditions :
         Les paramètres game et player_id sont présents dans l'URL
     Post-conditions :
@@ -102,12 +108,11 @@ def send_static(path):
 @app.route('/createGame', methods=['POST'])
 def create_game():
     """
+    Route pour créer une partie 
+
     Préconditions:
     - 'data' doit être un dictionnaire contenant au moins le champ 'player_1' (pseudos du joueurs)
     - 'player_2' est optionnel dans le cas ou il n'y à pas de player 2, il s'agit d'un partie contre l'IA
-
-    Pré-conditions:
-    - 'request_data' doit être un dictionnaire contenant au moins le champ 'player_1' et évententuellement 'player_2' (pseudos des joueurs).
 
     Post-conditions:
     - Si les joueurs n'existent pas dans la base de données, ils sont créés.
