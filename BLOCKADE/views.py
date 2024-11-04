@@ -1,5 +1,6 @@
-from flask import Flask, render_template, redirect, url_for, flash, request, jsonify
-from .models import Player, db, Game
+from flask import Flask, render_template, request, jsonify
+from .app_models.models import *
+from .app_models.util import *
 from .ai import get_move
 from . import business
 import config
@@ -158,51 +159,3 @@ def end_game(is_winner, player_id):
     """
     is_winner = is_winner == 'true'
     return render_template('endGame.html', is_winner=is_winner, player_id=player_id)
-      
-
-def player_exists(nickname):
-    """
-    Fonction qui détermine si le joueur est déjà présent dans la base de données ou non
-
-    Préconditions:
-    - 'nickname' est une chaîne de caractères représentant le pseudo d'un joueur.
-    - La base de données est accessible via 'db.session'.
-    - Il faut que la fonction ait accès au modèle Player
-
-    Postconditions:
-    - Retourne True si un joueur avec ce pseudo existe dans la base de données.
-    - Retourne False si aucun joueur avec ce pseudo n'est trouvé.
-    """
-
-    return True if db.session.query(Player).filter_by(nickname=nickname).first() else False
-
-def add_player(nickname): 
-    """
-    Fonction qui ajoute un joueur dans la base de données
-
-    Préconditions:
-    - 'nickname' doit être une chaîne de caractères qui n'existe pas encore dans la base de données.
-    - La base de données est accessible via 'db.session'.
-    - Il faut que la fonction ait accès au modèle Player
-
-    Postconditions:
-    - Un nouveau joueur est ajouté à la base de données.
-    """
-    new_player = Player(is_human = (nickname != 'IA' and nickname != 'Alice'), nickname=nickname) 
-    db.session.add(new_player)  
-    db.session.commit()
-
-def id_searched_player(nickname):
-    """
-
-    Fonction qui retourne l'id d'un joueur sur base de son pseudo
-
-    Préconditions:
-    - 'nickname' doit être une chaîne de caractères représentant un pseudo existant dans la base de données.
-    - La base de données est accessible via 'db.session'.
-    - Il faut que la fonction ait accès au modèle Player
-
-    Postconditions:
-    - Retourne l'ID ('player_id') du joueur correspondant au pseudo.
-    """
-    return db.session.query(Player).filter_by(nickname=nickname).first().player_id
