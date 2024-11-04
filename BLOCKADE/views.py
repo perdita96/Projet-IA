@@ -71,7 +71,7 @@ def move():
 @app.route('/game/<int:game_id>/<int:player_id>')
 def game(game_id, player_id): 
     """
-    Route qui 
+    Route qui retourne le template de la partie
 
     Pré-conditions :
         Les paramètres game et player_id sont présents dans l'URL
@@ -146,6 +146,8 @@ def create_game():
 @app.route('/endGame/<string:is_winner>/<int:player_id>')
 def end_game(is_winner, player_id):
     """
+    Route qui retourne le template de fin de jeu qui indique le gagnant
+
     Pré-conditions:
         - player_id doit être un entier qui identifie le joueur
         - is_winner doit être un booléen qui indique si le joueur player_id a gagné
@@ -160,6 +162,8 @@ def end_game(is_winner, player_id):
 
 def player_exists(nickname):
     """
+    Fonction qui détermine si le joueur est déjà présent dans la base de données ou non
+
     Préconditions:
     - 'nickname' est une chaîne de caractères représentant le pseudo d'un joueur.
     - La base de données est accessible via 'db.session'.
@@ -170,12 +174,12 @@ def player_exists(nickname):
     - Retourne False si aucun joueur avec ce pseudo n'est trouvé.
     """
 
-    if db.session.query(Player).filter_by(nickname=nickname).first() == None:
-        return False
-    return True
+    return True if db.session.query(Player).filter_by(nickname=nickname).first() else False
 
 def add_player(nickname): 
     """
+    Fonction qui ajoute un joueur dans la base de données
+
     Préconditions:
     - 'nickname' doit être une chaîne de caractères qui n'existe pas encore dans la base de données.
     - La base de données est accessible via 'db.session'.
@@ -190,6 +194,9 @@ def add_player(nickname):
 
 def id_searched_player(nickname):
     """
+
+    Fonction qui retourne l'id d'un joueur sur base de son pseudo
+
     Préconditions:
     - 'nickname' doit être une chaîne de caractères représentant un pseudo existant dans la base de données.
     - La base de données est accessible via 'db.session'.
