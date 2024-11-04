@@ -9,13 +9,13 @@ def move(game, player, direction):
         game est un objet Game valide
         player est un ID de joueur 
         direction est une chaîne
-        Le jeu n'est pas déjà terminé (c'est-à-dire que game.winner_player_1 est None)
+        Le jeu n'est pas déjà terminé (c'est-à-dire que game.winner est falsy)
     Post-conditions :
         Si le déplacement est valide, la fonction met à jour l'état du jeu en conséquence :
             Met à jour la position du joueur (game.pos_player_1 ou game.pos_player_2)
             Met à jour l'état du plateau (game.board_state)
             Met à jour l'indicateur game.turn_player_1
-            Si le jeu est terminé, définit game.winner_player_1
+            Si le jeu est terminé, définit game.winner
         Lance un valueError si une valeur n'est pas valide ou un mouvement impossible
     """
     player_1 = game.player_1
@@ -77,7 +77,7 @@ def move(game, player, direction):
     game.turn_player_1 = not game.turn_player_1
 
     if "0" not in board_state:
-        game.winner_player_1 = board_state.count("1") > size ** 2 // 2
+        game.winner = 1 if board_state.count("1") > size ** 2 // 2 else 2
     
     return game
 
