@@ -54,15 +54,15 @@ def move():
             next_player_id = game.player_2_id
         next_player = db.session.query(Player).get(next_player_id)
         
-        if game.winner_player_1 is None and not next_player.is_human:
+        if not game.winner and not next_player.is_human:
             game = business.move(game, next_player.player_id, get_move(game, next_player.player_id))
         db.session.commit()
 
-        if game.winner_player_1 is None:
+        if not game.winner:
             return jsonify({'boardState': game.board_state, 'pos_player_1': game.pos_player_1, 'pos_player_2': game.pos_player_2})
         else:
-            is_winner = (game.winner_player_1 and int(game.player_1_id) == int(player_id) 
-                         or (not game.winner_player_1 and int(game.player_2_id) == int(player_id))) 
+            is_winner = (game.winner == 1 and int(game.player_1_id) == int(player_id) 
+                         or (game.winner == 2 and int(game.player_2_id) == int(player_id))) 
             return jsonify({'url': 'endGame', 'is_winner': is_winner, 'player_id': player_id})
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
@@ -92,7 +92,7 @@ def game(game_id, player_id):
         current_player_id = game.player_2_id
     current_player = db.session.query(Player).get(current_player_id)
 
-    if game.winner_player_1 == None and not current_player.is_human: 
+    if not game.winner and not current_player.is_human: 
         game = business.move(game, current_player.player_id, get_move(game, current_player.player_id)) 
         db.session.commit()
     return render_template('game.html', game=game, player_id=player_id)         
