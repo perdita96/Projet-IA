@@ -36,7 +36,7 @@ class Game(db.Model):
     pos_player_2 = db.Column(db.String, nullable=False)
     turn_player_1 = db.Column(db.Boolean, nullable=False)
     board_state = db.Column(db.String, nullable=False)
-    winner_player_1 = db.Column(db.Boolean, nullable=True)
+    winner = db.Column(db.SmallInteger, nullable=True)
     player_1_id = db.Column(db.Integer, db.ForeignKey('players.player_id'))
     player_2_id = db.Column(db.Integer, db.ForeignKey('players.player_id'))
 
@@ -51,3 +51,4 @@ class Game(db.Model):
         self.board_state = "1" + "0"*((size**2)-2) + "2"
         self.player_1_id = player_1
         self.player_2_id = player_2
+        self.winner = 0
