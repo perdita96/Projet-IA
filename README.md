@@ -14,10 +14,10 @@ Mettre en place une Intelligence Artificielle (et l’implémenter avec du Q-Lea
 ## Lancer le jeu
 ```python run.py```
 
+## Initialisation de la base de données
+En cas de problème avec la base de données exécuté ```python initDB.py``` pour la réinitialiser
+
 ## Collaboration
 - Buret Lucien
 - Desiron Anaïs
 - Marchand Romain
-
-## Initialisation de la base de données
-En cas de problème avec la base de données exécuté ```python initDB.py``` pour la réinitialiser
