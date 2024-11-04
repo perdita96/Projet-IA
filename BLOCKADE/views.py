@@ -147,7 +147,7 @@ def add_player(nickname):
 def create_game():
     """
     Pré-conditions:
-    - 'data' doit être un dictionnaire contenant au moins deux champs 'player_1' et 'player_2' (pseudos des joueurs).
+    - 'data' doit être un dictionnaire contenant au moins deux champs 'player_1'  'player_2' (pseudos des joueurs).
 
     Post-conditions:
     - Si les joueurs n'existent pas dans la base de données, ils sont créés.
