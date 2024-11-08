@@ -44,24 +44,22 @@
             if (event.key == 'ArrowUp' ||
                 event.key == 'ArrowDown' ||
                 event.key == 'ArrowLeft'||
-                event.key == 'ArrowRight'){
-                    window.removeEventListener('keydown', handleKeyPress);
-                    let response = await sendMoveRequest(event.key);
-                    if (response.error != null) {
-                        alert(response.error);
-                    } else {
-                        if (response.boardState == null){
-                            window.location.href = `/${response.url}/${response.is_winner}/${response.player_id}`; 
-                        }else{
-                            boardState = response.boardState;
-                            pos1 = getPositionFromString(response.pos_player_1);
-                            pos2 = getPositionFromString(response.pos_player_2);
-                            ColorBoard();
-                        }
+                event.key == 'ArrowRight') {
 
-                    }
-                    window.addEventListener('keydown', handleKeyPress);
+                window.removeEventListener('keydown', handleKeyPress);
+                let response = await sendMoveRequest(event.key);
+                if (response.error != null) {
+                    alert(response.error);
+                } else if (response.boardState == null){
+                    window.location.href = `/${response.url}/${response.is_winner}/${response.player_id}`; 
+                }else{
+                    boardState = response.boardState;
+                    pos1 = getPositionFromString(response.pos_player_1);
+                    pos2 = getPositionFromString(response.pos_player_2);
+                    ColorBoard();
                 }
+                window.addEventListener('keydown', handleKeyPress);
+            }       
         }
 
         async function sendMoveRequest(direction) {
