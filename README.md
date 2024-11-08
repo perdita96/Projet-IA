@@ -15,17 +15,17 @@ Pour installer les dépendances nécessaires, exécutez la commande suivante :
 pip3 install -r requirements.txt
 ```
 
-## Lancer le jeu
-```bash
-python run.py
-```
-
 ## Initialisation de la base de données
 
-En cas de problème avec la base de données, exécutez le script suivant pour la réinitialiser :
+Avant la première utilisation du projet, il faut exécuter le script de création de la base de données :
 
 ```bash
 python initDB.py
+```
+
+## Lancer le jeu
+```bash
+python run.py
 ```
 
 ## Collaboration

@@ -3,7 +3,7 @@ from math import sqrt
 
 def move(game, player, direction):
     """
-    Fonction qui bouge le joueur sur le  plateau de jeu.
+    Fonction qui bouge le joueur sur le plateau de jeu.
 
     Pré-conditions :
         game est un objet Game valide
