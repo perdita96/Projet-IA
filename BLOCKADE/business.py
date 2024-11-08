@@ -149,10 +149,10 @@ def reachable_cases(opponent_number, opponent_pos, board_state) :
 def update_enclosure(opponent_number, opponent_pos, board_state) :
     """
     Fonction qui met a jour l'état du plateau avec les enclos (cases inaccessibles par l'adversaire)
-    
+
     Préconditions:
     - opponent_number est le numéro du joueur adverse.
-    - opponent_pos doit être une chaîne de caractères au format "x,y" représantant la position actuelle du joueur adverse.
+    - opponent_pos doit être une chaîne de caractères au format "x,y" représentant la position actuelle du joueur adverse.
     - board_state doit être une chaîne de caractères représentant l'état du jeu.
 
     Postconditions:
