@@ -5,4 +5,4 @@ BLOCKADE/app_models/__pycache__/
 
 
 # Ignorer les fichiers
-app.db  
+#app.db  
