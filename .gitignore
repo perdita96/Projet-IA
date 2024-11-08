@@ -1,7 +1,7 @@
 # Ignorer les dossiers spécifiques
 __pycache__/
 BLOCKADE/__pycache__/
-BLOCKADE/app_models/
+BLOCKADE/app_models/__pycache__/
 
 
 # Ignorer les fichiers
