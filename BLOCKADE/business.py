@@ -71,7 +71,7 @@ def move(game, player, direction):
     board_state = list(board_state)
     board_state[new_x * size + new_y] = current_player
 
-    board_state = board_state_with_pen(opponent_player, opponent_player_pos, board_state)
+    board_state = update_enclosure(opponent_player, opponent_player_pos, board_state)
                                     
     game.board_state = "".join(board_state)
     game.turn_player_1 = not game.turn_player_1
@@ -85,6 +85,7 @@ def move(game, player, direction):
 def is_within_board(x, y, side_size) : 
     """
     Fonction qui vérifie si la case est dans le plateau
+
     Préconditions:
     - x et y doivent être des entiers.
     - side_size doit être un entier positif.
@@ -98,26 +99,27 @@ def is_within_board(x, y, side_size) :
 def is_move_valid(target_case, player_number) : 
     """
     Fonction qui vérifie si le mouvement est valide
+
     Préconditions:
-    - target_case doit être un caratère de la chaine représentant l'état du jeu.
+    - target_case doit être un caractère de la chaîne représentant l'état du jeu.
     - player_number est le numéro du joueur.
 
     Postconditions:
-    - Retourne True si le mouvement est valide, c'est à dire que target_case n'est pas occupé par l'adverssaire, sinon False.
+    - Retourne True si le mouvement est valide, c'est à dire que target_case n'est pas occupé par l'adversaire, sinon False.
     """
     return target_case == "0" or target_case == player_number
 
 def reachable_cases(opponent_number, opponent_pos, board_state) : 
     """
-    Fonction qui trouve les cases acessibles ou non par un joueur
+    Fonction qui trouve les cases accessibles ou non par un joueur
+
     Préconditions:
-    - opponent_number est le numero du joueur adversse.
-    - opponent_pos doit être une chaîne de caractères au format "x,y" représantant la position actuelle du joueur adversse.
-    - board_state doit être une liste de chaînes de caractères représentant l'état du jeu.
+    - opponent_number est le numéro du joueur adverse.
+    - opponent_pos doit être une chaîne de caractères au format "x,y" représentant la position actuelle du joueur adverse.
+    - board_state doit être une chaîne de caractères représentant l'état du jeu.
 
     Postconditions:
-    - Retourne une liste de booléens indiquant si chaque case est accessible ou non par le joueur adversse.
-
+    - Retourne une liste de booléens indiquant si chaque case est accessible ou non par le joueur adverse.
     """
 
     board_size = len(board_state)
@@ -144,13 +146,14 @@ def reachable_cases(opponent_number, opponent_pos, board_state) :
 
     return reachable
 
-def board_state_with_pen(opponent_number, opponent_pos, board_state) :
+def update_enclosure(opponent_number, opponent_pos, board_state) :
     """
-    Fonction qui met a jour l'état du plateau avec les enclos (case inaxessible par l'adverssaire)
+    Fonction qui met a jour l'état du plateau avec les enclos (cases inaccessibles par l'adversaire)
+    
     Préconditions:
-    - opponent_number est le numero du joueur adversse.
-    - opponent_pos doit être une chaîne de caractères au format "x,y" représantant la position actuelle du joueur adversse.
-    - board_state doit être une liste de chaînes de caractères représentant l'état du jeu.
+    - opponent_number est le numéro du joueur adverse.
+    - opponent_pos doit être une chaîne de caractères au format "x,y" représantant la position actuelle du joueur adverse.
+    - board_state doit être une chaîne de caractères représentant l'état du jeu.
 
     Postconditions:
     - Retourne l'état du plateau mis à jour.
@@ -169,4 +172,3 @@ def board_state_with_pen(opponent_number, opponent_pos, board_state) :
             board_state[i_case] = current_player_number
             
     return board_state
-
