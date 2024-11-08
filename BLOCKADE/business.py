@@ -85,6 +85,12 @@ def move(game, player, direction):
 def is_within_board(x, y, side_size) : 
     """
     Fonction qui vérifie si la case est dans le plateau
+    Préconditions:
+    - x et y doivent être des entiers.
+    - side_size doit être un entier positif.
+
+    Postconditions:
+    - Retourne True si (x, y) est dans les limites du plateau, sinon False.
     """
     return (0 <= x < side_size) and (0 <= y < side_size)
 
@@ -92,12 +98,26 @@ def is_within_board(x, y, side_size) :
 def is_move_valid(target_case, player_number) : 
     """
     Fonction qui vérifie si le mouvement est valide
+    Préconditions:
+    - target_case doit être un caratère de la chaine représentant l'état du jeu.
+    - player_number est le numéro du joueur.
+
+    Postconditions:
+    - Retourne True si le mouvement est valide, c'est à dire que target_case n'est pas occupé par l'adverssaire, sinon False.
     """
     return target_case == "0" or target_case == player_number
 
 def reachable_cases(opponent_number, opponent_pos, board_state) : 
     """
     Fonction qui trouve les cases acessibles ou non par un joueur
+    Préconditions:
+    - opponent_number est le numero du joueur adversse.
+    - opponent_pos doit être une chaîne de caractères au format "x,y" représantant la position actuelle du joueur adversse.
+    - board_state doit être une liste de chaînes de caractères représentant l'état du jeu.
+
+    Postconditions:
+    - Retourne une liste de booléens indiquant si chaque case est accessible ou non par le joueur adversse.
+
     """
 
     board_size = len(board_state)
@@ -127,6 +147,13 @@ def reachable_cases(opponent_number, opponent_pos, board_state) :
 def board_state_with_pen(opponent_number, opponent_pos, board_state) :
     """
     Fonction qui met a jour l'état du plateau avec les enclos (case inaxessible par l'adverssaire)
+    Préconditions:
+    - opponent_number est le numero du joueur adversse.
+    - opponent_pos doit être une chaîne de caractères au format "x,y" représantant la position actuelle du joueur adversse.
+    - board_state doit être une liste de chaînes de caractères représentant l'état du jeu.
+
+    Postconditions:
+    - Retourne l'état du plateau mis à jour.
     """
     reachable = reachable_cases(opponent_number, opponent_pos, board_state)
 
