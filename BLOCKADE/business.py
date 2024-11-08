@@ -139,7 +139,8 @@ def reachable_cases(opponent_number, opponent_pos, board_state) :
 
             if is_within_board(x_neighbor, y_neighbor, side_size) and not reachable[i_case] and is_move_valid(board_state[i_case], opponent_number) : 
                 reachable[i_case] = True
-                queue.append((x_neighbor, y_neighbor)) 
+                if((x_neighbor, y_neighbor) not in queue):
+                    queue.append((x_neighbor, y_neighbor)) 
 
 
     return reachable
