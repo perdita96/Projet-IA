@@ -11,7 +11,7 @@ def get_move(game, player_id):
     """
     # Suggestion : Instancier directions une seule fois et l'importer vu qu'il est aussi utilisé dans la business (par ex dans config)
     # pour avoir un point de modification unique
-    
+
     directions = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight']
 
     move = random.choice(directions)
@@ -45,15 +45,6 @@ def is_move_possible(game, player_id, move) :
 
     x, y = map(int, current_pos.split(","))
 
-    match move:
-        case "ArrowUp":
-            new_x, new_y = x - 1, y
-        case "ArrowDown":
-            new_x, new_y = x + 1, y
-        case "ArrowLeft":
-            new_x, new_y = x, y - 1
-        case "ArrowRight":
-            new_x, new_y = x, y + 1
     match move:
         case "ArrowUp":
             new_x, new_y = x - 1, y
