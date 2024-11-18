@@ -99,7 +99,7 @@ def is_within_board(x, y, side_size) :
 def is_move_valid(target_case, player_number) : 
     """
     Fonction qui vérifie si le mouvement est valide
-
+    
     Préconditions:
     - target_case doit être un caractère de la chaîne représentant l'état du jeu.
     - player_number est le numéro du joueur.
