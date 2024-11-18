@@ -85,6 +85,7 @@ def move(game, player, direction):
 def is_within_board(x, y, side_size) : 
     """
     Fonction qui vérifie si la case est dans le plateau
+
     Préconditions:
     - x et y doivent être des entiers.
     - side_size doit être un entier positif.
@@ -98,6 +99,7 @@ def is_within_board(x, y, side_size) :
 def is_move_valid(target_case, player_number) : 
     """
     Fonction qui vérifie si le mouvement est valide
+    
     Préconditions:
     - target_case doit être un caratère de la chaine représentant l'état du jeu.
     - player_number est le numéro du joueur.
