@@ -38,7 +38,7 @@ def possible_move(game, player_id):
         if((0 <= new_x < size) and (0 <= new_y < size)): 
             target_square = board_state[new_x * size + new_y]
             if(target_square == "0" or target_square == current_player):
-                possible_move.append(move)
+                possible_move.append(move.lower())
     return possible_move
 
 def get_move(game, player_id):
@@ -60,7 +60,6 @@ def get_move(game, player_id):
         current_player_number = 1 if player_id == game.player_1.player_id else 2
         update_q_table(previous_state_move, current_state, current_player_number)
     else:
-        # changer previous_state car int trop petit
         previous_state_move = PreviousStateAction(
             game_id=game.game_id,
             player_id=player_id,
@@ -74,7 +73,7 @@ def get_move(game, player_id):
     previous_state_move.previous_state = current_state
     previous_state_move.previous_action = move
     db.session.commit()
-    return "Arrow" + move
+    return "Arrow" + move.capitalize()
 
 def explore(game, player_id):
     """
@@ -108,7 +107,7 @@ def exploit(game, player_id, current_state):
         best_value = -float('inf')
         directions = possible_move(game, player_id)
         for direction in directions:
-            value = value_state[direction]
+            value = getattr(value_state, direction)
             if (value > best_value):
                 best_value = value
                 best_action = direction
@@ -130,9 +129,7 @@ def state(game):
     pos_player_1 = game.pos_player_1.replace(',', '')
     pos_player_2 = game.pos_player_2.replace(',', '')
 
-    state_str = f"{current_player}{pos_player_1}{pos_player_2}{game.board_state}"
-
-    return int(state_str)
+    return f"{current_player}{pos_player_1}{pos_player_2}{game.board_state}"
 
 
 def update_q_table(previous_state_move, current_state, current_player_number):
@@ -150,12 +147,11 @@ def update_q_table(previous_state_move, current_state, current_player_number):
     learning_rate = config.LEARNING_RATE 
     discount_factor = config.DISCOUNT_FACTOR 
 
-    previous_boardstate = str(previous_state_move.previous_state)[5:]
-    current_boardstate = str(current_state.previous_state)[5:]
+    previous_boardstate = previous_state_move.previous_state[5:]
+    current_boardstate = current_state[5:]
     
     reward = calculate_reward(previous_boardstate, current_boardstate, current_player_number)  
     
-    #ajout etat non renconter
     if  not db.session.query(Qtable).get(previous_state_move.previous_state):
         new_entry = Qtable(state=previous_state_move.previous_state)
         db.session.add(new_entry)
@@ -165,14 +161,18 @@ def update_q_table(previous_state_move, current_state, current_player_number):
     
     action = previous_state_move.previous_action
 
-    current_q_value = db.session.query(Qtable).get(previous_state_move.previous_state)[action]
+    q_table_entry = db.session.query(Qtable).get(previous_state_move.previous_state)
+    current_q_value = getattr(q_table_entry, action)
 
-    max_future_q_value = max(db.session.query(Qtable).get(current_state).values())
+    future_q_table_entry = db.session.query(Qtable).get(current_state)
+    
+    max_future_q_value = max(future_q_table_entry.up, future_q_table_entry.down, 
+                              future_q_table_entry.left, future_q_table_entry.right)
 
     new_q_value = current_q_value + learning_rate * (reward + discount_factor * max_future_q_value - current_q_value)
 
     q_table_entry = db.session.query(Qtable).get(previous_state_move.previous_state)
-    q_table_entry[action] = new_q_value
+    setattr(q_table_entry, action, new_q_value)
     db.session.commit()
 
 def calculate_reward(previous_boardstate, current_boardstate, current_player_nb):

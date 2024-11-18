@@ -13,7 +13,7 @@ def init_db():
 class Qtable(db.Model):
     __tablename__ = 'qtable'
 
-    state = db.Column(db.Integer, primary_key=True)
+    state = db.Column(db.String(30), primary_key=True)
     up = db.Column(db.Float, nullable=False)
     down = db.Column(db.Float, nullable=False)
     right = db.Column(db.Float, nullable=False)
@@ -31,7 +31,7 @@ class PreviousStateAction(db.Model) :
 
     game_id = db.Column(db.Integer, db.ForeignKey('games.game_id'), primary_key=True)
     player_id = db.Column(db.Integer, db.ForeignKey('players.player_id'), primary_key=True)
-    previous_state = db.Column(db.Integer)
+    previous_state = db.Column(db.String(30))
     previous_action = db.Column(db.String(10))
 
     player = db.relationship("Player", foreign_keys=[player_id], back_populates="previous_state_action")
