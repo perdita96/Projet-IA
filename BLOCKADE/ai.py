@@ -60,6 +60,7 @@ def get_move(game, player_id):
         current_player_number = 1 if player_id == game.player_1.player_id else 2
         update_q_table(previous_state_move, current_state, current_player_number)
     else:
+        # changer previous_state car int trop petit
         previous_state_move = PreviousStateAction(
             game_id=game.game_id,
             player_id=player_id,
@@ -86,7 +87,6 @@ def explore(game, player_id):
     Post-conditions : 
         Retourne un mouvement valide sur le plateau du jeu choisi aléatoirement parmi les mouvements possibles.
     """
-
     directions = possible_move(game, player_id)
     return random.choice(directions)
 
@@ -150,7 +150,7 @@ def update_q_table(previous_state_move, current_state, current_player_number):
     learning_rate = config.LEARNING_RATE 
     discount_factor = config.DISCOUNT_FACTOR 
 
-    previous_boardstate = str(previous_state_move[previous_state])[5:]
+    previous_boardstate = str(previous_state_move.previous_state)[5:]
     current_boardstate = str(current_state.previous_state)[5:]
     
     reward = calculate_reward(previous_boardstate, current_boardstate, current_player_number)  
