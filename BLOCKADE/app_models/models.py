@@ -10,6 +10,41 @@ def init_db():
     db.session.commit()
     lg.warning('database initialized')
 
+class Qtable(db.Model):
+    __tablename__ = 'qtable'
+
+    state = db.Column(db.Integer, primary_key=True)
+    up = db.Column(db.Float, nullable=False)
+    down = db.Column(db.Float, nullable=False)
+    right = db.Column(db.Float, nullable=False)
+    left = db.Column(db.Float, nullable=False)
+
+    def __init__(self, state, up, down, right, left):
+        self.state = state
+        self.up = up
+        self.down = down
+        self.right = right 
+        self.left = left
+
+class PreviousStateAction(db.Model) :
+    __tablename__ = 'previousStateAction'
+
+    game_id = db.Column(db.Integer, db.ForeignKey('games.game_id'), primary_key=True)
+    player_id = db.Column(db.Integer, db.ForeignKey('players.player_id') ,primary_key=True)
+    previous_state = db.Column(db.Integer)
+    previous_action = db.Column(db.String(25))
+
+    player = db.relationship("Player", foreign_keys=[player_id], back_populates="previous_state_action")
+    game = db.relationship("Game", foreign_keys=[game_id], back_populates="previous_state_action")
+
+    def __init__(self, game_id, player_id, previous_state, previous_action):
+        self.game_id = game_id
+        self.player_id = player_id
+        self.previous_state = previous_state
+        self.previous_action = previous_action
+
+
+
 class Player(db.Model):
     __tablename__ = 'players'
 
@@ -20,6 +55,8 @@ class Player(db.Model):
     games_as_player_1 = db.relationship("Game", foreign_keys='Game.player_1_id', back_populates="player_1")
     
     games_as_player_2 = db.relationship("Game", foreign_keys='Game.player_2_id', back_populates="player_2")
+
+    previous_state_action = db.relationship("PreviousStateAction", foreign_keys='PreviousStateAction.player_id', back_populates="player")
 
 
     def __init__(self, is_human, nickname=None):
@@ -42,6 +79,9 @@ class Game(db.Model):
 
     player_1 = db.relationship("Player", foreign_keys=[player_1_id], back_populates="games_as_player_1")
     player_2 = db.relationship("Player", foreign_keys=[player_2_id], back_populates="games_as_player_2")
+
+    previous_state_action = db.relationship("PreviousStateAction", foreign_keys='PreviousStateAction.game_id', back_populates="game")
+
 
     def __init__(self, player_1, player_2, size):
         self.size = size
