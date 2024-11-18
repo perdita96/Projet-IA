@@ -19,7 +19,7 @@ class Qtable(db.Model):
     right = db.Column(db.Float, nullable=False)
     left = db.Column(db.Float, nullable=False)
 
-    def __init__(self, state, up, down, right, left):
+    def __init__(self, state, up=0 , down=0, right=0, left=0):
         self.state = state
         self.up = up
         self.down = down
@@ -57,6 +57,7 @@ class Player(db.Model):
     games_as_player_2 = db.relationship("Game", foreign_keys='Game.player_2_id', back_populates="player_2")
 
     previous_state_action = db.relationship("PreviousStateAction", foreign_keys='PreviousStateAction.player_id', back_populates="player")
+
 
 
     def __init__(self, is_human, nickname=None):
