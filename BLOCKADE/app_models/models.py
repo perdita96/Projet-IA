@@ -30,9 +30,9 @@ class PreviousStateAction(db.Model) :
     __tablename__ = 'previousStateAction'
 
     game_id = db.Column(db.Integer, db.ForeignKey('games.game_id'), primary_key=True)
-    player_id = db.Column(db.Integer, db.ForeignKey('players.player_id') ,primary_key=True)
+    player_id = db.Column(db.Integer, db.ForeignKey('players.player_id'), primary_key=True)
     previous_state = db.Column(db.Integer)
-    previous_action = db.Column(db.String(25))
+    previous_action = db.Column(db.String(10))
 
     player = db.relationship("Player", foreign_keys=[player_id], back_populates="previous_state_action")
     game = db.relationship("Game", foreign_keys=[game_id], back_populates="previous_state_action")
