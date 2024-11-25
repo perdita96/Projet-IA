@@ -147,12 +147,13 @@ def update_q_table(previous_state_move, current_state, current_player_number):
     learning_rate = config.LEARNING_RATE 
     discount_factor = config.DISCOUNT_FACTOR 
 
+    # On commence à 5 car il y a cur_player, pos_player_1 et pos_player_2 avant
     previous_boardstate = previous_state_move.previous_state[5:] 
     current_boardstate = current_state[5:]
     
     reward = calculate_reward(previous_boardstate, current_boardstate, current_player_number)  
     
-    #ajouter les états dans la Qtable si ils n'existent pas
+    # Ajouter les états dans la Qtable s'ils n'existent pas
     if not db.session.query(Qtable).get(previous_state_move.previous_state):
         new_entry = Qtable(state=previous_state_move.previous_state)
         db.session.add(new_entry)
@@ -163,14 +164,14 @@ def update_q_table(previous_state_move, current_state, current_player_number):
     action = previous_state_move.previous_action
 
     previous_q_table_entry = db.session.query(Qtable).get(previous_state_move.previous_state)
-    previous_current_q_value = getattr(previous_q_table_entry, action)
+    previous_q_value = getattr(previous_q_table_entry, action)
 
     current_q_table_entry = db.session.query(Qtable).get(current_state)
     
     max_current_q_value = max(current_q_table_entry.up, current_q_table_entry.down, 
                               current_q_table_entry.left, current_q_table_entry.right)
 
-    new_q_value = previous_current_q_value + learning_rate * (reward + discount_factor * max_current_q_value - previous_current_q_value)
+    new_q_value = previous_q_value + learning_rate * (reward + discount_factor * max_current_q_value - previous_q_value)
 
     q_table_entry = db.session.query(Qtable).get(previous_state_move.previous_state)
     setattr(q_table_entry, action, new_q_value)
