@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from .app_models.models import *
 from .app_models.util import *
-from .ai import get_move
+from .ai import*
 from . import business
 import config
 
@@ -62,9 +62,15 @@ def move():
         if not game.winner:
             return jsonify({'boardState': game.board_state, 'pos_player_1': game.pos_player_1, 'pos_player_2': game.pos_player_2})
         else:
-            is_winner = (game.winner == 1 and int(game.player_1_id) == int(player_id) 
-                         or (game.winner == 2 and int(game.player_2_id) == int(player_id))) 
-            return jsonify({'url': 'endGame', 'is_winner': is_winner, 'player_id': player_id})
+            if next_player.is_human:
+                end_game(game,next_player)
+            if game.winner == -1:
+                status = "equality"
+            if game.winner == 1 and int(game.player_1_id) == int(player_id) or game.winner == 2 and int(game.player_2_id) == int(player_id):
+                status = "win"
+            if game.winner == 2 and int(game.player_1_id) == int(player_id) or game.winner == 1 and int(game.player_2_id) == int(player_id):
+                status = "lose"
+            return jsonify({'url': 'endGame', 'status': status, 'player_id': player_id})
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
     
@@ -77,7 +83,6 @@ def game(game_id, player_id):
     Pré-conditions :
         Les paramètres game et player_id sont présents dans l'URL
     Post-conditions :
-        Si la game est finie la fonction renvoie vers la page ???
         Fait jouer l'IA si besoin
         Sinon la fonction renvoie le template game.html avec les paramètres game et player_id
     """
@@ -145,7 +150,7 @@ def create_game():
 
 
 @app.route('/endGame/<string:is_winner>/<int:player_id>')
-def end_game(is_winner, player_id):
+def end_game(status, player_id):
     """
     Route qui retourne le template de fin de jeu qui indique le gagnant
 
@@ -157,5 +162,4 @@ def end_game(is_winner, player_id):
         - retourne la route à prendre
         - retourne le booléen qui indique si on a gagné ainsi que l'id du joueur
     """
-    is_winner = is_winner == 'true'
-    return render_template('endGame.html', is_winner=is_winner, player_id=player_id)
+    return render_template('endGame.html', status=status, player_id=player_id)
