@@ -101,7 +101,7 @@ def exploit(game, player_id, current_state):
     Post-conditions : 
         Retourne le meilleur mouvement possible basé sur la Q-table, ou un mouvement aléatoire si current_state n'est pas dans la base de données.
     """
-    value_state = db.session.query(Qtable).get(current_state)
+    value_state = db.session.query(Qtable).get(current_state) 
     if current_state:
         best_action = None
         best_value = -float('inf')
