@@ -165,12 +165,12 @@ def update_q_table(previous_state_move, current_state, current_player_number):
     previous_q_table_entry = db.session.query(Qtable).get(previous_state_move.previous_state)
     previous_current_q_value = getattr(previous_q_table_entry, action)
 
-    future_q_table_entry = db.session.query(Qtable).get(current_state)
+    current_q_table_entry = db.session.query(Qtable).get(current_state)
     
-    max_future_q_value = max(future_q_table_entry.up, future_q_table_entry.down, 
-                              future_q_table_entry.left, future_q_table_entry.right)
+    max_current_q_value = max(current_q_table_entry.up, current_q_table_entry.down, 
+                              current_q_table_entry.left, current_q_table_entry.right)
 
-    new_q_value = current_q_value + learning_rate * (reward + discount_factor * max_future_q_value - current_q_value)
+    new_q_value = previous_current_q_value + learning_rate * (reward + discount_factor * max_current_q_value - previous_current_q_value)
 
     q_table_entry = db.session.query(Qtable).get(previous_state_move.previous_state)
     setattr(q_table_entry, action, new_q_value)
