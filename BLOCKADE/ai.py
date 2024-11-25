@@ -162,8 +162,8 @@ def update_q_table(previous_state_move, current_state, current_player_number):
     
     action = previous_state_move.previous_action
 
-    q_table_entry = db.session.query(Qtable).get(previous_state_move.previous_state)
-    current_q_value = getattr(q_table_entry, action)
+    previous_q_table_entry = db.session.query(Qtable).get(previous_state_move.previous_state)
+    previous_current_q_value = getattr(previous_q_table_entry, action)
 
     future_q_table_entry = db.session.query(Qtable).get(current_state)
     
