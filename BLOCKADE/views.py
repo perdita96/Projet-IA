@@ -49,7 +49,7 @@ def move():
 
     try:
         game = business.move(game, player_id, direction)
-        if (game.turn_player_1): 
+        if game.turn_player_1: 
             next_player_id = game.player_1_id
         else:
             next_player_id = game.player_2_id
@@ -87,7 +87,7 @@ def game(game_id, player_id):
     if player_id not in [game.player_1_id, game.player_2_id]:
         return jsonify({"error": "Player is not part of the game"}), 403
     
-    if (game.turn_player_1): 
+    if game.turn_player_1: 
         current_player_id = game.player_1_id
     else:
         current_player_id = game.player_2_id
