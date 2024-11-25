@@ -149,7 +149,7 @@ def create_game():
     return jsonify({'game_id': new_game.game_id, 'player_id': player_1_id})
 
 
-@app.route('/endGame/<string:is_winner>/<int:player_id>')
+@app.route('/endGame/<string:status>/<int:player_id>')
 def end_game(status, player_id):
     """
     Route qui retourne le template de fin de jeu qui indique le gagnant

@@ -51,7 +51,7 @@
                 if (response.error != null) {
                     alert(response.error);
                 } else if (response.boardState == null){
-                    window.location.href = `/${response.url}/${response.is_winner}/${response.player_id}`; 
+                    window.location.href = `/${response.url}/${response.status}/${response.player_id}`; 
                 }else{
                     boardState = response.boardState;
                     pos1 = getPositionFromString(response.pos_player_1);
