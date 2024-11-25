@@ -204,7 +204,7 @@ def calculate_reward(previous_boardstate, current_boardstate, current_player_nb)
     return reward
 
 
-def endGame(game, player_id):
+def end_game(game, player_id):
     """
 
     """

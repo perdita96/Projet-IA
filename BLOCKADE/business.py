@@ -77,8 +77,13 @@ def move(game, player, direction):
     game.turn_player_1 = not game.turn_player_1
 
     if "0" not in board_state:
-        game.winner = 1 if board_state.count("1") > size ** 2 // 2 else 2
-    
+        nb_1 = board_state.count("1")
+        if nb_1 > size ** 2 - nb_1:
+           game.winner = 1
+        elif nb_1 < size ** 2 - nb_1:
+            game.winner = 2
+        else:
+            game.winner = -1
     return game
 
 
