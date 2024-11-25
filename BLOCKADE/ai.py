@@ -9,7 +9,7 @@ def possible_move(game, player_id):
     
     Pré-conditions :
         - game : instance de la classe Game représentant l'état actuel de la partie.
-        - player_id : identifiant du joueur qui effectue le mouvement, doit être présent dans la partie.
+        - player_id : identifiant du joueur qui effectue le mouvement, doit être présent dans la partie.(IA)
     
     Post-conditions : 
         Retourne une liste des mouvements valides (Up, Down, Left, Right) que le joueur peut effectuer.
@@ -47,7 +47,7 @@ def get_move(game, player_id):
     
     Pré-conditions :
         - game : instance de la classe Game représentant l'état actuel de la partie.
-        - player_id : identifiant du joueur qui effectue le mouvement, doit être présent dans la partie.
+        - player_id : identifiant du joueur qui effectue le mouvement, doit être présent dans la partie.(IA)
     
     Post-conditions : 
         Retourne un mouvement valide sur le plateau du jeu sous la forme d'une chaîne de caractères, par exemple "ArrowUp".
@@ -80,7 +80,7 @@ def explore(game, player_id):
     
     Pré-conditions :
         - game : instance de la classe Game représentant l'état actuel de la partie.
-        - player_id : identifiant du joueur qui effectue le mouvement, doit être présent dans la partie.
+        - player_id : identifiant du joueur qui effectue le mouvement, doit être présent dans la partie.(IA)
     
     Post-conditions : 
         Retourne un mouvement valide sur le plateau du jeu choisi aléatoirement parmi les mouvements possibles.
@@ -94,14 +94,14 @@ def exploit(game, player_id, current_state):
     
     Pré-conditions :
         - game : instance de la classe Game représentant l'état actuel de la partie.
-        - player_id : identifiant du joueur qui effectue le mouvement, doit être présent dans la partie.
+        - player_id : identifiant du joueur qui effectue le mouvement, doit être présent dans la partie.(IA)
         - current_state : l'état actuel du jeu sous forme d'entier.
     
     Post-conditions : 
         Retourne le meilleur mouvement possible basé sur la Q-table, ou un mouvement aléatoire si current_state n'est pas dans la base de données.
     """
     value_state = db.session.query(Qtable).get(current_state) 
-    if value_state: #a tester. Il retourne quoi si n'existe pas? 
+    if value_state:
         best_action = None
         best_value = -float('inf')
         directions = possible_move(game, player_id)
@@ -206,7 +206,10 @@ def calculate_reward(previous_boardstate, current_boardstate, current_player_nb)
 
 def end_game(game, player_id):
     """
-
+    Gère la fin du jeu. En mettant à jour la Q-table pour le dernier mouvement.
+        Pré-conditions :
+        - game : instance de la classe Game représentant l'état actuel de la partie.
+        - player_id : Le numéro du joueur de IA.
     """
     previous_state_move = db.session.query(PreviousStateAction).filter_by(game_id=game.game_id, player_id=player_id).first()
     current_state = state(game)
