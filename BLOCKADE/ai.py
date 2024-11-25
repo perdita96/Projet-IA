@@ -57,8 +57,7 @@ def get_move(game, player_id):
     previous_state_move = db.session.query(PreviousStateAction).filter_by(game_id=game.game_id, player_id=player_id).first()
     current_state = state(game)
     if previous_state_move:
-        current_player_number = 1 if player_id == game.player_1_id else 2
-        update_q_table(previous_state_move, current_state, current_player_number)
+        update_q_table(previous_state_move, current_state)
     else:
         previous_state_move = PreviousStateAction(
             game_id=game.game_id,
@@ -132,20 +131,22 @@ def state(game):
     return f"{current_player}{pos_player_1}{pos_player_2}{game.board_state}"
 
 
-def update_q_table(previous_state_move, current_state, current_player_number):
+def update_q_table(previous_state_move, current_state):
     """
     Met à jour la Q-table en fonction de l'état précédent, de l'état actuel et de l'action effectuée.
 
     Pré-conditions :
         - previous_state_move : Instance de la classe PreviousStateAction reprécentant l'état précédent du joueur et l'action effectuée.
-        - current_state : Entier représanant l'état actuel du jeu.
-        - current_player_number : Le numéro du joueur actuel (1 ou 2).
+        - current_state : Entier représentant l'état actuel du jeu.
+            Contient -> cur_player_nb, pos_player_1 (x,y), pos_player_2 (x,y), board_state
 
     Post-conditions :
         - Met à jour la Q-table avec la nouvelle valeur calculée pour l'action effectuée.
     """
     learning_rate = config.LEARNING_RATE 
     discount_factor = config.DISCOUNT_FACTOR 
+
+    current_player_number = current_state[0]
 
     # On commence à 5 car il y a cur_player, pos_player_1 et pos_player_2 avant
     previous_boardstate = previous_state_move.previous_state[5:] 
@@ -192,4 +193,23 @@ def calculate_reward(previous_boardstate, current_boardstate, current_player_nb)
     nb_take = current_boardstate.count(str(current_player_nb)) - previous_boardstate.count(str(current_player_nb))
     opponent_number = 1 if current_player_nb == 2 else 2
     nb_lose = current_boardstate.count(str(opponent_number)) - previous_boardstate.count(str(opponent_number))
-    return nb_take - nb_lose
+    reward =  nb_take - nb_lose;
+    if "0" not in current_boardstate:
+        nb_take = current_boardstate.count(current_player_nb)
+        nb_lose = current_boardstate.count(opponent_number)
+        if(nb_take > nb_lose):
+            reward += current_boardstate.count(current_player_nb)
+        elif(nb_take < nb_lose):
+            reward -= current_boardstate.count(opponent_number)
+    return reward
+
+
+def end_game(game, player_id):
+    """
+
+    """
+    previous_state_move = db.session.query(PreviousStateAction).filter_by(game_id=game.game_id, player_id=player_id).first()
+    current_state = state(game)
+    current_player_number = 1 if player_id == game.player_1_id else 2
+    update_q_table(previous_state_move, current_state, current_player_number)
+    db.session.commit();
