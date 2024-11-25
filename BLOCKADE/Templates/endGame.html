@@ -3,9 +3,21 @@
 {%block end_game%}
     <h1>Partie terminée</h1>
     <script type="text/javascript">
-        const is_winner = "{{is_winner}}" == 'True';
+        const status = "{{status}}";
         const player_id = "{{player_id}}";
+        let endText = "";
 
+        switch (status) {
+            case 'win': 
+                endText = 'win"><a href="https://www.larousse.fr/dictionnaires/francais/dieu/25418">GAGNÉ</a>';
+                break;
+            case 'lose':
+                endText = 'lose">PERDU';
+                break;
+            case 'draw':
+                endText = 'draw">fait égalité (ça arrive)';
+                break;
+        }
         document.write('<p id="winner">Vous avez <span id="' + 
             (is_winner ? 'win"><a href="https://www.larousse.fr/dictionnaires/francais/dieu/25418">GAGNÉ</a>' : 'lose">PERDU') + '</span> !</p>');
 
