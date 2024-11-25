@@ -66,6 +66,12 @@ class Player(db.Model):
 
 
 class Game(db.Model):
+    """
+        Winner peut valoir : 
+            . 1 --> le joueur 1 à gagné
+            . 2 --> le joueur 2 à gagné
+            . -1 --> les joueurs sont à égalité
+    """
     __tablename__ = 'games'
 
     game_id = db.Column(db.Integer, primary_key=True)
@@ -74,7 +80,7 @@ class Game(db.Model):
     pos_player_2 = db.Column(db.String, nullable=False)
     turn_player_1 = db.Column(db.Boolean, nullable=False)
     board_state = db.Column(db.String, nullable=False)
-    winner = db.Column(db.SmallInteger, nullable=True)
+    winner = db.Column(db.SmallInteger, nullable=True) 
     player_1_id = db.Column(db.Integer, db.ForeignKey('players.player_id'))
     player_2_id = db.Column(db.Integer, db.ForeignKey('players.player_id'))
 
