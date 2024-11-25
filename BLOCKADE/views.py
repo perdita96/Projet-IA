@@ -65,7 +65,7 @@ def move():
             if next_player.is_human:
                 end_game(game,next_player)
             if game.winner == -1:
-                status = "equality"
+                status = "draw"
             if game.winner == 1 and int(game.player_1_id) == int(player_id) or game.winner == 2 and int(game.player_2_id) == int(player_id):
                 status = "win"
             if game.winner == 2 and int(game.player_1_id) == int(player_id) or game.winner == 1 and int(game.player_2_id) == int(player_id):
