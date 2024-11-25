@@ -56,11 +56,11 @@ def move(game, player, direction):
         case _:
             raise ValueError("Direction non valide")
                 
-    if (not is_within_board(new_x, new_y , size)):
+    if not is_within_board(new_x, new_y , size):
         raise ValueError("Mouvement en dehors du plateau")
     
     target_case = board_state[new_x * size + new_y]
-    if (not is_move_valid(target_case, current_player)): 
+    if not is_move_valid(target_case, current_player): 
         raise ValueError("Mouvement non autorisé")
     
     if current_player == "1":
@@ -93,7 +93,7 @@ def is_within_board(x, y, side_size) :
     Postconditions:
     - Retourne True si (x, y) est dans les limites du plateau, sinon False.
     """
-    return (0 <= x < side_size) and (0 <= y < side_size)
+    return 0 <= x < side_size and 0 <= y < side_size
 
 
 def is_move_valid(target_case, player_number) : 
@@ -131,15 +131,15 @@ def reachable_cases(opponent_number, opponent_pos, board_state) :
 
     queue = [(x, y)]
 
-    while queue : 
+    while queue: 
         x_case, y_case = queue.pop(0)
 
-        neighbor_cases = [(x_case - 1, y_case), (x_case , y_case-1), (x_case + 1, y_case), (x_case, y_case + 1) ]
+        neighbor_cases = [(x_case - 1, y_case), (x_case , y_case-1), (x_case + 1, y_case), (x_case, y_case + 1)]
 
-        for x_neighbor, y_neighbor in neighbor_cases :
+        for x_neighbor, y_neighbor in neighbor_cases:
             i_case = x_neighbor * side_size + y_neighbor
 
-            if is_within_board(x_neighbor, y_neighbor, side_size) and not reachable[i_case] and is_move_valid(board_state[i_case], opponent_number) : 
+            if is_within_board(x_neighbor, y_neighbor, side_size) and not reachable[i_case] and is_move_valid(board_state[i_case], opponent_number): 
                 reachable[i_case] = True
                 if((x_neighbor, y_neighbor) not in queue):
                     queue.append((x_neighbor, y_neighbor)) 
@@ -161,10 +161,7 @@ def update_enclosure(opponent_number, opponent_pos, board_state) :
     """
     reachable = reachable_cases(opponent_number, opponent_pos, board_state)
 
-    if opponent_number == "1" : 
-        current_player_number = "2"
-    else :
-        current_player_number = "1"
+    current_player_number = "1" if opponent_number == "2" else "2"
         
     board_size = len(board_state)
 
