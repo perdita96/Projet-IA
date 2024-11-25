@@ -57,7 +57,7 @@ def get_move(game, player_id):
     previous_state_move = db.session.query(PreviousStateAction).filter_by(game_id=game.game_id, player_id=player_id).first()
     current_state = state(game)
     if(previous_state_move):
-        current_player_number = 1 if player_id == game.player_1.player_id else 2
+        current_player_number = 1 if player_id == game.player_1_id else 2
         update_q_table(previous_state_move, current_state, current_player_number)
     else:
         previous_state_move = PreviousStateAction(
@@ -147,7 +147,7 @@ def update_q_table(previous_state_move, current_state, current_player_number):
     learning_rate = config.LEARNING_RATE 
     discount_factor = config.DISCOUNT_FACTOR 
 
-    previous_boardstate = previous_state_move.previous_state[5:]
+    previous_boardstate = previous_state_move.previous_state[5:] 
     current_boardstate = current_state[5:]
     
     reward = calculate_reward(previous_boardstate, current_boardstate, current_player_number)  
