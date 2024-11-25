@@ -35,9 +35,9 @@ def possible_move(game, player_id):
                new_x, new_y = x, y - 1
             case "Right":
                 new_x, new_y = x, y + 1
-        if((0 <= new_x < size) and (0 <= new_y < size)): 
+        if 0 <= new_x < size and 0 <= new_y < size: 
             target_square = board_state[new_x * size + new_y]
-            if(target_square == "0" or target_square == current_player):
+            if target_square == "0" or target_square == current_player:
                 possible_move.append(move.lower())
     return possible_move
 
@@ -56,7 +56,7 @@ def get_move(game, player_id):
     """
     previous_state_move = db.session.query(PreviousStateAction).filter_by(game_id=game.game_id, player_id=player_id).first()
     current_state = state(game)
-    if(previous_state_move):
+    if previous_state_move:
         current_player_number = 1 if player_id == game.player_1_id else 2
         update_q_table(previous_state_move, current_state, current_player_number)
     else:
@@ -66,7 +66,7 @@ def get_move(game, player_id):
             previous_state=None,
             previous_action=None)
         db.session.add(previous_state_move)
-    if(random.random() < config.EPS):
+    if random.random() < config.EPS:
         move = explore(game, player_id)
     else:
         move = exploit(game, player_id, current_state)
@@ -102,7 +102,7 @@ def exploit(game, player_id, current_state):
         Retourne le meilleur mouvement possible basé sur la Q-table, ou un mouvement aléatoire si current_state n'est pas dans la base de données.
     """
     value_state = db.session.query(Qtable).get(current_state)
-    if (current_state):
+    if current_state:
         best_action = None
         best_value = -float('inf')
         directions = possible_move(game, player_id)
@@ -153,10 +153,10 @@ def update_q_table(previous_state_move, current_state, current_player_number):
     reward = calculate_reward(previous_boardstate, current_boardstate, current_player_number)  
     
     #ajouter les états dans la Qtable si ils n'existent pas
-    if  not db.session.query(Qtable).get(previous_state_move.previous_state):
+    if not db.session.query(Qtable).get(previous_state_move.previous_state):
         new_entry = Qtable(state=previous_state_move.previous_state)
         db.session.add(new_entry)
-    if  not db.session.query(Qtable).get(current_state):
+    if not db.session.query(Qtable).get(current_state):
         new_entry = Qtable(state=current_state)
         db.session.add(new_entry)
     
