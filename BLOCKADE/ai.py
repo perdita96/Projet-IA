@@ -193,4 +193,23 @@ def calculate_reward(previous_boardstate, current_boardstate, current_player_nb)
     nb_take = current_boardstate.count(str(current_player_nb)) - previous_boardstate.count(str(current_player_nb))
     opponent_number = 1 if current_player_nb == 2 else 2
     nb_lose = current_boardstate.count(str(opponent_number)) - previous_boardstate.count(str(opponent_number))
-    return nb_take - nb_lose
+    reward =  nb_take - nb_lose;
+    if "0" not in current_boardstate:
+        nb_take = current_boardstate.count(current_player_nb)
+        nb_lose = current_boardstate.count(opponent_number)
+        if(nb_take > nb_lose):
+            reward += current_boardstate.count(current_player_nb)
+        elif(nb_take < nb_lose):
+            reward -= current_boardstate.count(opponent_number)
+    return reward
+
+
+def endGame(game, player_id):
+    """
+
+    """
+    previous_state_move = db.session.query(PreviousStateAction).filter_by(game_id=game.game_id, player_id=player_id).first()
+    current_state = state(game)
+    current_player_number = 1 if player_id == game.player_1_id else 2
+    update_q_table(previous_state_move, current_state, current_player_number)
+    db.session.commit();
