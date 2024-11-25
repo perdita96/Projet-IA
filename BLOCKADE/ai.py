@@ -152,6 +152,7 @@ def update_q_table(previous_state_move, current_state, current_player_number):
     
     reward = calculate_reward(previous_boardstate, current_boardstate, current_player_number)  
     
+    #ajouter les états dans la Qtable si ils n'existent pas
     if  not db.session.query(Qtable).get(previous_state_move.previous_state):
         new_entry = Qtable(state=previous_state_move.previous_state)
         db.session.add(new_entry)
