@@ -102,7 +102,7 @@ def exploit(game, player_id, current_state):
         Retourne le meilleur mouvement possible basé sur la Q-table, ou un mouvement aléatoire si current_state n'est pas dans la base de données.
     """
     value_state = db.session.query(Qtable).get(current_state) 
-    if value_state: #a tester. Il retourne quoi si n'existe pas? 
+    if value_state: 
         best_action = None
         best_value = -float('inf')
         directions = possible_move(game, player_id)
