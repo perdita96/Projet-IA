@@ -146,7 +146,7 @@ def reachable_cases(opponent_number, opponent_pos, board_state) :
 
             if is_within_board(x_neighbor, y_neighbor, side_size) and not reachable[i_case] and is_move_valid(board_state[i_case], opponent_number): 
                 reachable[i_case] = True
-                if((x_neighbor, y_neighbor) not in queue):
+                if(x_neighbor, y_neighbor) not in queue:
                     queue.append((x_neighbor, y_neighbor)) 
 
 
@@ -171,7 +171,7 @@ def update_enclosure(opponent_number, opponent_pos, board_state) :
     board_size = len(board_state)
 
     for i_case in range(board_size) :
-        if(not reachable[i_case]) :
+        if not reachable[i_case]:
             board_state[i_case] = current_player_number
             
     return board_state
