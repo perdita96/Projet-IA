@@ -136,7 +136,7 @@ def update_q_table(previous_state_move, current_state):
     Met à jour la Q-table en fonction de l'état précédent, de l'état actuel et de l'action effectuée.
 
     Pré-conditions :
-        - previous_state_move : Instance de la classe PreviousStateAction reprécentant l'état précédent du joueur et l'action effectuée.
+        - previous_state_move : Instance de la classe PreviousStateAction représentant l'état précédent du joueur et l'action effectuée.
         - current_state : Entier représentant l'état actuel du jeu.
             Contient -> cur_player_nb, pos_player_1 (x,y), pos_player_2 (x,y), board_state
 
@@ -192,7 +192,7 @@ def calculate_reward(previous_boardstate, current_boardstate, current_player_nb)
     nb_take = current_boardstate.count(str(current_player_nb)) - previous_boardstate.count(str(current_player_nb))
     opponent_number = 1 if current_player_nb == 2 else 2
     nb_lose = current_boardstate.count(str(opponent_number)) - previous_boardstate.count(str(opponent_number))
-    reward =  nb_take - nb_lose
+    reward = nb_take - nb_lose
     if "0" not in current_boardstate:
         nb_take = current_boardstate.count(current_player_nb)
         nb_lose = current_boardstate.count(opponent_number)
