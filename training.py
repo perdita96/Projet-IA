@@ -38,7 +38,7 @@ if __name__ == "__main__":
             #fonction jouer game
             play_game(last_game)
 
-    nb_games_played = db.session.query(Game).count()
+    nb_games_played = db.session.query(Game).filter(Game.player_1 == ai_id, Game.player_2 == ai_id).count()
 
     i_game = 0
     while nb_games_played < config.MAX_GAMES and i_game < nb_games_wanted : 
