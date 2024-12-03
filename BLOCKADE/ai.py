@@ -136,7 +136,7 @@ def update_q_table(previous_state_move, current_state):
     Met à jour la Q-table en fonction de l'état précédent, de l'état actuel et de l'action effectuée.
 
     Pré-conditions :
-        - previous_state_move : Instance de la classe PreviousStateAction reprécentant l'état précédent du joueur et l'action effectuée.
+        - previous_state_move : Instance de la classe PreviousStateAction représentant l'état précédent du joueur et l'action effectuée.
         - current_state : Entier représentant l'état actuel du jeu.
             Contient -> cur_player_nb, pos_player_1 (x,y), pos_player_2 (x,y), board_state
 
