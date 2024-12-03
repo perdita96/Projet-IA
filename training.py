@@ -8,7 +8,7 @@ import config
 def play_game(game) :
     while(game.winner == 0) :
 
-        current_player =  game.player_1 if game.turn_player_1 else game.player_
+        current_player =  game.player_1 if game.turn_player_1 else game.player_2
 
         game = move(game, current_player.id,get_move(game, current_player.id))
 
