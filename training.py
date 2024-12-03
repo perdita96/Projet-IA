@@ -14,7 +14,7 @@ def play_game(game) :
 
         db.session.commit() #ici ? 
 
-    end_game(game,game.player_1_id)
+    end_game(game,current_player.id)
 
     db.session.commit()
 
