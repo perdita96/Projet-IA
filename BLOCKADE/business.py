@@ -25,7 +25,7 @@ def move(game, player, direction):
 
     directions = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight']
     if direction not in directions:
-        raise ValueError("Direction non valide")
+        raise ValueError("Direction non valide 1")
     
     if int(player) == player_1.player_id:
         current_player = "1"
@@ -54,7 +54,7 @@ def move(game, player, direction):
         case "ArrowRight":
             new_x, new_y = x, y + 1
         case _:
-            raise ValueError("Direction non valide")
+            raise ValueError("Direction non valide 2")
                 
     if not is_within_board(new_x, new_y , size):
         raise ValueError("Mouvement en dehors du plateau")

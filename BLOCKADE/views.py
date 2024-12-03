@@ -50,23 +50,21 @@ def move():
     try:
         game = business.move(game, player_id, direction)
         if game.turn_player_1: 
-            next_player_id = game.player_1_id
+            next_player = game.player_1
         else:
-            next_player_id = game.player_2_id
-        next_player = db.session.query(Player).get(next_player_id)
+            next_player = game.player_2
         
         if not game.winner and not next_player.is_human:
-            game = business.move(game, next_player.player_id, get_move(game, next_player.player_id))
+            game = business.move(game, next_player.player_id,get_move(game, next_player.player_id))
         db.session.commit()
 
         if not game.winner:
             return jsonify({'boardState': game.board_state, 'pos_player_1': game.pos_player_1, 'pos_player_2': game.pos_player_2})
         else:
-            if not game.player_1_id.is_human:
+            if not game.player_1.is_human:
                 end_game(game,game.player_1_id)
-            if not game.player_2_id.is_human:
+            if not game.player_2.is_human:
                 end_game(game,game.player_2_id)
-                
             if game.winner == -1:
                 status = "draw"
             if game.winner == 1 and int(game.player_1_id) == int(player_id) or game.winner == 2 and int(game.player_2_id) == int(player_id):
@@ -82,7 +80,7 @@ def move():
 def game(game_id, player_id): 
     """
     Route qui retourne le template de la partie
-
+get_move
     Pré-conditions :
         Les paramètres game et player_id sont présents dans l'URL
     Post-conditions :
@@ -96,14 +94,14 @@ def game(game_id, player_id):
         return jsonify({"error": "Player is not part of the game"}), 403
     
     if game.turn_player_1: 
-        current_player_id = game.player_1_id
+        current_player = game.player_1
     else:
-        current_player_id = game.player_2_id
-    current_player = db.session.query(Player).get(current_player_id)
+        current_player = game.player_2
 
     if not game.winner and not current_player.is_human: 
-        game = business.move(game, current_player.player_id, get_move(game, current_player.player_id)) 
+        game = business.move(game, current_player.player_id, get_move(game, current_player.player_id))
         db.session.commit()
+        
     return render_template('game.html', game=game, player_id=player_id)         
 
 @app.route('/static/<path:path>')
