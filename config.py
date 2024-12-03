@@ -3,7 +3,7 @@ import os
 BOARD_SIZE = 5
 
 #à ajuster
-EPS = 0
+EPS = 1
 DISCOUNT_FACTOR  = 0.5
 LEARNING_RATE = 0.5
 

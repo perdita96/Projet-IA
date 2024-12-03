@@ -65,11 +65,11 @@ def get_move(game, player_id):
             previous_state=None,
             previous_action=None)
         db.session.add(previous_state_move)
+    previous_state_move.previous_state = current_state
     if random.random() < config.EPS:
         move = explore(game, player_id)
     else:
         move = exploit(game, player_id, current_state)
-    previous_state_move.previous_state = current_state
     previous_state_move.previous_action = move
     db.session.commit()
     return "Arrow" + move.capitalize()
@@ -174,8 +174,7 @@ def update_q_table(previous_state_move, current_state):
 
     new_q_value = previous_q_value + learning_rate * (reward + discount_factor * max_current_q_value - previous_q_value)
 
-    q_table_entry = db.session.query(Qtable).get(previous_state_move.previous_state)
-    setattr(q_table_entry, action, new_q_value)
+    setattr(previous_q_table_entry, action, new_q_value)
     db.session.commit()
 
 def calculate_reward(previous_boardstate, current_boardstate, current_player_nb):
@@ -193,7 +192,7 @@ def calculate_reward(previous_boardstate, current_boardstate, current_player_nb)
     nb_take = current_boardstate.count(str(current_player_nb)) - previous_boardstate.count(str(current_player_nb))
     opponent_number = 1 if current_player_nb == 2 else 2
     nb_lose = current_boardstate.count(str(opponent_number)) - previous_boardstate.count(str(opponent_number))
-    reward =  nb_take - nb_lose;
+    reward =  nb_take - nb_lose
     if "0" not in current_boardstate:
         nb_take = current_boardstate.count(current_player_nb)
         nb_lose = current_boardstate.count(opponent_number)
@@ -215,4 +214,4 @@ def end_game(game, player_id):
     current_state = state(game)
     current_player_number = 1 if player_id == game.player_1_id else 2
     update_q_table(previous_state_move, current_state, current_player_number)
-    db.session.commit();
+    db.session.commit()
