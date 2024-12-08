@@ -52,5 +52,7 @@ if __name__ == "__main__":
         i_game += 1
     exit()
 
-
+## if nb_games_played == config.MAX_GAMES -> remettre game a zero et evaluer les performances de l'IA
+## contre random
+## contre elle même
 
