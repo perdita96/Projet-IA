@@ -20,7 +20,7 @@ def play_game(game) :
 
 if __name__ == "__main__":
 
-    nb_games_wanted = input("Combien de partie voulez-vous jouer : ")
+    nb_games_wanted = int(input("Combien de partie voulez-vous jouer : "))
 
     #démarrer l'ap ==> BASE DE DONNEES
     app.run()
@@ -52,7 +52,7 @@ if __name__ == "__main__":
         i_game += 1
     exit()
 
-## if nb_games_played == config.MAX_GAMES -> remettre game a zero et evaluer les performances de l'IA
+## if nb_games_played == config.MAX_GAMES -> remettre game a zero et evaluer les performances de l'IA ==> faire un fichier evaluate.py?
 ## contre random
 ## contre elle même
 
