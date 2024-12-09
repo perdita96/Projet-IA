@@ -84,6 +84,7 @@ def trainning() :
     i_game = 0
     while nb_games_played < config.MAX_GAMES and i_game < nb_games_wanted : 
 
+        print(ai_id)
         new_game = Game(player_1=ai_id, player_2=ai_id, size=config.BOARD_SIZE)
         db.session.add(new_game)
         db.session.commit()
