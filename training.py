@@ -40,7 +40,7 @@ def play_game(game) :
         
     end_game(game, current_player_id)
 
-def trainning() : 
+def training() : 
     """
     Gère le processus d'entraînement de l'IA en jouant un certain nombre de parties.
 
@@ -104,7 +104,7 @@ if __name__ == "__main__":
 
     with app.app_context():
         try  :
-            trainning()
+            training()
         except ValueError as e:
             print("error : " + str(e))
             
