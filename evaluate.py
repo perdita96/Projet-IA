@@ -2,7 +2,7 @@ from BLOCKADE import app
 from BLOCKADE.app_models.models import *
 from BLOCKADE.app_models.util import *
 from BLOCKADE.business import move
-from BLOCKADE.ai import get_move, end_game, possible_move
+from BLOCKADE.ai import get_move, end_game, explore
 
 import config
 import sys
@@ -19,14 +19,10 @@ def set_eps_config(eps):
             else:
                 f.write(line)
 
-def get_random_move(game, player_id):
-    moves = possible_move(game, player_id)
-    return choice(moves)
-
 def get_player_move(game, player_id):
     match player_id:
         case game.player_1.id:
-            move = get_random_move(game, player_id)
+            move = explore(game, player_id)
         case game.player_2.id:
             move = get_move(game, player_id)
         case _:
