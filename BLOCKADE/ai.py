@@ -210,8 +210,7 @@ def end_game(game, player_id):
     """
     previous_state_move = db.session.query(PreviousStateAction).filter_by(game_id=game.game_id, player_id=player_id).first()
     current_state = state(game)
-    current_player_number = 1 if player_id == game.player_1_id else 2
-    update_q_table(previous_state_move, current_state, current_player_number)
+    update_q_table(previous_state_move, current_state)
     db.session.commit()
 
 def update_epsilon():
