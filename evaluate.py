@@ -21,9 +21,9 @@ def set_eps_config(eps):
 def get_player_move(game, player_id):
     match player_id:
         case game.player_1.id:
-            move = explore(game, "2")
+            move = explore(game, player_id)
         case game.player_2.id:
-            move = get_move(game, "2")
+            move = get_move(game, player_id)
         case _:
             raise ValueError('Invalid Player id')
     return move
@@ -38,7 +38,7 @@ def play_game(ai_id, random_id):
         game = move(game, current_player.id, get_player_move(game, current_player.id))
         db.session.commit()
     
-    end_game(game, "2")
+    end_game(game, game.player_2.id)
 
 def evaluate_model(nb_games, nb_wins):
     win_pct = (nb_wins / nb_games) * 100
