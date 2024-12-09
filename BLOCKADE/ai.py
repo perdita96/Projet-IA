@@ -17,10 +17,10 @@ def possible_move(game, current_player):
     board_state = game.board_state
     size = game.size
 
-    current_pos = game.pos_player_1 if current_player == 1 else game.pos_player_2
+    current_pos = game.pos_player_1 if current_player == "1" else game.pos_player_2
 
     x, y = map(int, current_pos.split(","))
-    print("X :" + x + " y : " + y)
+ 
     possible_move = []
     for move in ['Up', 'Down', 'Left', 'Right']:
         match move:
@@ -34,8 +34,10 @@ def possible_move(game, current_player):
                 new_x, new_y = x, y + 1
         if 0 <= new_x < size and 0 <= new_y < size: 
             target_square = board_state[new_x * size + new_y]
+            print(board_state)
             if target_square == "0" or target_square == current_player:
                 possible_move.append(move.lower())
+                print("cc")
     return possible_move
 
 def get_move(game, current_player_number):
@@ -51,7 +53,7 @@ def get_move(game, current_player_number):
         Met à jour les données d'apprentissage, c'est a dire la Q-Table et previous_state_move dans la base de données
 
     """
-    player_id = (game.player_1_id if current_player_number == 1 else game.player_2_id)
+    player_id = (game.player_1_id if current_player_number == "1" else game.player_2_id)
     previous_state_move = db.session.query(PreviousStateAction).filter_by(game_id=game.game_id, player_id=player_id).first()
     current_state = state(game)
     if previous_state_move:
