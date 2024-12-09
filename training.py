@@ -34,10 +34,11 @@ def play_game(game) :
         try : 
             game = move(game, current_player_id, get_move(game, current_player_id), current_player_number)
 
-            db.session.commit() 
+            db.session.commit()
+            current_player_number = 1 if game.turn_player_1 else 2 
         except ValueError as e:
             raise e
-            
+        
     end_game(game,current_player_id)
 
 def trainning() : 
