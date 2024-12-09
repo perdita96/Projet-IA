@@ -2,7 +2,7 @@ from BLOCKADE import app
 from BLOCKADE.app_models.models import *
 from BLOCKADE.app_models.util import *
 from BLOCKADE.business import move
-from BLOCKADE.ai import get_move, end_game, update_epsilon
+from BLOCKADE.ai import get_move, end_game_ai, update_epsilon
 import config
 
 def play_game(game) :
@@ -29,7 +29,6 @@ def play_game(game) :
 
     while(game.winner == 0) :  
         try : 
-            print(current_player_id)
             game = move(game, current_player_id, get_move(game, current_player_id))
             db.session.commit()
 
@@ -38,7 +37,8 @@ def play_game(game) :
         except ValueError as e:
             raise e
         
-    end_game(game, current_player_id)
+    end_game_ai(game, game.player_1_id)
+    end_game_ai(game, game.player_2_id)
 
 def training() : 
     """

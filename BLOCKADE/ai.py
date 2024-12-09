@@ -202,7 +202,7 @@ def calculate_reward(previous_boardstate, current_boardstate, current_player_nb)
     return reward
 
 
-def end_game(game, player_id):
+def end_game_ai(game, player_id):
     """
     Gère la fin du jeu. En mettant à jour la Q-table pour le dernier mouvement.
         Pré-conditions :

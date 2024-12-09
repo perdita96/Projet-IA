@@ -62,9 +62,9 @@ def move():
             return jsonify({'boardState': game.board_state, 'pos_player_1': game.pos_player_1, 'pos_player_2': game.pos_player_2})
         else:
             if not game.player_1.is_human:
-                end_game(game,game.player_1_id)
+                end_game_ai(game,game.player_1_id)
             if not game.player_2.is_human:
-                end_game(game,game.player_2_id)
+                end_game_ai(game,game.player_2_id)
             if game.winner == -1:
                 status = "draw"
             if game.winner == 1 and int(game.player_1_id) == int(player_id) or game.winner == 2 and int(game.player_2_id) == int(player_id):
