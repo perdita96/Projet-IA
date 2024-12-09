@@ -95,7 +95,7 @@ def training() :
         i_game += 1
         nb_games_played += 1
 
-        if nb_games_played % 500 == 0: #utiliser une formule qui déterminer 500 pour que ce soit adaptatif ? Genre (config.MAX_GAMES / 400) à la place de 500 ?
+        if nb_games_played % config.EPSILON_UPDATE_PARTIE == 0: #utiliser une formule qui déterminer 500 pour que ce soit adaptatif ? Genre (config.MAX_GAMES / 400) à la place de 500 ?
             update_epsilon()
 
     print(f"{nb_games_played}/{config.MAX_GAMES} parties jouées")
@@ -108,8 +108,6 @@ if __name__ == "__main__":
         except ValueError as e:
             print("error : " + str(e))
             
-
-    
 
     #si nb_games_played = MAX_GAMES -> lancer l'évaluation contre elle même et contre random
 
