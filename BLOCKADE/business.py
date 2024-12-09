@@ -53,7 +53,7 @@ def move(game, player, direction, current_player = None):
             new_x, new_y = x, y + 1
         case _:
             raise ValueError("Direction non valide 2")
-                
+    
     if not is_within_board(new_x, new_y , size):
         raise ValueError("Mouvement en dehors du plateau")
     
@@ -96,6 +96,7 @@ def is_within_board(x, y, side_size) :
     Postconditions:
     - Retourne True si (x, y) est dans les limites du plateau, sinon False.
     """
+    
     return 0 <= x < side_size and 0 <= y < side_size
 
 

@@ -18,8 +18,6 @@ def possible_move(game, current_player):
     size = game.size
 
     current_pos = game.pos_player_1 if current_player == "1" else game.pos_player_2
-    print(current_player)
-    print(current_pos)
 
     x, y = map(int, current_pos.split(","))
  
@@ -36,9 +34,6 @@ def possible_move(game, current_player):
                 new_x, new_y = x, y + 1
         if 0 <= new_x < size and 0 <= new_y < size: 
             target_square = board_state[new_x * size + new_y]
-            print(move)
-            print(target_square)
-            print(current_player)
             if target_square == "0" or target_square == current_player:
                 possible_move.append(move.lower())
     return possible_move
