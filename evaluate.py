@@ -6,7 +6,6 @@ from BLOCKADE.ai import get_move, end_game, explore
 
 import config
 import sys
-from random import choice
 
 def set_eps_config(eps):
     with open('config.py', 'r') as f:
