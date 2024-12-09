@@ -190,7 +190,7 @@ def calculate_reward(previous_boardstate, current_boardstate, current_player_nb)
         int : Une récompense calculée, représentant la différence entre le nombre d'éléments pris et perdus.
     """
     nb_take = current_boardstate.count(current_player_nb) - previous_boardstate.count(current_player_nb)
-    opponent_number = 1 if current_player_nb == 2 else 2
+    opponent_number = "1" if current_player_nb == "2" else "2"
     nb_lose = current_boardstate.count(opponent_number) - previous_boardstate.count(opponent_number)
     reward = nb_take - nb_lose
     if "0" not in current_boardstate:
