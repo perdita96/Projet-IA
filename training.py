@@ -38,7 +38,7 @@ def play_game(game) :
         except ValueError as e:
             raise e
         
-    end_game(game)
+    end_game(game, current_player_id)
 
 def trainning() : 
     """
@@ -66,7 +66,7 @@ def trainning() :
     alice_id = id_searched_player('Alice')
 
 
-    last_game = db.session.query(Game).order_by(Game.game_id.desc()).first()
+    last_game = db.session.query(Game).filter(Game.player_1 == ai_id, Game.player_2 == ai_id).first()
 
     if last_game : 
         if last_game.winner == 0 : 
