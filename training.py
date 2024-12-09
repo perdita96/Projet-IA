@@ -25,8 +25,14 @@ def play_game(game) :
         - Peut renvoyer une erreur provenant de la fonction move
 
     """
-
-    current_player =  game.player_1 if game.turn_player_1 else game.player_2
+    #comme c'est la même id peut importe et de toute façon c'est inutile dans la fonction move (IA VS IA)
+    current_player =  game.player_1_id
+    current_player_number = 1 if game.turn_player_1 else 2
+    
+    print(f"Id joueur courant : {current_player.player_id}")
+    print(f"Tour du joueur 1 : {game.turn_player_1}")
+    print(f"Id Joueur 1 : {game.player_1_id}")
+    print(f"Id Joueur 2 : {game.player_2_id}")
 
     while(game.winner == 0) :  
 
@@ -90,7 +96,7 @@ def trainning() :
         i_game += 1
         nb_games_played += 1
 
-        if nb_games_played % 500 == 0:
+        if nb_games_played % 500 == 0: #utiliser une formule qui déterminer 500 pour que ce soit adaptatif ? Genre (config.MAX_GAMES / 400) à la place de 500 ?
             update_epsilon()
 
     print(f"{nb_games_played}/{config.MAX_GAMES} parties jouées")
