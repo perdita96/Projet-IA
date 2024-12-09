@@ -1,7 +1,7 @@
 from math import sqrt
 
 
-def move(game, player, direction):
+def move(game, player, direction, current_player = None):
     """
     Fonction qui bouge le joueur sur le plateau de jeu.
 
@@ -10,6 +10,7 @@ def move(game, player, direction):
         player est un ID de joueur 
         direction est une chaîne
         Le jeu n'est pas déjà terminé (c'est-à-dire que game.winner est falsy)
+        current_player est le numéro du joueur courrant. Il est faculatif et est ulitisé quand un joueur joue contre lui même
     Post-conditions :
         Si le déplacement est valide, la fonction met à jour l'état du jeu en conséquence :
             Met à jour la position du joueur (game.pos_player_1 ou game.pos_player_2)
@@ -27,18 +28,15 @@ def move(game, player, direction):
     if direction not in directions:
         raise ValueError("Direction non valide 1")
     
-    if int(player) == player_1.player_id:
-        current_player = "1"
-        opponent_player = "2"
-        current_player_pos = game.pos_player_1
-        opponent_player_pos = game.pos_player_2
-    elif int(player) == player_2.player_id:
-        current_player = "2"
-        opponent_player = "1"
-        current_player_pos = game.pos_player_2
-        opponent_player_pos = game.pos_player_1
-    else:
-        raise ValueError("Player is not in the game")
+    if int(player) not in [player_1.player_id, player_2.player_id]:
+        raise ValueError(f"L'identifiant {player} ne correspond à aucun joueur.")
+    
+    if(not current_player):
+        current_player = "1" if int(player) == player_1.player_id else "2"
+    
+    opponent_player = "2" if current_player == "1" else "1"
+    current_player_pos = game.pos_player_1 if current_player == "1" else game.pos_player_2
+    opponent_player_pos = game.pos_player_2 if current_player == "1" else game.pos_player_1
 
     if (not game.turn_player_1 and current_player == "1") or (game.turn_player_1 and current_player == "2"):
         raise ValueError("Ce n'est pas au tour du joueur")
