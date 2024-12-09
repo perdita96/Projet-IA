@@ -194,12 +194,10 @@ def calculate_reward(previous_boardstate, current_boardstate, current_player_nb)
     nb_lose = current_boardstate.count(str(opponent_number)) - previous_boardstate.count(str(opponent_number))
     reward = nb_take - nb_lose
     if "0" not in current_boardstate:
-        nb_take = current_boardstate.count(current_player_nb)
-        nb_lose = current_boardstate.count(opponent_number)
         if nb_take > nb_lose:
-            reward += current_boardstate.count(current_player_nb)
+            reward += current_boardstate.count(str(current_player_nb))
         elif nb_take < nb_lose:
-            reward -= current_boardstate.count(opponent_number)
+            reward -= current_boardstate.count(str(opponent_number))
     return reward
 
 
