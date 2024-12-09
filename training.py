@@ -63,9 +63,7 @@ def trainning() :
         
     ai_id = id_searched_player('IA')
 
-    #si parti non terminée -> reprend et finir
-    #last_game = db.session.query(Game).order_by(Game.id.desc()).first()
-    last_game = db.session.query(Game).filter(Game.player_1 == ai_id, Game.player_2 == ai_id).first() # c'est pas mieux?
+    last_game = db.session.query(Game).order_by(Game.game_id.desc()).first()
 
     if last_game : 
         if last_game.winner == 0 : 
@@ -92,23 +90,6 @@ def trainning() :
             raise e
 
         i_game += 1
-        nb_games_played += 1
-
-        if nb_games_played % 500 == 0:
-            update_epsilon()
-
-    print(f"{nb_games_played}/{config.MAX_GAMES} parties jouées")
-
-if __name__ == "__main__":
-
-    with app.app_context():
-        try  :
-            trainning()
-        except ValueError as e:
-            print("error : " + str(e))
-            
-
-    
 
     #si nb_games_played = MAX_GAMES -> lancer l'évaluation contre elle même et contre random
 
