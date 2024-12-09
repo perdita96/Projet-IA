@@ -32,6 +32,8 @@ def play_game(game) :
             print(current_player_id)
             game = move(game, current_player_id, get_move(game, current_player_id))
             db.session.commit()
+
+            current_player_id =  game.player_1_id if game.turn_player_1 else game.player_2_id
             
         except ValueError as e:
             raise e
