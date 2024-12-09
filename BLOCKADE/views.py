@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from .app_models.models import *
 from .app_models.util import *
-from .ai import*
+from .ai import *
 from . import business
 import config
 

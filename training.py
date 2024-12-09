@@ -30,11 +30,11 @@ def play_game(game) :
     current_player_number = "1" if game.turn_player_1 else "2" 
 
     while(game.winner == 0) :  
-        
         try : 
-            game = move(game, current_player_id, get_move(game, current_player_id), current_player_number)
-            current_player_number = "1" if game.turn_player_1 else "2" 
+            print("joueur " + str(current_player_number))
+            game = move(game, current_player_id, get_move(game, current_player_number), current_player_number)
             db.session.commit()
+            current_player_number = "1" if game.turn_player_1 else "2" 
             
         except ValueError as e:
             raise e

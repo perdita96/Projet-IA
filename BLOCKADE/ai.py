@@ -51,6 +51,7 @@ def get_move(game, current_player_number):
         Met à jour les données d'apprentissage, c'est a dire la Q-Table et previous_state_move dans la base de données
 
     """
+    print(f"get_move joueur : {current_player_number}")
     player_id = (game.player_1_id if current_player_number == "1" else game.player_2_id)
     previous_state_move = db.session.query(PreviousStateAction).filter_by(game_id=game.game_id, player_id=player_id).first()
     current_state = state(game)
@@ -199,14 +200,14 @@ def calculate_reward(previous_boardstate, current_boardstate, current_player_nb)
     return reward
 
 
-def end_game(game):
+def end_game(game, current_player_number):
     """
     Gère la fin du jeu. En mettant à jour la Q-table pour le dernier mouvement.
         Pré-conditions :
         - game : instance de la classe Game représentant l'état actuel de la partie.
         - current_player_number : Le numéro du joueur
     """
-    player_id = game.player_1_id if game.turn_player_1 else game.player_2_id
+    player_id = game.player_1_id if current_player_number == 1 else game.player_2_id
     previous_state_move = db.session.query(PreviousStateAction).filter_by(game_id=game.game_id, player_id=player_id).first()
     current_state = state(game)
     update_q_table(previous_state_move, current_state)
