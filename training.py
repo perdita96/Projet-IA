@@ -20,7 +20,7 @@ def play_game(game) :
 
 if __name__ == "__main__":
 
-    nb_games_wanted = int(input("Combien de partie voulez-vous jouer : "))
+    nb_games_wanted = input("Combien de partie voulez-vous jouer : ")
 
     #démarrer l'ap ==> BASE DE DONNEES
     app.run()
@@ -31,7 +31,8 @@ if __name__ == "__main__":
     ai_id = id_searched_player('IA')
 
     #si parti non terminée -> reprend et finir
-    last_game = db.session.query(Game).order_by(Game.id.desc()).first()
+    #last_game = db.session.query(Game).order_by(Game.id.desc()).first()
+    last_game = db.session.query(Game).filter(Game.player_1 == ai_id, Game.player_2 == ai_id).first() # c'est pas mieux?
 
     if last_game : 
         if last_game.winner == 0 : 
@@ -52,7 +53,5 @@ if __name__ == "__main__":
         i_game += 1
     exit()
 
-## if nb_games_played == config.MAX_GAMES -> remettre game a zero et evaluer les performances de l'IA ==> faire un fichier evaluate.py?
-## contre random
-## contre elle même
+
 
