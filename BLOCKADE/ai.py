@@ -146,7 +146,7 @@ def update_q_table(previous_state_move, current_state):
     learning_rate = config.LEARNING_RATE 
     discount_factor = config.DISCOUNT_FACTOR 
 
-    current_player_number = current_state[0]
+    current_player_number = str(current_state[0])
 
     # On commence à 5 car il y a cur_player, pos_player_1 et pos_player_2 avant
     previous_boardstate = previous_state_move.previous_state[5:] 
@@ -184,18 +184,16 @@ def calculate_reward(previous_boardstate, current_boardstate, current_player_nb)
     Pré-conditions :
         previous_boardstate : L'état précédent du plateau (sous forme de chaîne).
         current_boardstate : L'état actuel du plateau (sous forme de chaîne).
-        current_player_nb : Le numéro du joueur actuel (1 ou 2).
+        current_player_nb : Le numéro du joueur actuel (1 ou 2) sous forme de caractère.
 
     Post-conditions :
         int : Une récompense calculée, représentant la différence entre le nombre d'éléments pris et perdus.
     """
-    nb_take = current_boardstate.count(str(current_player_nb)) - previous_boardstate.count(str(current_player_nb))
+    nb_take = current_boardstate.count(current_player_nb) - previous_boardstate.count(current_player_nb)
     opponent_number = 1 if current_player_nb == 2 else 2
-    nb_lose = current_boardstate.count(str(opponent_number)) - previous_boardstate.count(str(opponent_number))
+    nb_lose = current_boardstate.count(opponent_number) - previous_boardstate.count(opponent_number)
     reward = nb_take - nb_lose
     if "0" not in current_boardstate:
-        nb_take = current_boardstate.count(current_player_nb)
-        nb_lose = current_boardstate.count(opponent_number)
         if nb_take > nb_lose:
             reward += current_boardstate.count(current_player_nb)
         elif nb_take < nb_lose:
