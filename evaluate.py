@@ -57,7 +57,7 @@ def evaluate_model(nb_games, nb_wins):
     print(f'\tLose percentage : {win_pct:.2f}%\t\tLose percentage : {1 - win_pct:.2f}')
     print()
     print(f'\t\tBEST AI : {'RANDOM' if win_pct < 50 else 'AI' if win_pct > 50 else 'NONE'}')
-    
+
 
 if __name__ == '__main__':
     min_games = 50
@@ -73,25 +73,24 @@ if __name__ == '__main__':
         case _:
             raise ValueError(f'Either one or no argument can be passed')
     
-    app.run()
+    with app.app_context():
+        original_eps = config.EPS
+        set_eps_config(0)
 
-    original_eps = config.EPS
-    set_eps_config(0)
+        if not player_exists('Random'):
+            add_player('Random')
+        if not player_exists('IA'):
+            raise ValueError("L'IA n'existe pas")
 
-    if not player_exists('Random'):
-        add_player('Random')
-    if not player_exists('IA'):
-        raise ValueError("L'IA n'existe pas")
+        random_id = id_searched_player('Random')
+        ai_id = id_searched_player('IA')
 
-    random_id = id_searched_player('Random')
-    ai_id = id_searched_player('IA')
+        nb_wins = 0
+        for _ in range(nb_games):
+            winner = play_game(ai_id, random_id)
+            if winner == 2:
+                nb_wins += 1
+        
+        evaluate_model(nb_games, nb_wins)
 
-    nb_wins = 0
-    for _ in range(nb_games):
-        winner = play_game(ai_id, random_id)
-        if winner == 2:
-            nb_wins += 1
-    
-    evaluate_model(nb_games, nb_wins)
-
-    set_eps_config(original_eps)
+        set_eps_config(original_eps)
