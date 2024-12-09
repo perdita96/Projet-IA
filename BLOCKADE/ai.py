@@ -34,10 +34,11 @@ def possible_move(game, current_player):
                 new_x, new_y = x, y + 1
         if 0 <= new_x < size and 0 <= new_y < size: 
             target_square = board_state[new_x * size + new_y]
-            print(board_state)
+            print(move)
+            print(target_square)
+            print(current_player)
             if target_square == "0" or target_square == current_player:
                 possible_move.append(move.lower())
-                print("cc")
     return possible_move
 
 def get_move(game, current_player_number):
