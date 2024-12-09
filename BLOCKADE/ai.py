@@ -55,7 +55,8 @@ def get_move(game, player_id):
 
     """
     previous_state_move = db.session.query(PreviousStateAction).filter_by(game_id=game.game_id, player_id=player_id).first()
-    current_state = state(game)
+    current_player_number = "1" if player_id == game.player_1_id else "2"
+    current_state = state(game,current_player_number)
     if previous_state_move:
         update_q_table(previous_state_move, current_state)
     else:
@@ -114,21 +115,21 @@ def exploit(game, player_id, current_state):
     else:
         return explore(game, player_id)
 
-def state(game):
+def state(game, current_player_number):
     """
     Génère un entier représentant l'état actuel d'un jeu basé sur les informations des joueurs et l'état du plateau.
 
     Pré-conditions :
         - game : instance de la classe Game représentant l'état actuel de la partie.
+        - current_player_number : est le numéro du joueur qui modifie la q-table
 
     Post-conditions : 
         Retourne un entier représentant l'état du jeu, obtenu par la conversion.
     """
-    current_player = 1 if game.turn_player_1 else 2
     pos_player_1 = game.pos_player_1.replace(',', '')
     pos_player_2 = game.pos_player_2.replace(',', '')
 
-    return f"{current_player}{pos_player_1}{pos_player_2}{game.board_state}"
+    return f"{current_player_number}{pos_player_1}{pos_player_2}{game.board_state}"
 
 
 def update_q_table(previous_state_move, current_state):
@@ -209,9 +210,9 @@ def end_game(game, player_id):
         - player_id : Le numéro du joueur de IA.
     """
     previous_state_move = db.session.query(PreviousStateAction).filter_by(game_id=game.game_id, player_id=player_id).first()
-    current_state = state(game)
     current_player_number = 1 if player_id == game.player_1_id else 2
-    update_q_table(previous_state_move, current_state, current_player_number)
+    current_state = state(game,current_player_number)
+    update_q_table(previous_state_move, current_state)
     db.session.commit()
 
 def update_epsilon():
