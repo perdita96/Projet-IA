@@ -3,27 +3,24 @@ from .app_models.models import *
 import config
 
 
-def possible_move(game, player_id):
+def possible_move(game, current_player):
     """
     Fonction qui renvoie les mouvements possibles pour l'IA.
     
     Pré-conditions :
         - game : instance de la classe Game représentant l'état actuel de la partie.
-        - player_id : identifiant du joueur qui effectue le mouvement, doit être présent dans la partie.(IA)
+        - current_player : numéro du joueur qui effectue le mouvement, doit être présent dans la partie.(IA)
     
     Post-conditions : 
         Retourne une liste des mouvements valides (Up, Down, Left, Right) que le joueur peut effectuer.
     """
     board_state = game.board_state
     size = game.size
-    if player_id == game.player_1_id : 
-        current_player = "1"
-        current_pos = game.pos_player_1
-    else :
-        current_player = "2"
-        current_pos = game.pos_player_2
+
+    current_pos = game.pos_player_1 if current_player == 1 else game.pos_player_2
 
     x, y = map(int, current_pos.split(","))
+    print("X :" + x + " y : " + y)
     possible_move = []
     for move in ['Up', 'Down', 'Left', 'Right']:
         match move:
@@ -41,19 +38,20 @@ def possible_move(game, player_id):
                 possible_move.append(move.lower())
     return possible_move
 
-def get_move(game, player_id):
+def get_move(game, current_player_number):
     """
     Fonction qui renvoie le mouvement choisi par l'IA et met à jour les données d'apprentissage.
     
     Pré-conditions :
         - game : instance de la classe Game représentant l'état actuel de la partie.
-        - player_id : identifiant du joueur qui effectue le mouvement, doit être présent dans la partie.(IA)
+        - current_player_number : numéro du joueur qui effectue le mouvement, doit être présent dans la partie.(IA)
     
     Post-conditions : 
         Retourne un mouvement valide sur le plateau du jeu sous la forme d'une chaîne de caractères, par exemple "ArrowUp".
         Met à jour les données d'apprentissage, c'est a dire la Q-Table et previous_state_move dans la base de données
 
     """
+    player_id = (game.player_1_id if current_player_number == 1 else game.player_2_id)
     previous_state_move = db.session.query(PreviousStateAction).filter_by(game_id=game.game_id, player_id=player_id).first()
     current_state = state(game)
     if previous_state_move:
@@ -61,40 +59,40 @@ def get_move(game, player_id):
     else:
         previous_state_move = PreviousStateAction(
             game_id=game.game_id,
-            player_id=player_id,
+            player_id= player_id,
             previous_state=None,
             previous_action=None)
         db.session.add(previous_state_move)
     previous_state_move.previous_state = current_state
     if random.random() < config.EPS:
-        move = explore(game, player_id)
+        move = explore(game, current_player_number)
     else:
-        move = exploit(game, player_id, current_state)
+        move = exploit(game, current_player_number, current_state)
     previous_state_move.previous_action = move
     db.session.commit()
     return "Arrow" + move.capitalize()
 
-def explore(game, player_id):
+def explore(game, current_player_number):
     """
     Fonction qui renvoie le mouvement choisi par l'IA lors de la phase d'exploration.
     
     Pré-conditions :
         - game : instance de la classe Game représentant l'état actuel de la partie.
-        - player_id : identifiant du joueur qui effectue le mouvement, doit être présent dans la partie.(IA)
+        - current_player_number : numéro du joueur qui effectue le mouvement, doit être présent dans la partie.(IA)
     
     Post-conditions : 
         Retourne un mouvement valide sur le plateau du jeu choisi aléatoirement parmi les mouvements possibles.
     """
-    directions = possible_move(game, player_id)
+    directions = possible_move(game, current_player_number)
     return random.choice(directions)
 
-def exploit(game, player_id, current_state):
+def exploit(game, current_player_number, current_state):
     """
     Fonction qui renvoie le mouvement choisi par l'IA lors de la phase d'exploitation.
     
     Pré-conditions :
         - game : instance de la classe Game représentant l'état actuel de la partie.
-        - player_id : identifiant du joueur qui effectue le mouvement, doit être présent dans la partie.(IA)
+        - current_player_number : identifiant du joueur qui effectue le mouvement, doit être présent dans la partie.(IA)
         - current_state : l'état actuel du jeu sous forme d'entier.
     
     Post-conditions : 
@@ -104,7 +102,7 @@ def exploit(game, player_id, current_state):
     if value_state:
         best_action = None
         best_value = -float('inf')
-        directions = possible_move(game, player_id)
+        directions = possible_move(game, current_player_number)
         for direction in directions:
             value = getattr(value_state, direction)
             if (value > best_value):
@@ -112,7 +110,7 @@ def exploit(game, player_id, current_state):
                 best_action = direction
         return best_action
     else:
-        return explore(game, player_id)
+        return explore(game, current_player_number)
 
 def state(game):
     """
@@ -208,7 +206,7 @@ def end_game(game, current_player_number):
     Gère la fin du jeu. En mettant à jour la Q-table pour le dernier mouvement.
         Pré-conditions :
         - game : instance de la classe Game représentant l'état actuel de la partie.
-        - player_id : Le numéro du joueur de IA.
+        - current_player_number : Le numéro du joueur
     """
     player_id = game.player_id_1 if game.turn_player_1 else game.player_id_2
     previous_state_move = db.session.query(PreviousStateAction).filter_by(game_id=game.game_id, player_id=player_id).first()

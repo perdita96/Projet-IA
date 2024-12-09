@@ -30,6 +30,7 @@ def play_game(game) :
 
     while(game.winner == 0) :  
         current_player_number = 1 if game.turn_player_1 else 2 
+        
         try : 
             game = move(game, current_player_id, get_move(game, current_player_id), current_player_number)
 
