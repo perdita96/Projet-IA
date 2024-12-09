@@ -27,15 +27,14 @@ def play_game(game) :
     """
     #comme c'est la même id peut importe et de toute façon c'est inutile dans la fonction move (IA VS IA)
     current_player_id =  game.player_1_id
-    current_player_number = 1 if game.turn_player_1 else 2
 
     while(game.winner == 0) :  
-
+        current_player_number = 1 if game.turn_player_1 else 2 
         try : 
             game = move(game, current_player_id, get_move(game, current_player_id), current_player_number)
 
             db.session.commit()
-            current_player_number = 1 if game.turn_player_1 else 2 
+            
         except ValueError as e:
             raise e
         
