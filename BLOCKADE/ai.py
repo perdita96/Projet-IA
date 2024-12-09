@@ -203,17 +203,17 @@ def calculate_reward(previous_boardstate, current_boardstate, current_player_nb)
     return reward
 
 
-def end_game(game, current_player_number):
+def end_game(game):
     """
     Gère la fin du jeu. En mettant à jour la Q-table pour le dernier mouvement.
         Pré-conditions :
         - game : instance de la classe Game représentant l'état actuel de la partie.
         - current_player_number : Le numéro du joueur
     """
-    player_id = game.player_id_1 if game.turn_player_1 else game.player_id_2
+    player_id = game.player_1_id if game.turn_player_1 else game.player_2_id
     previous_state_move = db.session.query(PreviousStateAction).filter_by(game_id=game.game_id, player_id=player_id).first()
     current_state = state(game)
-    update_q_table(previous_state_move, current_state, current_player_number)
+    update_q_table(previous_state_move, current_state)
     db.session.commit()
 
 def update_epsilon():
