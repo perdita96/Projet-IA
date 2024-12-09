@@ -18,6 +18,8 @@ def possible_move(game, current_player):
     size = game.size
 
     current_pos = game.pos_player_1 if current_player == "1" else game.pos_player_2
+    print(current_player)
+    print(current_pos)
 
     x, y = map(int, current_pos.split(","))
  
