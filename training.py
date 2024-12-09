@@ -66,7 +66,7 @@ def training() :
     alice_id = id_searched_player('Alice')
 
 
-    last_game = db.session.query(Game).filter(Game.player_1 == ai_id, Game.player_2 == alice_id).first()
+    last_game = db.session.query(Game).filter(Game.player_1_id == ai_id, Game.player_2_id == alice_id).first()
 
     if last_game : 
         if last_game.winner == 0 : 
