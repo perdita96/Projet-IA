@@ -29,7 +29,6 @@ def play_game(game) :
 
     while(game.winner == 0) :  
         try : 
-            print(current_player_id)
             game = move(game, current_player_id, get_move(game, current_player_id))
             db.session.commit()
 
