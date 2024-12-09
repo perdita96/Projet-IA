@@ -26,13 +26,12 @@ def play_game(game) :
 
     """
     #comme c'est la même id peut importe et de toute façon c'est inutile dans la fonction move (IA VS IA)
-    print(game.player_1_id)
     current_player_id =  game.player_1_id
+    print(current_player_id)
     current_player_number = 1 if game.turn_player_1 else 2 
 
     while(game.winner == 0) :  
         
-
         try : 
             game = move(game, current_player_id, get_move(game, current_player_id), current_player_number)
             current_player_number = 1 if game.turn_player_1 else 2 
@@ -84,7 +83,6 @@ def trainning() :
     i_game = 0
     while nb_games_played < config.MAX_GAMES and i_game < nb_games_wanted : 
 
-        print("test" + str(ai_id))
         new_game = Game(player_1=ai_id, player_2=ai_id, size=config.BOARD_SIZE)
         db.session.add(new_game)
         db.session.commit()
