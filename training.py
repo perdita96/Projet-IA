@@ -106,5 +106,7 @@ if __name__ == "__main__":
 
     
 
+    #si nb_games_played = MAX_GAMES -> lancer l'évaluation contre elle même et contre random
+
 
 
