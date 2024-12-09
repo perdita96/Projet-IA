@@ -25,8 +25,14 @@ def play_game(game) :
         - Peut renvoyer une erreur provenant de la fonction move
 
     """
-
-    current_player =  game.player_1 if game.turn_player_1 else game.player_2
+    #comme c'est la même id peut importe et de toute façon c'est inutile dans la fonction move (IA VS IA)
+    current_player =  game.player_1_id
+    current_player_number = 1 if game.turn_player_1 else 2
+    
+    print(f"Id joueur courant : {current_player.player_id}")
+    print(f"Tour du joueur 1 : {game.turn_player_1}")
+    print(f"Id Joueur 1 : {game.player_1_id}")
+    print(f"Id Joueur 2 : {game.player_2_id}")
 
     while(game.winner == 0) :  
 
@@ -90,7 +96,25 @@ def trainning() :
             raise e
 
         i_game += 1
-    exit()
+        nb_games_played += 1
+
+        if nb_games_played % 500 == 0:
+            update_epsilon()
+
+    print(f"{nb_games_played}/{config.MAX_GAMES} parties jouées")
+
+if __name__ == "__main__":
+
+    with app.app_context():
+        try  :
+            trainning()
+        except ValueError as e:
+            print("error : " + str(e))
+            
+
+    
+
+    #si nb_games_played = MAX_GAMES -> lancer l'évaluation contre elle même et contre random
 
 
 
