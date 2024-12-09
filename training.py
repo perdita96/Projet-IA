@@ -32,13 +32,15 @@ def play_game(game) :
             print(current_player_id)
             game = move(game, current_player_id, get_move(game, current_player_id))
             db.session.commit()
+
+            current_player_id =  game.player_1_id if game.turn_player_1 else game.player_2_id
             
         except ValueError as e:
             raise e
         
-    end_game(game)
+    end_game(game, current_player_id)
 
-def trainning() : 
+def training() : 
     """
     Gère le processus d'entraînement de l'IA en jouant un certain nombre de parties.
 
@@ -64,7 +66,7 @@ def trainning() :
     alice_id = id_searched_player('Alice')
 
 
-    last_game = db.session.query(Game).order_by(Game.game_id.desc()).first()
+    last_game = db.session.query(Game).filter(Game.player_1_id == ai_id, Game.player_2_id == alice_id).first()
 
     if last_game : 
         if last_game.winner == 0 : 
@@ -102,7 +104,7 @@ if __name__ == "__main__":
 
     with app.app_context():
         try  :
-            trainning()
+            training()
         except ValueError as e:
             print("error : " + str(e))
             
