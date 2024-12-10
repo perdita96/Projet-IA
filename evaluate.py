@@ -8,6 +8,12 @@ import config
 import sys
 
 def set_eps_config(eps):
+    """
+    Modifie la valeur de l'epsilon dans le fichier de config
+
+    Pré-conditions :
+        - eps est un entier positif compris entre 0 et 1
+    """
     with open('config.py', 'r') as f:
        lines = f.readlines()
     
@@ -19,6 +25,17 @@ def set_eps_config(eps):
                 f.write(line)
 
 def get_player_move(game, player_id):
+    """
+    Renvoie le mouvement du joueur
+
+    Pré-conditions : 
+        - game est la Game actuelle
+        - player_id est l'id du joueur dont c'est le tour de jouer
+
+    Post-conditions :
+        - Renvoie un mouvement dont la valeur peut être ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown']
+        - Lève une exception si le player_id est invalide
+    """
     match player_id:
         case game.player_1.id:
             move = explore(game, player_id)
@@ -29,6 +46,16 @@ def get_player_move(game, player_id):
     return move
 
 def play_game(ai_id, random_id):
+    """
+    Crée une game et fait jouer l'IA contre un random
+
+    Pré-conditions : 
+        - ai_id est l'id du joueur 'IA'
+        - random_id est l'id du joueur 'Random'
+
+    Post-conditions : 
+        - la partie est ajoutée en db et la QTable de l'IA est mise à jour
+    """
     game = Game(player_1=random_id, player_2=ai_id, size=config.BOARD_SIZE)
     db.session.add(game)
     db.session.commit()
@@ -41,6 +68,18 @@ def play_game(ai_id, random_id):
     end_game(game, game.player_2.id)
 
 def evaluate_model(nb_games, nb_wins):
+    """
+    Affiche les résultats de l'évaluation
+
+    Dont :
+        - Le nombre de parties gagnées et perdues par chaque joueur
+        - Le pourcentage de parties gagnées et perdues par chaque joueur
+        - Le joueur qui a le meilleur score
+
+    Pré-conditions :
+        - nb_games est le nombre total de parties jouées
+        - nb_wins est le nombre de parties gagnées par l'IA
+    """
     win_pct = (nb_wins / nb_games) * 100
     nb_loses = nb_games - nb_wins
     print('-' * 20)
