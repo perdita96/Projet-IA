@@ -24,8 +24,9 @@ def move(game, player, direction):
     size = game.size
 
     directions = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight']
+    print(direction)
     if direction not in directions:
-        raise ValueError("Direction non valide 1")
+        raise ValueError("Direction non valide")
     
     if int(player) == player_1.player_id:
         current_player = "1"
@@ -43,18 +44,12 @@ def move(game, player, direction):
     if (not game.turn_player_1 and current_player == "1") or (game.turn_player_1 and current_player == "2"):
         raise ValueError("Ce n'est pas au tour du joueur")
     
-    directions = possible_move(game, player)
+    directions = possible_move(game, int(player))
+    print(directions)
     if direction not in directions:
         raise ValueError("Mouvement non autorisé")
-    
-    if player == game.player_1_id : 
-        current_player = "1"
-        current_pos = game.pos_player_1
-    else :
-        current_player = "2"
-        current_pos = game.pos_player_2
 
-    x, y = map(int, current_pos.split(","))
+    x, y = map(int, current_player_pos.split(","))
     match direction:
         case "ArrowUp":
             new_x, new_y = x - 1, y
@@ -197,6 +192,8 @@ def possible_move(game, player_id):
     else :
         current_player = "2"
         current_pos = game.pos_player_2
+    
+    print(current_player)
 
     x, y = map(int, current_pos.split(","))
     possible_move = []
@@ -207,7 +204,7 @@ def possible_move(game, player_id):
             case "ArrowDown":
                 new_x, new_y = x + 1, y
             case "ArrowLeft":
-               new_x, new_y = x, y - 1
+                new_x, new_y = x, y - 1
             case "ArrowRight":
                 new_x, new_y = x, y + 1
         if 0 <= new_x < size and 0 <= new_y < size: 

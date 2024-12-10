@@ -1,7 +1,7 @@
 import random
 from .app_models.models import *
 import config
-from business import possible_move
+from .business import possible_move
 
 
 def get_move(game, player_id):
@@ -35,7 +35,7 @@ def get_move(game, player_id):
         move = exploit(game, player_id, current_state)
     previous_state_move.previous_action = move
     db.session.commit()
-    return "Arrow" + move.capitalize()
+    return move
 
 def explore(game, player_id):
     """
@@ -132,8 +132,8 @@ def update_q_table(previous_state_move, current_state):
 
     current_q_table_entry = db.session.query(Qtable).get(current_state)
     
-    max_current_q_value = max(current_q_table_entry.up, current_q_table_entry.down, 
-                              current_q_table_entry.left, current_q_table_entry.right)
+    max_current_q_value = max(current_q_table_entry.ArrowUp, current_q_table_entry.ArrowDown, 
+                              current_q_table_entry.ArrowLeft, current_q_table_entry.ArrowRight)
 
     new_q_value = previous_q_value + learning_rate * (reward + discount_factor * max_current_q_value - previous_q_value)
 
