@@ -47,6 +47,24 @@ def move(game, player, direction):
     if direction not in directions:
         raise ValueError("Mouvement non autorisé")
     
+    if player == game.player_1_id : 
+        current_player = "1"
+        current_pos = game.pos_player_1
+    else :
+        current_player = "2"
+        current_pos = game.pos_player_2
+
+    x, y = map(int, current_pos.split(","))
+    match direction:
+        case "ArrowUp":
+            new_x, new_y = x - 1, y
+        case "ArrowDown":
+            new_x, new_y = x + 1, y
+        case "ArrowLeft":
+            new_x, new_y = x, y - 1
+        case "ArrowRight":
+            new_x, new_y = x, y + 1
+    
     if current_player == "1":
         game.pos_player_1 = f"{new_x},{new_y}"
     else:
@@ -182,19 +200,18 @@ def possible_move(game, player_id):
 
     x, y = map(int, current_pos.split(","))
     possible_move = []
-    for move in ['Up', 'Down', 'Left', 'Right']:
+    for move in ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight']:
         match move:
-            case "Up":
+            case "ArrowUp":
                 new_x, new_y = x - 1, y
-            case "Down":
+            case "ArrowDown":
                 new_x, new_y = x + 1, y
-            case "Left":
+            case "ArrowLeft":
                new_x, new_y = x, y - 1
-            case "Right":
+            case "ArrowRight":
                 new_x, new_y = x, y + 1
         if 0 <= new_x < size and 0 <= new_y < size: 
             target_square = board_state[new_x * size + new_y]
             if target_square == "0" or target_square == current_player:
-                arrow_move = "Arrow" + move.capitalize()
-                possible_move.append(arrow_move)
+                possible_move.append(move)
     return possible_move
