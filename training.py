@@ -75,6 +75,7 @@ def training() :
     Gère le processus d'entraînement de l'IA en jouant un certain nombre de parties.
 
     Pré-conditions :
+        - Le fichier config.py doit être accessible
         - La classe Game doit être définie et accessible.
         - Les fonctions player_exists, add_player, id_searched_player, play_game, et update_epsilon doivent être définies.
         - Un nombre de parties à jouer est demandé à l'utilisateur, il doit être un entier positif.
@@ -83,7 +84,7 @@ def training() :
         - Si le joueur "IA" n'existe pas, il est créé.
         - L'IA joue un nombre spécifié de parties contre elle-même sans dépasser le nombre de parties maximum.
         - L'état des parties est enregistré dans la base de données.
-        - La valeur d'epsilon est mise à jour toutes les 500 parties jouées.
+        - La valeur d'epsilon est mise à jour toutes les 500 (config.EPSILON_UPDATE_PARTIE) parties jouées.
         - Peut renvoyer une erreur provenant de la fonction play_game
 
     """
