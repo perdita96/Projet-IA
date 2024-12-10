@@ -14,17 +14,17 @@ class Qtable(db.Model):
     __tablename__ = 'qtable'
 
     state = db.Column(db.String(30), primary_key=True)
-    up = db.Column(db.Float, nullable=False)
-    down = db.Column(db.Float, nullable=False)
-    right = db.Column(db.Float, nullable=False)
-    left = db.Column(db.Float, nullable=False)
+    ArrowUp = db.Column(db.Float, nullable=False)
+    ArrowDown = db.Column(db.Float, nullable=False)
+    ArrowRight = db.Column(db.Float, nullable=False)
+    ArrowLeft = db.Column(db.Float, nullable=False)
 
-    def __init__(self, state, up=0 , down=0, right=0, left=0):
+    def __init__(self, state, ArrowUp=0 , ArrowDown=0, ArrowRight=0, ArrowLeft=0):
         self.state = state
-        self.up = up
-        self.down = down
-        self.right = right 
-        self.left = left
+        self.ArrowUp = ArrowUp
+        self.ArrowDown = ArrowDown
+        self.ArrowRight = ArrowRight 
+        self.ArrowLeft = ArrowLeft
 
 class PreviousStateAction(db.Model) :
     __tablename__ = 'previousStateAction'

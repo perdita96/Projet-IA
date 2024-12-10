@@ -1,45 +1,8 @@
 import random
 from .app_models.models import *
 import config
+from .business import possible_move
 
-
-def possible_move(game, player_id):
-    """
-    Fonction qui renvoie les mouvements possibles pour l'IA.
-    
-    Pré-conditions :
-        - game : instance de la classe Game représentant l'état actuel de la partie.
-        - player_id : identifiant du joueur qui effectue le mouvement, doit être présent dans la partie.(IA)
-    
-    Post-conditions : 
-        Retourne une liste des mouvements valides (Up, Down, Left, Right) que le joueur peut effectuer.
-    """
-    board_state = game.board_state
-    size = game.size
-    if player_id == game.player_1_id : 
-        current_player = "1"
-        current_pos = game.pos_player_1
-    else :
-        current_player = "2"
-        current_pos = game.pos_player_2
-
-    x, y = map(int, current_pos.split(","))
-    possible_move = []
-    for move in ['Up', 'Down', 'Left', 'Right']:
-        match move:
-            case "Up":
-                new_x, new_y = x - 1, y
-            case "Down":
-                new_x, new_y = x + 1, y
-            case "Left":
-               new_x, new_y = x, y - 1
-            case "Right":
-                new_x, new_y = x, y + 1
-        if 0 <= new_x < size and 0 <= new_y < size: 
-            target_square = board_state[new_x * size + new_y]
-            if target_square == "0" or target_square == current_player:
-                possible_move.append(move.lower())
-    return possible_move
 
 def get_move(game, player_id):
     """
@@ -73,7 +36,7 @@ def get_move(game, player_id):
         move = exploit(game, player_id, current_state)
     previous_state_move.previous_action = move
     db.session.commit()
-    return "Arrow" + move.capitalize()
+    return move
 
 def explore(game, player_id):
     """
@@ -170,8 +133,8 @@ def update_q_table(previous_state_move, current_state):
 
     current_q_table_entry = db.session.query(Qtable).get(current_state)
     
-    max_current_q_value = max(current_q_table_entry.up, current_q_table_entry.down, 
-                              current_q_table_entry.left, current_q_table_entry.right)
+    max_current_q_value = max(current_q_table_entry.ArrowUp, current_q_table_entry.ArrowDown, 
+                              current_q_table_entry.ArrowLeft, current_q_table_entry.ArrowRight)
 
     new_q_value = previous_q_value + learning_rate * (reward + discount_factor * max_current_q_value - previous_q_value)
 

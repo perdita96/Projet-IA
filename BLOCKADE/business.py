@@ -25,7 +25,7 @@ def move(game, player, direction):
 
     directions = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight']
     if direction not in directions:
-        raise ValueError("Direction non valide 1")
+        raise ValueError("Direction non valide")
     
     if int(player) == player_1.player_id:
         current_player = "1"
@@ -43,6 +43,10 @@ def move(game, player, direction):
     if (not game.turn_player_1 and current_player == "1") or (game.turn_player_1 and current_player == "2"):
         raise ValueError("Ce n'est pas au tour du joueur")
     
+    directions = possible_move(game, int(player))
+    if direction not in directions:
+        raise ValueError("Mouvement non autorisé")
+
     x, y = map(int, current_player_pos.split(","))
     match direction:
         case "ArrowUp":
@@ -53,15 +57,6 @@ def move(game, player, direction):
             new_x, new_y = x, y - 1
         case "ArrowRight":
             new_x, new_y = x, y + 1
-        case _:
-            raise ValueError("Direction non valide 2")
-                
-    if not is_within_board(new_x, new_y , size):
-        raise ValueError("Mouvement en dehors du plateau")
-    
-    target_case = board_state[new_x * size + new_y]
-    if not is_move_valid(target_case, current_player): 
-        raise ValueError("Mouvement non autorisé")
     
     if current_player == "1":
         game.pos_player_1 = f"{new_x},{new_y}"
@@ -175,3 +170,41 @@ def update_enclosure(opponent_number, opponent_pos, board_state) :
             board_state[i_case] = current_player_number
             
     return board_state
+
+def possible_move(game, player_id):
+    """
+    Fonction qui renvoie les mouvements possibles pour l'IA.
+    
+    Pré-conditions :
+        - game : instance de la classe Game représentant l'état actuel de la partie.
+        - player_id : identifiant du joueur qui effectue le mouvement, doit être présent dans la partie.(IA)
+    
+    Post-conditions : 
+        Retourne une liste des mouvements valides (Up, Down, Left, Right) que le joueur peut effectuer.
+    """
+    board_state = game.board_state
+    size = game.size
+    if player_id == game.player_1_id : 
+        current_player = "1"
+        current_pos = game.pos_player_1
+    else :
+        current_player = "2"
+        current_pos = game.pos_player_2
+
+    x, y = map(int, current_pos.split(","))
+    possible_move = []
+    for move in ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight']:
+        match move:
+            case "ArrowUp":
+                new_x, new_y = x - 1, y
+            case "ArrowDown":
+                new_x, new_y = x + 1, y
+            case "ArrowLeft":
+                new_x, new_y = x, y - 1
+            case "ArrowRight":
+                new_x, new_y = x, y + 1
+        if 0 <= new_x < size and 0 <= new_y < size: 
+            target_square = board_state[new_x * size + new_y]
+            if target_square == "0" or target_square == current_player:
+                possible_move.append(move)
+    return possible_move
