@@ -149,7 +149,7 @@ def training() :
 
         if nb_games_played % config.EPSILON_UPDATE_PARTIE == 0: 
             update_epsilon()
-        if random.random() < 0.05:
+        if random.random() < 0.01:
             print(random.choice(phrases_of_encouragement))
 
     print(f"{nb_games_played}/{config.MAX_GAMES} parties jouées")
