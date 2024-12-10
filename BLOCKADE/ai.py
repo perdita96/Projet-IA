@@ -119,19 +119,19 @@ def update_q_table(previous_state_move, current_state):
     reward = calculate_reward(previous_boardstate, current_boardstate, current_player_number)  
     
     # Ajouter les états dans la Qtable s'ils n'existent pas
-    if not db.session.query(Qtable).get(previous_state_move.previous_state):
-        new_entry = Qtable(state=previous_state_move.previous_state)
-        db.session.add(new_entry)
-    if not db.session.query(Qtable).get(current_state):
-        new_entry = Qtable(state=current_state)
-        db.session.add(new_entry)
+    previous_q_table_entry = db.session.query(Qtable).get(previous_state_move.previous_state)
+    if not previous_q_table_entry:
+        previous_q_table_entry = Qtable(state=previous_state_move.previous_state)
+        db.session.add(previous_q_table_entry)
+    
+    current_q_table_entry = db.session.query(Qtable).get(current_state)
+    if not current_q_table_entry:
+        current_q_table_entry = Qtable(state=current_state)
+        db.session.add(current_q_table_entry)
     
     action = previous_state_move.previous_action
 
-    previous_q_table_entry = db.session.query(Qtable).get(previous_state_move.previous_state)
     previous_q_value = getattr(previous_q_table_entry, action)
-
-    current_q_table_entry = db.session.query(Qtable).get(current_state)
     
     max_current_q_value = max(current_q_table_entry.ArrowUp, current_q_table_entry.ArrowDown, 
                               current_q_table_entry.ArrowLeft, current_q_table_entry.ArrowRight)
