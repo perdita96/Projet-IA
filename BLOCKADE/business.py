@@ -24,7 +24,6 @@ def move(game, player, direction):
     size = game.size
 
     directions = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight']
-    print(direction)
     if direction not in directions:
         raise ValueError("Direction non valide")
     
@@ -45,7 +44,6 @@ def move(game, player, direction):
         raise ValueError("Ce n'est pas au tour du joueur")
     
     directions = possible_move(game, int(player))
-    print(directions)
     if direction not in directions:
         raise ValueError("Mouvement non autorisé")
 
@@ -192,8 +190,6 @@ def possible_move(game, player_id):
     else :
         current_player = "2"
         current_pos = game.pos_player_2
-    
-    print(current_player)
 
     x, y = map(int, current_pos.split(","))
     possible_move = []
