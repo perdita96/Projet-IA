@@ -48,7 +48,7 @@ python training.py
 L'évaluation de l'IA se fait en la confrontant à une IA aléatoire, via le script suivant :
 
 ```bash
-python test.py
+python evaluate.py
 ```
 
 ## Collaboration
