@@ -50,6 +50,7 @@ L'évaluation de l'IA se fait en la confrontant à une IA aléatoire, via le scr
 ```bash
 python evaluate.py
 ```
+Ce script accepte un paramètre facultatif spécifiant le nombre de parties jouées pour l'évaluation. Ce nombre doit être compris entre 50 et 10 000. Par défaut, il est fixé à 1 000.
 
 ## Collaboration
 - Buret Lucien
