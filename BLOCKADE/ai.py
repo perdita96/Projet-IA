@@ -178,31 +178,3 @@ def end_game_ai(game, player_id):
     update_q_table(previous_state_move, current_state)
     db.session.commit()
 
-def update_epsilon():
-    """
-    Met à jour la valeur d'epsilon dans le fichier de configuration.
-
-    Pré-conditions :
-        - Présence d'un fichier config.py avec l'epsilon
-
-    Post-conditions :
-        - l'epsilon a été mis à jour dans le fichier config.py
-    """
-    current_epsilon = config.EPS
-    new_epsilon = current_epsilon * config.DECAY_RATE
-
-    new_epsilon = max(new_epsilon, config.MIN_EPSILON)
-
-    config.EPS = new_epsilon
-
-    with open('config.py', 'r') as f:
-       lines = f.readlines()
-    
-    with open('config.py', 'w') as f:
-        for line in lines:
-            if line.startswith('EPS ='):
-                f.write(f"EPS = {new_epsilon}\n")
-            else:
-                f.write(line)
-
-    print(f"Epsilon mis à jour de {current_epsilon} à {new_epsilon}")
