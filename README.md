@@ -42,6 +42,7 @@ L'entraînement intensif de l'IA se fait via le script suivant :
 ```bash
 python training.py
 ```
+Le script entraîne l'IA sur le nombre de partie entré par l'utilisateur et fait une backup de la base de données à chaque fois que l'on met à jour l'epsilon.
 
 ### L'évaluation de l'IA 
 
