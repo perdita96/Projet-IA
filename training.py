@@ -5,6 +5,23 @@ from BLOCKADE.business import move
 from BLOCKADE.ai import get_move, end_game_ai
 import config
 import random
+import shutil
+import os
+
+def make_backup():
+    """
+    Effectue une sauvegarde de la base de données sur le bureau.
+    """
+
+    #adapter les chemin
+    db_file = 'app.db'
+    backup_db = 'backup_app.db'
+    
+    try:
+        shutil.copy(db_file, backup_db)
+        print(f"Backup effectué avec succès : {backup_db}")
+    except Exception as e:
+        print(f"Erreur lors de la sauvegarde : {e}")
 
 def update_epsilon():
     """
@@ -150,6 +167,7 @@ def training() :
 
         if nb_games_played % config.EPSILON_UPDATE_PARTIE == 0: 
             update_epsilon()
+            make_backup()
         if random.random() < 0.01:
             print(random.choice(phrases_of_encouragement))
 
@@ -165,9 +183,5 @@ if __name__ == "__main__":
             training()
         except ValueError as e:
             print("error : " + str(e))
-            
-
-    #si nb_games_played = MAX_GAMES -> lancer l'évaluation contre elle même et contre random
-
 
 
