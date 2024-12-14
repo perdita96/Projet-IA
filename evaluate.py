@@ -2,7 +2,7 @@ from BLOCKADE import app
 from BLOCKADE.app_models.models import *
 from BLOCKADE.app_models.util import *
 from BLOCKADE.business import move
-from BLOCKADE.ai import get_move, end_game, explore
+from BLOCKADE.ai import get_move, end_game_ai, explore
 
 import config
 import sys
@@ -37,9 +37,9 @@ def get_player_move(game, player_id):
         - Lève une exception si le player_id est invalide
     """
     match player_id:
-        case game.player_1.id:
+        case game.player_1_id :
             move = explore(game, player_id)
-        case game.player_2.id:
+        case game.player_2_id:
             move = get_move(game, player_id)
         case _:
             raise ValueError('Invalid Player id')
@@ -62,10 +62,12 @@ def play_game(ai_id, random_id):
 
     while(game.winner == 0) :
         current_player = game.player_1 if game.turn_player_1 else game.player_2
-        game = move(game, current_player.id, get_player_move(game, current_player.id))
+        game = move(game, current_player.player_id, get_player_move(game, current_player.player_id))
         db.session.commit()
     
-    end_game(game, game.player_2.id)
+    end_game_ai(game, game.player_2.player_id)
+
+    return game.winner
 
 def evaluate_model(nb_games, nb_wins):
     """
@@ -86,14 +88,14 @@ def evaluate_model(nb_games, nb_wins):
     print('\tRANDOM' + (' ' * 10) + 'AI')
     print(f'\tGames won : {nb_loses}\t\tGames won : {nb_wins}')
     print(f'\tGames lost : {nb_wins}\t\tGames lost : {nb_loses}')
-    print(f'\tWin percentage : {1 - win_pct:.2f}%\t\tWin percentage : {win_pct:.2f}')
-    print(f'\tLose percentage : {win_pct:.2f}%\t\tLose percentage : {1 - win_pct:.2f}')
+    print(f'\tWin percentage : {100 - win_pct:.2f}%\t\tWin percentage : {win_pct:.2f}')
+    print(f'\tLose percentage : {win_pct:.2f}%\t\tLose percentage : {100 - win_pct:.2f}')
     print()
     print(f'\t\tBEST AI : {'RANDOM' if win_pct < 50 else 'AI' if win_pct > 50 else 'NONE'}')
 
 
 if __name__ == '__main__':
-    min_games = 50
+    min_games = 5
     max_games = 10000
 
     match len(sys.argv):
