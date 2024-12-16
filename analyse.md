@@ -37,3 +37,33 @@ En analysant les résultats obtenus, il sera possible de :
 - Adapter les choix d’hyperparamètres pour optimiser l’apprentissage en fonction des objectifs du jeu.
 
 Les conclusions détaillées seront fournies après l’exécution des tests et l’analyse des résultats.
+
+### **Résultats des tests**
+#### **Gamma = 0.9, Alpha = 0.3**
+##### 50 000
+
+##### 100 000
+
+##### 150 000
+
+##### 200 000
+
+#### **Gamma = 0.3, Alpha = 0.3**
+##### 50 000
+
+##### 100 000
+
+##### 150 000
+
+##### 200 000
+
+#### **Gamma = 0.9, Alpha = 0.9**
+##### 50 000
+
+##### 100 000
+
+##### 150 000
+
+##### 200 000
+
+#### **Gamma = 0.9, Alpha = 0.1**
