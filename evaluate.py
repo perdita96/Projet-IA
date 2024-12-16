@@ -45,18 +45,20 @@ def get_player_move(game, player_id):
             raise ValueError('Invalid Player id')
     return move
 
-def play_game(ai_id, random_id):
+def play_game(ai_id, random_id, ia_is_first):
     """
     Crée une game et fait jouer l'IA contre un random
 
     Pré-conditions : 
         - ai_id est l'id du joueur 'IA'
         - random_id est l'id du joueur 'Random'
+        - ia_is_first determine si l'ia comance ou non
 
     Post-conditions : 
         - la partie est ajoutée en db et la QTable de l'IA est mise à jour
     """
     game = Game(player_1=random_id, player_2=ai_id, size=config.BOARD_SIZE)
+    game.turn_player_1 = not ia_is_first
     db.session.add(game)
     db.session.commit()
 
@@ -69,14 +71,19 @@ def play_game(ai_id, random_id):
 
     return game.winner
 
-def evaluate_model(nb_games, nb_wins):
+def evaluate_model(nb_games, nb_wins, ia_is_first):
     """
     Affiche les résultats de l'évaluation
-
-    Dont :
+        Dont :
         - Le nombre de parties gagnées et perdues par chaque joueur
         - Le pourcentage de parties gagnées et perdues par chaque joueur
         - Le joueur qui a le meilleur score
+
+        Pré-conditions : 
+        - nb_game est le nombre de partie jouer
+        - nb_wins est le nombre de partie gagné par l'ia
+        - ia_is_first determine si l'ia comance ou non
+
 
     Pré-conditions :
         - nb_games est le nombre total de parties jouées
@@ -85,6 +92,7 @@ def evaluate_model(nb_games, nb_wins):
     win_pct = (nb_wins / nb_games) * 100
     nb_loses = nb_games - nb_wins
     print('-' * 20)
+    print('ia commence' if ia_is_first else 'random commence')
     print('\tRANDOM' + (' ' * 10) + 'AI')
     print(f'\tGames won : {nb_loses}\t\tGames won : {nb_wins}')
     print(f'\tGames lost : {nb_wins}\t\tGames lost : {nb_loses}')
@@ -121,11 +129,18 @@ if __name__ == '__main__':
         ai_id = id_searched_player('IA')
 
         nb_wins = 0
-        for _ in range(nb_games):
-            winner = play_game(ai_id, random_id)
+        for _ in range(nb_games/2):
+            winner = play_game(ai_id, random_id,True)
             if winner == 2:
                 nb_wins += 1
         
-        evaluate_model(nb_games, nb_wins)
+        evaluate_model(nb_games/2, nb_wins,True)
+
+        for _ in range(nb_games/2):
+            winner = play_game(ai_id, random_id,False)
+            if winner == 2:
+                nb_wins += 1
+        
+        evaluate_model(nb_games/2, nb_wins,False)
 
         set_eps_config(original_eps)

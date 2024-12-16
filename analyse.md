@@ -26,7 +26,7 @@ Pour chaque configuration, un test sera exécutée afin d'évaluer les performan
 1. **Définir des métriques d'évaluation** : le taux de victoire contre une IA random.
 2. **Exécuter un nombre suffisant de parties** : nous avons choisis d'entrainer nos IA sur 200 000 parties par palier de 50 000
 3. **Evlotution du epsilon**: nous avons choisit de diminuer de 1% toutes les 500 parties
-3. **Test des IA** : nous avons choisis d'évaluer les IA sur 10 000 parties toutes les 50 000 parties
+3. **Test des IA** : nous avons choisis d'évaluer les IA sur 5000 parties en joueur 1 et 5000 parties en joueur 2 toutes les 50 000 parties
 ---
 
 ### **Conclusions attendues**
