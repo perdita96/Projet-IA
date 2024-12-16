@@ -136,6 +136,7 @@ if __name__ == '__main__':
         
         evaluate_model(nb_games/2, nb_wins,True)
 
+        nb_wins = 0
         for _ in range(nb_games/2):
             winner = play_game(ai_id, random_id,False)
             if winner == 2:
