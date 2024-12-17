@@ -15,7 +15,7 @@ Chaque configuration est pensée pour représenter une stratégie d'apprentissag
 2. **Gamma = 0.3, Alpha = 0.3**
 3. **Gamma = 0.9, Alpha = 0.9**
 
-si on a le temp
+si on a le temps
 4. **Gamma = 0.9, Alpha = 0.1**
 
 ---
@@ -59,7 +59,8 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 
 #### **Gamma = 0.9, Alpha = 0.9**
 ##### 50 000
-
+Lorsque l'IA commence : 82,58% de parties gagnées
+Lorsque l'IA ne commence pas : 61,84% de parties gagnées
 ##### 100 000
 
 ##### 150 000
