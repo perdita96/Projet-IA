@@ -127,6 +127,23 @@ random commence
                 BEST AI : AI
 
 ##### 100 000
+ia commence
+        RANDOM          AI
+        Games won : 1509                Games won : 3491
+        Games lost : 3491               Games lost : 1509
+        Win percentage : 30.18%         Win percentage : 69.82
+        Lose percentage : 69.82%                Lose percentage : 30.18
+
+                BEST AI : AI
+--------------------
+random commence
+        RANDOM          AI
+        Games won : 1988.0              Games won : 3012
+        Games lost : 3012               Games lost : 1988.0
+        Win percentage : 39.76%         Win percentage : 60.24
+        Lose percentage : 60.24%                Lose percentage : 39.76
+
+                BEST AI : AI
 
 ##### 150 000
 
