@@ -182,7 +182,8 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 
 ### 200 000
 *(Données manquantes)*
-#### **Gamma = 0.9, Alpha = 0.1** (IA4)
+
+## **Gamma = 0.9, Alpha = 0.1** (IA4)
 ### 50 000
 *(Données manquantes)*
 
