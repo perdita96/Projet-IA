@@ -68,3 +68,22 @@ Lorsque l'IA ne commence pas : 61,84% de parties gagnées
 ##### 200 000
 
 #### **Gamma = 0.9, Alpha = 0.1**
+##### 50 000
+--------------------
+ia commence
+        RANDOM          AI
+        Games won : 1652.0              Games won : 3348
+        Games lost : 3348               Games lost : 1652.0
+        Win percentage : 33.04%         Win percentage : 66.96
+        Lose percentage : 66.96%                Lose percentage : 33.04
+
+                BEST AI : AI
+--------------------
+random commence
+        RANDOM          AI
+        Games won : 1981.0              Games won : 3019
+        Games lost : 3019               Games lost : 1981.0
+        Win percentage : 39.62%         Win percentage : 60.38
+        Lose percentage : 60.38%                Lose percentage : 39.62
+
+                BEST AI : AI
