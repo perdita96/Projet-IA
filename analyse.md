@@ -15,7 +15,7 @@ Chaque configuration est pensée pour représenter une stratégie d'apprentissag
 2. **Gamma = 0.3, Alpha = 0.3**
 3. **Gamma = 0.9, Alpha = 0.9**
 
-si on a le temp
+si on a le temps
 4. **Gamma = 0.9, Alpha = 0.1**
 
 ---
@@ -106,7 +106,7 @@ random commence
 
 ##### 200 000
 
-#### **Gamma = 0.9, Alpha = 0.9**
+#### **Gamma = 0.9, Alpha = 0.9** (IA3)
 ##### 50 000
 ia commence
         RANDOM          AI
