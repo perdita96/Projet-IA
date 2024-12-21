@@ -101,12 +101,13 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 
 ### 100 000
 #### IA commence
-| RANDOM          | AI              |
-|------------------|-----------------|
-| Games won : 1691 | Games won : 3309 |
-| Games lost : 3309 | Games lost : 1691 |
-| Win percentage : 33.82% | Win percentage : 66.18% |
-| Lose percentage : 66.18% | Lose percentage : 33.82% |**
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 1691            | 3309           |
+| Games lost      | 3309            | 1691           |
+| Win percentage  | 33.82%          | 66.18%         |
+| Lose percentage | 66.18%          | 33.82%         |
+
 
 **BEST AI : AI**
 
