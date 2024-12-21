@@ -184,11 +184,52 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 ---
 
 ## **Gamma = 0.9, Alpha = 0.1** (IA4)
-### 50 000
-*(Données manquantes)*
+##### 50 000
+--------------------
+**IA commence**  
+|                    | RANDOM          | AI             |
+|--------------------|-----------------|----------------|
+| Games won          | 1652.0          | 3348           |
+| Games lost         | 3348            | 1652.0         |
+| Win percentage     | 33.04%          | 66.96%         |
+| Lose percentage    | 66.96%          | 33.04%         |
 
-### 100 000
-*(Données manquantes)*
+**BEST AI : AI**
+
+--------------------
+**Random commence**  
+|                    | RANDOM          | AI             |
+|--------------------|-----------------|----------------|
+| Games won          | 1981.0          | 3019           |
+| Games lost         | 3019            | 1981.0         |
+| Win percentage     | 39.62%          | 60.38%         |
+| Lose percentage    | 60.38%          | 39.62%         |
+
+**BEST AI : AI**
+
+##### 100 000
+--------------------
+**IA commence**  
+|                    | RANDOM          | AI             |
+|--------------------|-----------------|----------------|
+| Games won          | 1185.0          | 3815           |
+| Games lost         | 3815            | 1185.0         |
+| Win percentage     | 23.70%          | 76.30%         |
+| Lose percentage    | 76.30%          | 23.70%         |
+
+**BEST AI : AI**
+
+--------------------
+**Random commence**  
+|                    | RANDOM          | AI             |
+|--------------------|-----------------|----------------|
+| Games won          | 1871.0          | 3129           |
+| Games lost         | 3129            | 1871.0         |
+| Win percentage     | 37.42%          | 62.58%         |
+| Lose percentage    | 62.58%          | 37.42%         |
+
+**BEST AI : AI**
+
 
 ### 150 000
 *(Données manquantes)*
