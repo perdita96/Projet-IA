@@ -39,21 +39,236 @@ En analysant les résultats obtenus, il sera possible de :
 Les conclusions détaillées seront fournies après l’exécution des tests et l’analyse des résultats.
 
 ### **Résultats des tests**
-#### **Gamma = 0.9, Alpha = 0.3**
+## **Gamma = 0.9, Alpha = 0.3** (IA1)
+
+### 50 000
+#### IA commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 831             | 4169           |
+| Games lost      | 4169            | 831            |
+| Win percentage  | 16.62%          | 83.38%         |
+| Lose percentage | 83.38%          | 16.62%         |
+
+**BEST AI : AI**
+
+#### RANDOM commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 1495            | 3505           |
+| Games lost      | 3505            | 1495           |
+| Win percentage  | 29.90%          | 70.10%         |
+| Lose percentage | 70.10%          | 29.90%         |
+
+**BEST AI : AI**
+
+
+### 100 000
+*(Données manquantes)*
+
+
+
+### 150 000
+*(Données manquantes)*
+
+### 200 000
+*(Données manquantes)*
+
+---
+
+## **Gamma = 0.3, Alpha = 0.3** (IA2)
+
+### 50 000
+#### IA commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 1885            | 3115           |
+| Games lost      | 3115            | 1885           |
+| Win percentage  | 37.70%          | 62.30%         |
+| Lose percentage | 62.30%          | 37.70%         |
+
+**BEST AI : AI**
+
+#### RANDOM commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 2187            | 2813           |
+| Games lost      | 2813            | 2187           |
+| Win percentage  | 43.74%          | 56.26%         |
+| Lose percentage | 56.26%          | 43.74%         |
+
+**BEST AI : AI**
+
+### 100 000
+#### IA commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 1691            | 3309           |
+| Games lost      | 3309            | 1691           |
+| Win percentage  | 33.82%          | 66.18%         |
+| Lose percentage | 66.18%          | 33.82%         |
+
+
+**BEST AI : AI**
+
+#### RANDOM commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 2112            | 2888           |
+| Games lost      | 2888            | 2112           |
+| Win percentage  | 42.24%          | 57.76%         |
+| Lose percentage | 57.76%          | 42.24%         |
+
+**BEST AI : AI**
+
+
+### 150 000
+#### IA commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 1446            | 3554           |
+| Games lost      | 3554            | 1446           |
+| Win percentage  | 28.92%          | 71.08%         |
+| Lose percentage | 71.08%          | 28.92%         |
+
+**BEST AI : AI**
+#### RANDOM commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 2043            | 2957           |
+| Games lost      | 2957            | 2043           |
+| Win percentage  | 40.86%          | 59.14%         |
+| Lose percentage | 59.14%          | 40.86%         |
+
+**BEST AI : AI**
+
+
+### 200 000
+*(Données manquantes)*
+
+---
+
+## **Gamma = 0.9, Alpha = 0.9** (IA3)
+
+### 50 000
+#### IA commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 871             | 4129           |
+| Games lost      | 4129            | 871            |
+| Win percentage  | 17.42%          | 82.58%         |
+| Lose percentage | 82.58%          | 17.42%         |
+
+**BEST AI : AI**
+
+#### RANDOM commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 1908            | 3092           |
+| Games lost      | 3092            | 1908           |
+| Win percentage  | 38.16%          | 61.84%         |
+| Lose percentage | 61.84%          | 38.16%         |
+
+**BEST AI : AI**
+
+### 100 000
+#### IA commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 1509            | 3491           |
+| Games lost      | 3491            | 1509           |
+| Win percentage  | 30.18%          | 69.82%         |
+| Lose percentage | 69.82%          | 30.18%         |
+
+**BEST AI : AI**
+
+#### RANDOM commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 1988            | 3012           |
+| Games lost      | 3012            | 1988           |
+| Win percentage  | 39.76%          | 60.24%         |
+| Lose percentage | 60.24%          | 39.76%         |
+
+
+**BEST AI : AI**
+
+### 150 000
+#### IA commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 1008            | 3992           |
+| Games lost      | 3992            | 1008           |
+| Win percentage  | 20.16%          | 79.84%         |
+| Lose percentage | 79.84%          | 20.16%         |
+
+**BEST AI : AI**
+
+#### RANDOM commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 1879            | 3121           |
+| Games lost      | 3121            | 1879           |
+| Win percentage  | 37.58%          | 62.42%         |
+| Lose percentage | 62.42%          | 37.58%         |
+
+**BEST AI : AI**
+
+### 200 000
+*(Données manquantes)*
+
+---
+
+## **Gamma = 0.9, Alpha = 0.1** (IA4)
 ##### 50 000
+--------------------
+#### IA commence
+|Metric              | RANDOM          | AI             |
+|--------------------|-----------------|----------------|
+| Games won          | 1652.0          | 3348           |
+| Games lost         | 3348            | 1652.0         |
+| Win percentage     | 33.04%          | 66.96%         |
+| Lose percentage    | 66.96%          | 33.04%         |
+
+**BEST AI : AI**
+
+--------------------
+#### RANDOM commence 
+|Metric              | RANDOM          | AI             |
+|--------------------|-----------------|----------------|
+| Games won          | 1981.0          | 3019           |
+| Games lost         | 3019            | 1981.0         |
+| Win percentage     | 39.62%          | 60.38%         |
+| Lose percentage    | 60.38%          | 39.62%         |
+
+**BEST AI : AI**
 
 ##### 100 000
+--------------------
+#### IA commence 
+|Metric              | RANDOM          | AI             |
+|--------------------|-----------------|----------------|
+| Games won          | 1185.0          | 3815           |
+| Games lost         | 3815            | 1185.0         |
+| Win percentage     | 23.70%          | 76.30%         |
+| Lose percentage    | 76.30%          | 23.70%         |
 
-##### 150 000
+**BEST AI : AI**
 
-##### 200 000
+--------------------
+#### RANDOM commence 
+|Metric              | RANDOM          | AI             |
+|--------------------|-----------------|----------------|
+| Games won          | 1871.0          | 3129           |
+| Games lost         | 3129            | 1871.0         |
+| Win percentage     | 37.42%          | 62.58%         |
+| Lose percentage    | 62.58%          | 37.42%         |
 
-#### **Gamma = 0.3, Alpha = 0.3**
-##### 50 000
+**BEST AI : AI**
 
-##### 100 000
 
-##### 150 000
+### 150 000
+*(Données manquantes)*
 
 ##### 200 000
 
