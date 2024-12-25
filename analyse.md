@@ -190,11 +190,11 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 
 ###### Pourquoi une baisse à 200 000 parties ?
 
-1. **Surapprentissage :**
+1. *Surapprentissage :*
 - À 200 000 parties, l'IA pourrait avoir surappris des stratégies spécifiques contre elle-même.  
 - Contre un RANDOM, ces stratégies deviennent moins efficaces.
 
-2. **Impact d'une exploration insuffisante :**
+2. *Impact d'une exploration insuffisante :*
 - L'IA, s'étant principalement entraînée contre elle-même, pourrait ne pas avoir exploré tous les états possibles de l'environnement.  
 - Cela peut limiter sa capacité à réagir efficacement à des scénarios inattendus.
 
