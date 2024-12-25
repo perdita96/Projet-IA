@@ -1,11 +1,24 @@
 ## **Analyse comparative des IA**
 
+### Table des matières
+
+1. [Définition de la méthodologie](#définition-de-la-méthodologie)
+2. [Configurations testées](#configurations-testées)
+3. [Méthodologie des tests](#méthodologie-des-tests)
+4. [Conclusions attendues](#conclusions-attendues)
+5. [Résultats des tests](#résultats-des-tests)
+   - [Gamma = 0.9, Alpha = 0.3 (IA1)](#gamma--09-alpha--03-ia1)
+   - [Gamma = 0.3, Alpha = 0.3 (IA2)](#gamma--03-alpha--03-ia2)
+   - [Gamma = 0.9, Alpha = 0.9 (IA3)](#gamma--09-alpha--09-ia3)
+   - [Gamma = 0.9, Alpha = 0.1 (IA4)](#gamma--09-alpha--01-ia4)
+6. [Conclusion](#conclusion)
+
+---
 ### **Définition de la méthodologie**
 
 Avant de procéder aux tests, il est essentiel de définir une méthodologie rigoureuse pour garantir des résultats pertinents. L'objectif est d'évaluer l'impact des hyperparamètres **Gamma** (facteur d'actualisation) et **Alpha** (facteur d'apprentissage) sur les performances des IA. Cette analyse se base sur trois configurations différentes de ces hyperparamètres, chacune visant à explorer des comportements d'apprentissage distincts.
 
 ---
-
 ### **Configurations testées**
 
 Trois configurations de Gamma (facteur d'actualisation) et Alpha (facteur d'apprentissage) ont été définies. 
@@ -17,16 +30,15 @@ Chaque configuration est pensée pour représenter une stratégie d'apprentissag
 4. **Gamma = 0.9, Alpha = 0.1**
 
 ---
-
 ### **Méthodologie des tests**
 
 Pour chaque configuration, un test sera exécutée afin d'évaluer les performances des IA dans un environnement standardisé. Les étapes suivantes seront respectées :  
 1. **Définir des métriques d'évaluation** : le taux de victoire contre une IA random.
 2. **Exécuter un nombre suffisant de parties** : nous avons choisis d'entrainer nos IA sur 200 000 parties par palier de 50 000
 3. **Evlotution du epsilon**: nous avons choisit de diminuer de 1% toutes les 500 parties
-3. **Test des IA** : nous avons choisis d'évaluer les IA sur 5000 parties en joueur 1 et 5000 parties en joueur 2 toutes les 50 000 parties
----
+4. **Test des IA** : nous avons choisis d'évaluer les IA sur 5000 parties en joueur 1 et 5000 parties en joueur 2 toutes les 50 000 parties
 
+---
 ### **Conclusions attendues**
 
 En analysant les résultats obtenus, il sera possible de :
@@ -37,7 +49,6 @@ En analysant les résultats obtenus, il sera possible de :
 Les conclusions détaillées seront fournies après l’exécution des tests et l’analyse des résultats.
 
 ---
-
 ### **Résultats des tests**
 #### **Gamma = 0.9, Alpha = 0.3** (IA1)
 
@@ -90,7 +101,6 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 *(Données manquantes)*
 
 ---
-
 #### **Gamma = 0.3, Alpha = 0.3** (IA2)
 
 ##### 50 000
@@ -155,7 +165,6 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 
 **BEST AI : AI**
 
-
 ##### 200 000
 ###### IA commence
 | Metric          | RANDOM          | AI             |
@@ -178,7 +187,6 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 ##### Analyse globale des résultats 
 
 ![image](https://github.com/user-attachments/assets/a453495f-4666-40de-a55b-4fa0790e6dd7)
-
 
 ###### **IA commence :**
 - À mesure que le nombre de parties augmente (jusqu'à 150 000), les performances augmentent, suggérant que l'IA apprend efficacement les meilleures actions dans l'environnement.
@@ -231,7 +239,6 @@ La baisse des performances à 200 000 parties peut être expliquée par plusieur
 - Cette homogénéité d'entraînement réduit sa capacité d'adaptation face à des scénarios imprévus ou à des adversaires adoptant des comportements aléatoires (RANDOM).
 
 ---
-
 #### **Gamma = 0.9, Alpha = 0.9** (IA3)
 
 ##### 50 000
@@ -303,7 +310,6 @@ La baisse des performances à 200 000 parties peut être expliquée par plusieur
 *(Données manquantes)*
 
 ---
-
 #### **Gamma = 0.9, Alpha = 0.1** (IA4)
 ##### 50 000
 ###### IA commence
@@ -347,9 +353,11 @@ La baisse des performances à 200 000 parties peut être expliquée par plusieur
 
 **BEST AI : AI**
 
-
 ##### 150 000
 *(Données manquantes)*
 
 ##### 200 000
 *(Données manquantes)*
+
+---
+### **Conclusion**
