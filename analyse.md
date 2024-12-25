@@ -14,8 +14,6 @@ Chaque configuration est pensée pour représenter une stratégie d'apprentissag
 1. **Gamma = 0.9, Alpha = 0.3**
 2. **Gamma = 0.3, Alpha = 0.3**
 3. **Gamma = 0.9, Alpha = 0.9**
-
-si on a le temps
 4. **Gamma = 0.9, Alpha = 0.1**
 
 ---
@@ -64,7 +62,28 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 
 
 ### 100 000
-*(Données manquantes)*
+### IA commence
+| Metric          | RANDOM       | AI          |
+|-----------------|--------------|-------------|
+| Games won       | 984          | 4016        |
+| Games lost      | 4016         | 984         |
+| Win percentage  | 19.68%       | 80.32%      |
+| Lose percentage | 80.32%       | 19.68%      |
+
+**BEST AI : AI**
+
+---
+
+### RANDOM commence
+| Metric          | RANDOM       | AI          |
+|-----------------|--------------|-------------|
+| Games won       | 1810         | 3190        |
+| Games lost      | 3190         | 1810        |
+| Win percentage  | 36.20%       | 63.80%      |
+| Lose percentage | 63.80%       | 36.20%      |
+
+**BEST AI : AI**
+
 
 
 
@@ -123,11 +142,87 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 
 
 ### 150 000
-*(Données manquantes)*
+#### IA commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 1446            | 3554           |
+| Games lost      | 3554            | 1446           |
+| Win percentage  | 28.92%          | 71.08%         |
+| Lose percentage | 71.08%          | 28.92%         |
+
+**BEST AI : AI**
+#### RANDOM commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 2043            | 2957           |
+| Games lost      | 2957            | 2043           |
+| Win percentage  | 40.86%          | 59.14%         |
+| Lose percentage | 59.14%          | 40.86%         |
+
+**BEST AI : AI**
 
 
 ### 200 000
-*(Données manquantes)*
+#### IA commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 1719            | 3281           |
+| Games lost      | 3281            | 1719           |
+| Win percentage  | 34.38%          | 65.62%         |
+| Lose percentage | 65.62%          | 34.38%         |
+
+**BEST AI : AI**
+
+#### RANDOM commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 2070            | 2930           |
+| Games lost      | 2930            | 2070           |
+| Win percentage  | 41.40%          | 58.60%         |
+| Lose percentage | 58.60%          | 41.40%         |
+
+### Analyse globale des résultats
+
+![image](https://github.com/user-attachments/assets/a453495f-4666-40de-a55b-4fa0790e6dd7)
+
+
+#### **IA commence :**
+- L'IA surpasse RANDOM de manière significative dans tous les scénarios, avec un pourcentage de victoires allant de **62.30%** à **71.08%**.
+- À mesure que le nombre de parties augmente (jusqu'à 150 000), les performances augmentent, suggérant que l'IA apprend efficacement les meilleures actions dans l'environnement.
+- Cependant, après **200 000 parties**, le pourcentage de victoires diminue légèrement à **65.62%**.
+
+#### **RANDOM commence :**
+- Lorsque RANDOM commence, l'IA maintient une supériorité (jusqu'à 150 000 parties), bien que son taux de victoire soit plus faible qu'en jouant en premier.
+- La performance augmente progressivement avec le nombre de parties, mais une baisse est observée à **200 000 parties** (**59.14%** → **58.60%**).
+
+### Pourquoi une baisse à 200 000 parties ?
+
+#### 1. **Surapprentissage :**
+- À 200 000 parties, l'IA pourrait avoir surappris des stratégies spécifiques contre elle-même.  
+- Si RANDOM introduit une variation imprévisible, ces stratégies deviennent moins efficaces.
+
+#### 2. **Impact d'une exploration insuffisante :**
+- L'IA, s'étant principalement entraînée contre elle-même, pourrait ne pas avoir exploré tous les états possibles de l'environnement.  
+- Cela peut limiter sa capacité à réagir efficacement à des scénarios inattendus.
+
+
+### Impact des hyperparamètres (Alpha et Gamma)
+
+#### **Alpha (taux d'apprentissage, ici = 0.3)**
+- **Effet :**
+  - Un alpha élevé (comme 0.3) permet une adaptation rapide, mais cela peut aussi rendre l'apprentissage instable.
+- **Dans ce cas :**  
+  - Un alpha de 0.3 semble initialement efficace, mais pourrait contribuer au surapprentissage ou à une convergence prématurée.
+
+#### **Gamma (facteur d'actualisation, ici = 0.3)**
+- **Effet :**
+  - Un gamma faible (comme ici, 0.3) privilégie des récompenses immédiates, ce qui peut limiter l'optimisation globale des stratégies.
+- **Dans ce cas :**  
+  - Gamma = 0.3 pourrait limiter la capacité de l'IA à anticiper les conséquences de ses actions sur le long terme, surtout dans des scénarios avec un grand nombre de parties.
+
+### Conclusion
+
+La baisse des performances à 200 000 parties est probablement due à des limitations dans les hyperparamètres et a un manque de variété dans ses adverssaire.
 
 ---
 
@@ -177,7 +272,26 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 **BEST AI : AI**
 
 ### 150 000
-*(Données manquantes)*
+#### IA commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 1472            | 3528           |
+| Games lost      | 3528            | 1472           |
+| Win percentage  | 29.44%          | 70.56%         |
+| Lose percentage | 70.56%          | 29.44%         |
+
+**BEST AI : AI**
+
+#### RANDOM commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 1984.0          | 3016           |
+| Games lost      | 3016            | 1984.0         |
+| Win percentage  | 39.68%          | 60.32%         |
+| Lose percentage | 60.32%          | 39.68%         |
+
+**BEST AI : AI**
+
 
 ### 200 000
 *(Données manquantes)*
