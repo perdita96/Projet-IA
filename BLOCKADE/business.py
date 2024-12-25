@@ -1,7 +1,7 @@
 from math import sqrt
 from .app_models.util import *
 
-@log_function_call
+#@log_function_call
 def move(game, player, direction):
     """
     Fonction qui bouge le joueur sur le plateau de jeu.
