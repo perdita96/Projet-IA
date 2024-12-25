@@ -47,7 +47,7 @@ def id_searched_player(nickname):
     """
     return db.session.query(Player).filter_by(nickname=nickname).first().player_id
 
-# Décorateur de log
+# Décorateur de log pour l'examen de python
 def log_function_call(func):
     def decorated_function(*args, **kwargs):
         date = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
