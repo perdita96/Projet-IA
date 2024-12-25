@@ -1,4 +1,5 @@
 from .models import Player, db
+from datetime import datetime
 def player_exists(nickname):
     """
     Fonction qui détermine si le joueur est déjà présent dans la base de données ou non
@@ -45,3 +46,26 @@ def id_searched_player(nickname):
     - Retourne l'ID ('player_id') du joueur correspondant au pseudo.
     """
     return db.session.query(Player).filter_by(nickname=nickname).first().player_id
+
+# Décorateur de log
+def log_function_call(func):
+    def decorated_function(*args, **kwargs):
+        date = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        
+        func_name = func.__name__
+        
+        args_str = ", ".join([str(arg) for arg in args])
+        kwargs_str = ", ".join([f"{key}={value}" for key, value in kwargs.items()])
+        
+        result = func(*args, **kwargs)
+
+        logs_file = open("logs.txt", "a")  
+        logs_file.write(f"{date} : Appel de {func_name}({args_str}{', ' + kwargs_str if kwargs_str != '' else ''}) {'==>' + repr(result) if result is not None else ''}\n")
+        logs_file.close()
+        return result
+
+    return decorated_function
+
+
+
+    
