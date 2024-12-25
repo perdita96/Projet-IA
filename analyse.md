@@ -183,6 +183,9 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 
 ### Analyse globale des résultats
 
+![image](https://github.com/user-attachments/assets/a453495f-4666-40de-a55b-4fa0790e6dd7)
+
+
 #### **IA commence :**
 - L'IA surpasse RANDOM de manière significative dans tous les scénarios, avec un pourcentage de victoires allant de **62.30%** à **71.08%**.
 - À mesure que le nombre de parties augmente (jusqu'à 150 000), les performances augmentent, suggérant que l'IA apprend efficacement les meilleures actions dans l'environnement.

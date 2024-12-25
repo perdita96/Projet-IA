@@ -80,7 +80,7 @@ def move():
 def game(game_id, player_id): 
     """
     Route qui retourne le template de la partie
-get_move
+    
     Pré-conditions :
         Les paramètres game et player_id sont présents dans l'URL
     Post-conditions :

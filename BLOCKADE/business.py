@@ -83,7 +83,7 @@ def move(game, player, direction):
     return game
 
 
-def is_within_board(x, y, side_size) : 
+def is_within_board(x, y, side_size) :
     """
     Fonction qui vérifie si la case est dans le plateau
 
@@ -145,7 +145,6 @@ def reachable_cases(opponent_number, opponent_pos, board_state) :
                 if(x_neighbor, y_neighbor) not in queue:
                     queue.append((x_neighbor, y_neighbor)) 
 
-
     return reachable
 
 def update_enclosure(opponent_number, opponent_pos, board_state) :
@@ -204,8 +203,8 @@ def possible_move(game, player_id):
                 new_x, new_y = x, y - 1
             case "ArrowRight":
                 new_x, new_y = x, y + 1
-        if 0 <= new_x < size and 0 <= new_y < size: 
+        if is_within_board(new_x, new_y, size): 
             target_square = board_state[new_x * size + new_y]
-            if target_square == "0" or target_square == current_player:
+            if is_move_valid(target_square, current_player):
                 possible_move.append(move)
     return possible_move
