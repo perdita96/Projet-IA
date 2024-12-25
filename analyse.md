@@ -36,11 +36,13 @@ En analysant les résultats obtenus, il sera possible de :
 
 Les conclusions détaillées seront fournies après l’exécution des tests et l’analyse des résultats.
 
-### **Résultats des tests**
-## **Gamma = 0.9, Alpha = 0.3** (IA1)
+---
 
-### 50 000
-#### IA commence
+### **Résultats des tests**
+#### **Gamma = 0.9, Alpha = 0.3** (IA1)
+
+##### 50 000
+###### IA commence**
 | Metric          | RANDOM          | AI             |
 |-----------------|-----------------|----------------|
 | Games won       | 831             | 4169           |
@@ -50,7 +52,7 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 
 **BEST AI : AI**
 
-#### RANDOM commence
+###### RANDOM commence
 | Metric          | RANDOM          | AI             |
 |-----------------|-----------------|----------------|
 | Games won       | 1495            | 3505           |
@@ -60,9 +62,8 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 
 **BEST AI : AI**
 
-
-### 100 000
-### IA commence
+##### 100 000
+###### IA commence
 | Metric          | RANDOM       | AI          |
 |-----------------|--------------|-------------|
 | Games won       | 984          | 4016        |
@@ -72,9 +73,7 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 
 **BEST AI : AI**
 
----
-
-### RANDOM commence
+###### RANDOM commence
 | Metric          | RANDOM       | AI          |
 |-----------------|--------------|-------------|
 | Games won       | 1810         | 3190        |
@@ -84,21 +83,18 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 
 **BEST AI : AI**
 
-
-
-
-### 150 000
+##### 150 000
 *(Données manquantes)*
 
-### 200 000
+##### 200 000
 *(Données manquantes)*
 
 ---
 
-## **Gamma = 0.3, Alpha = 0.3** (IA2)
+#### **Gamma = 0.3, Alpha = 0.3** (IA2)
 
-### 50 000
-#### IA commence
+##### 50 000
+###### IA commence
 | Metric          | RANDOM          | AI             |
 |-----------------|-----------------|----------------|
 | Games won       | 1885            | 3115           |
@@ -108,7 +104,7 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 
 **BEST AI : AI**
 
-#### RANDOM commence
+###### RANDOM commence
 | Metric          | RANDOM          | AI             |
 |-----------------|-----------------|----------------|
 | Games won       | 2187            | 2813           |
@@ -118,8 +114,8 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 
 **BEST AI : AI**
 
-### 100 000
-#### IA commence
+##### 100 000
+###### IA commence
 | Metric          | RANDOM          | AI             |
 |-----------------|-----------------|----------------|
 | Games won       | 1691            | 3309           |
@@ -127,10 +123,9 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 | Win percentage  | 33.82%          | 66.18%         |
 | Lose percentage | 66.18%          | 33.82%         |
 
-
 **BEST AI : AI**
 
-#### RANDOM commence
+###### RANDOM commence
 | Metric          | RANDOM          | AI             |
 |-----------------|-----------------|----------------|
 | Games won       | 2112            | 2888           |
@@ -140,9 +135,8 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 
 **BEST AI : AI**
 
-
-### 150 000
-#### IA commence
+##### 150 000
+###### IA commence
 | Metric          | RANDOM          | AI             |
 |-----------------|-----------------|----------------|
 | Games won       | 1446            | 3554           |
@@ -151,7 +145,7 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 | Lose percentage | 71.08%          | 28.92%         |
 
 **BEST AI : AI**
-#### RANDOM commence
+###### RANDOM commence
 | Metric          | RANDOM          | AI             |
 |-----------------|-----------------|----------------|
 | Games won       | 2043            | 2957           |
@@ -162,8 +156,8 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 **BEST AI : AI**
 
 
-### 200 000
-#### IA commence
+##### 200 000
+###### IA commence
 | Metric          | RANDOM          | AI             |
 |-----------------|-----------------|----------------|
 | Games won       | 1719            | 3281           |
@@ -173,7 +167,7 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 
 **BEST AI : AI**
 
-#### RANDOM commence
+###### RANDOM commence
 | Metric          | RANDOM          | AI             |
 |-----------------|-----------------|----------------|
 | Games won       | 2070            | 2930           |
@@ -181,55 +175,67 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 | Win percentage  | 41.40%          | 58.60%         |
 | Lose percentage | 58.60%          | 41.40%         |
 
-### Analyse globale des résultats
+##### Analyse globale des résultats 
 
 ![image](https://github.com/user-attachments/assets/a453495f-4666-40de-a55b-4fa0790e6dd7)
 
 
-#### **IA commence :**
-- L'IA surpasse RANDOM de manière significative dans tous les scénarios, avec un pourcentage de victoires allant de **62.30%** à **71.08%**.
+###### **IA commence :**
 - À mesure que le nombre de parties augmente (jusqu'à 150 000), les performances augmentent, suggérant que l'IA apprend efficacement les meilleures actions dans l'environnement.
 - Cependant, après **200 000 parties**, le pourcentage de victoires diminue légèrement à **65.62%**.
 
-#### **RANDOM commence :**
+###### **RANDOM commence :**
 - Lorsque RANDOM commence, l'IA maintient une supériorité (jusqu'à 150 000 parties), bien que son taux de victoire soit plus faible qu'en jouant en premier.
 - La performance augmente progressivement avec le nombre de parties, mais une baisse est observée à **200 000 parties** (**59.14%** → **58.60%**).
 
-### Pourquoi une baisse à 200 000 parties ?
+###### Pourquoi une baisse à 200 000 parties ?
 
-#### 1. **Surapprentissage :**
+1. **Surapprentissage :**
 - À 200 000 parties, l'IA pourrait avoir surappris des stratégies spécifiques contre elle-même.  
-- Si RANDOM introduit une variation imprévisible, ces stratégies deviennent moins efficaces.
+- Contre un RANDOM, ces stratégies deviennent moins efficaces.
 
-#### 2. **Impact d'une exploration insuffisante :**
+2. **Impact d'une exploration insuffisante :**
 - L'IA, s'étant principalement entraînée contre elle-même, pourrait ne pas avoir exploré tous les états possibles de l'environnement.  
 - Cela peut limiter sa capacité à réagir efficacement à des scénarios inattendus.
 
 
-### Impact des hyperparamètres (Alpha et Gamma)
+###### Impact des hyperparamètres (Alpha et Gamma)
 
-#### **Alpha (taux d'apprentissage, ici = 0.3)**
+*Alpha (taux d'apprentissage, ici = 0.3)*
 - **Effet :**
   - Un alpha élevé (comme 0.3) permet une adaptation rapide, mais cela peut aussi rendre l'apprentissage instable.
 - **Dans ce cas :**  
-  - Un alpha de 0.3 semble initialement efficace, mais pourrait contribuer au surapprentissage ou à une convergence prématurée.
+  - Un alpha de 0.3 semble initialement efficace, mais pourrait contribuer au surapprentissage.
 
-#### **Gamma (facteur d'actualisation, ici = 0.3)**
+*Gamma (facteur d'actualisation, ici = 0.3)*
 - **Effet :**
   - Un gamma faible (comme ici, 0.3) privilégie des récompenses immédiates, ce qui peut limiter l'optimisation globale des stratégies.
 - **Dans ce cas :**  
   - Gamma = 0.3 pourrait limiter la capacité de l'IA à anticiper les conséquences de ses actions sur le long terme, surtout dans des scénarios avec un grand nombre de parties.
 
-### Conclusion
+###### Conclusion
 
-La baisse des performances à 200 000 parties est probablement due à des limitations dans les hyperparamètres et a un manque de variété dans ses adverssaire.
+Cette IA apprend rapidement, mais son apprentissage privilégie les récompenses immédiates. Cela limite sa capacité à développer des stratégies à long terme, pourtant essentielles pour ce type de jeu. 
+En conséquence, son taux de réussite reste plafonné sous les 70 %.
+
+La baisse des performances à 200 000 parties peut être expliquée par plusieurs facteurs combinés :
+
+1. **Limitations des hyperparamètres :**
+
+- Un alpha élevé (taux d'apprentissage) favorise des ajustements rapides mais peut provoquer une instabilité ou un surapprentissage.
+- Un gamma faible (facteur d'actualisation) empêche l'IA d'optimiser les actions sur le long terme, en limitant son anticipation des récompenses différées.
+
+2. **Manque de diversité dans l'entraînement :**
+
+- En s'entraînant principalement contre elle-même, l'IA n'a pas exploré une variété suffisante de stratégies adverses.
+- Cette homogénéité d'entraînement réduit sa capacité d'adaptation face à des scénarios imprévus ou à des adversaires adoptant des comportements aléatoires (RANDOM).
 
 ---
 
-## **Gamma = 0.9, Alpha = 0.9** (IA3)
+#### **Gamma = 0.9, Alpha = 0.9** (IA3)
 
-### 50 000
-#### IA commence
+##### 50 000
+###### IA commence
 | Metric          | RANDOM          | AI             |
 |-----------------|-----------------|----------------|
 | Games won       | 871             | 4129           |
@@ -239,7 +245,7 @@ La baisse des performances à 200 000 parties est probablement due à des limita
 
 **BEST AI : AI**
 
-#### RANDOM commence
+###### RANDOM commence
 | Metric          | RANDOM          | AI             |
 |-----------------|-----------------|----------------|
 | Games won       | 1908            | 3092           |
@@ -249,8 +255,8 @@ La baisse des performances à 200 000 parties est probablement due à des limita
 
 **BEST AI : AI**
 
-### 100 000
-#### IA commence
+##### 100 000
+###### IA commence
 | Metric          | RANDOM          | AI             |
 |-----------------|-----------------|----------------|
 | Games won       | 1509            | 3491           |
@@ -260,7 +266,7 @@ La baisse des performances à 200 000 parties est probablement due à des limita
 
 **BEST AI : AI**
 
-#### RANDOM commence
+###### RANDOM commence
 | Metric          | RANDOM          | AI             |
 |-----------------|-----------------|----------------|
 | Games won       | 1988            | 3012           |
@@ -271,8 +277,8 @@ La baisse des performances à 200 000 parties est probablement due à des limita
 
 **BEST AI : AI**
 
-### 150 000
-#### IA commence
+##### 150 000
+###### IA commence
 | Metric          | RANDOM          | AI             |
 |-----------------|-----------------|----------------|
 | Games won       | 1472            | 3528           |
@@ -282,7 +288,7 @@ La baisse des performances à 200 000 parties est probablement due à des limita
 
 **BEST AI : AI**
 
-#### RANDOM commence
+###### RANDOM commence
 | Metric          | RANDOM          | AI             |
 |-----------------|-----------------|----------------|
 | Games won       | 1984.0          | 3016           |
@@ -293,15 +299,14 @@ La baisse des performances à 200 000 parties est probablement due à des limita
 **BEST AI : AI**
 
 
-### 200 000
+##### 200 000
 *(Données manquantes)*
 
 ---
 
-## **Gamma = 0.9, Alpha = 0.1** (IA4)
+#### **Gamma = 0.9, Alpha = 0.1** (IA4)
 ##### 50 000
---------------------
-#### IA commence
+###### IA commence
 |Metric              | RANDOM          | AI             |
 |--------------------|-----------------|----------------|
 | Games won          | 1652.0          | 3348           |
@@ -311,8 +316,7 @@ La baisse des performances à 200 000 parties est probablement due à des limita
 
 **BEST AI : AI**
 
---------------------
-#### RANDOM commence 
+###### RANDOM commence 
 |Metric              | RANDOM          | AI             |
 |--------------------|-----------------|----------------|
 | Games won          | 1981.0          | 3019           |
@@ -323,8 +327,7 @@ La baisse des performances à 200 000 parties est probablement due à des limita
 **BEST AI : AI**
 
 ##### 100 000
---------------------
-#### IA commence 
+###### IA commence 
 |Metric              | RANDOM          | AI             |
 |--------------------|-----------------|----------------|
 | Games won          | 1185.0          | 3815           |
@@ -334,8 +337,7 @@ La baisse des performances à 200 000 parties est probablement due à des limita
 
 **BEST AI : AI**
 
---------------------
-#### RANDOM commence 
+###### RANDOM commence 
 |Metric              | RANDOM          | AI             |
 |--------------------|-----------------|----------------|
 | Games won          | 1871.0          | 3129           |
@@ -346,8 +348,8 @@ La baisse des performances à 200 000 parties est probablement due à des limita
 **BEST AI : AI**
 
 
-### 150 000
+##### 150 000
 *(Données manquantes)*
 
-### 200 000
+##### 200 000
 *(Données manquantes)*
