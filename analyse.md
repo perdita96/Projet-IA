@@ -294,7 +294,24 @@ La baisse des performances à 200 000 parties est probablement due à des limita
 
 
 ### 200 000
-*(Données manquantes)*
+#### IA commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 1353            | 3647           |
+| Games lost      | 3647            | 1353           |
+| Win percentage  | 27.06%          | 72.94%         |
+| Lose percentage | 72.94%          | 27.06%         |
+
+**BEST AI : AI**
+
+#### RANDOM commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 1884.0          | 3116           |
+| Games lost      | 3116            | 1884.0         |
+| Win percentage  | 37.68%          | 62.32%         |
+| Lose percentage | 62.32%          | 37.68%         |
+
 
 ---
 
