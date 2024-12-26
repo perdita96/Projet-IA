@@ -394,6 +394,7 @@ Les valeurs élevées de Gamma et d'Alpha favorisent une stratégie à long term
 | Games lost         | 3120            | 1880           |
 | Win percentage     | 37.6 %          | 62.4 %         |
 | Lose percentage    | 62.40%          | 37.60%         |
+
 **BEST AI : AI**
 
 ##### 200 000
