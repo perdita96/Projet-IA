@@ -129,15 +129,15 @@ if __name__ == '__main__':
         ai_id = id_searched_player('IA')
 
         nb_wins = 0
-        for _ in range(int(nb_games/2)):
+        for _ in range(nb_games/2):
             winner = play_game(ai_id, random_id,True)
             if winner == 2:
                 nb_wins += 1
         
-        evaluate_model(int(nb_games/2), nb_wins,True)
+        evaluate_model(nb_games/2, nb_wins,True)
 
         nb_wins = 0
-        for _ in range(int(nb_games/2)):
+        for _ in range(nb_games/2):
             winner = play_game(ai_id, random_id,False)
             if winner == 2:
                 nb_wins += 1
