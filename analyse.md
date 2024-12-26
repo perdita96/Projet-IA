@@ -399,3 +399,5 @@ Les valeurs élevées de Gamma et d'Alpha favorisent une stratégie à long term
 
 ##### 200 000
 *(Données manquantes)*
+
+### **Conclusion**
