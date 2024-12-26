@@ -189,12 +189,12 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 ![image](https://github.com/user-attachments/assets/a453495f-4666-40de-a55b-4fa0790e6dd7)
 
 ###### **IA commence :**
-- À mesure que le nombre de parties augmente (jusqu'à 150 000), les performances augmentent, suggérant que l'IA apprend efficacement les meilleures actions dans l'environnement.
-- Cependant, après **200 000 parties**, le pourcentage de victoires diminue légèrement à **65.62%**.
+À mesure que le nombre de parties augmente (jusqu'à 150 000), les performances augmentent, suggérant que l'IA apprend efficacement les meilleures actions dans l'environnement.
+Cependant, après **200 000 parties**, le pourcentage de victoires diminue légèrement à **65.62%**.
 
 ###### **RANDOM commence :**
-- Lorsque RANDOM commence, l'IA maintient une supériorité (jusqu'à 150 000 parties), bien que son taux de victoire soit plus faible qu'en jouant en premier.
-- La performance augmente progressivement avec le nombre de parties, mais une baisse est observée à **200 000 parties** (**59.14%** → **58.60%**).
+Lorsque RANDOM commence, l'IA maintient une supériorité (jusqu'à 150 000 parties), bien que son taux de victoire soit plus faible qu'en jouant en premier.
+La performance augmente progressivement avec le nombre de parties, mais une baisse est observée à **200 000 parties** (**59.14%** → **58.60%**).
 
 ###### Pourquoi une baisse à 200 000 parties ?
 
@@ -206,20 +206,11 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 - L'IA, s'étant principalement entraînée contre elle-même, pourrait ne pas avoir exploré tous les états possibles de l'environnement.  
 - Cela peut limiter sa capacité à réagir efficacement à des scénarios inattendus.
 
-
 ###### Impact des hyperparamètres (Alpha et Gamma)
 
-*Alpha (taux d'apprentissage, ici = 0.3)*
-- **Effet :**
-  - Un alpha élevé (comme 0.3) permet une adaptation rapide, mais cela peut aussi rendre l'apprentissage instable.
-- **Dans ce cas :**  
-  - Un alpha de 0.3 semble initialement efficace, mais pourrait contribuer au surapprentissage.
+- *Alpha (taux d'apprentissage, ici = 0.3)* : Un alpha élevé permet une adaptation rapide, mais cela peut aussi rendre l'apprentissage instable.
 
-*Gamma (facteur d'actualisation, ici = 0.3)*
-- **Effet :**
-  - Un gamma faible (comme ici, 0.3) privilégie des récompenses immédiates, ce qui peut limiter l'optimisation globale des stratégies.
-- **Dans ce cas :**  
-  - Gamma = 0.3 pourrait limiter la capacité de l'IA à anticiper les conséquences de ses actions sur le long terme, surtout dans des scénarios avec un grand nombre de parties.
+- *Gamma (facteur d'actualisation, ici = 0.3)* : Un gamma faible privilégie des récompenses immédiates, ce qui peut limiter l'optimisation globale des stratégies à llong terme. Cela pourrait limiter la capacité de l'IA à anticiper les conséquences de ses actions sur le long terme, surtout dans des scénarios avec un grand nombre de parties.
 
 ###### Conclusion
 
@@ -325,6 +316,21 @@ La baisse des performances à 200 000 parties peut être expliquée par plusieur
 | Win percentage  | 37.68%          | 62.32%         |
 | Lose percentage | 62.32%          | 37.68%         |
 
+##### Analyse globale des résultats 
+![image](https://github.com/user-attachments/assets/be62e986-9892-42f4-8e23-c8ff109a2b77)
+###### **IA commence :**
+Lorsque l'IA commence, elle démontre un taux de victoire moyen supérieur à 80% dès 50 000 parties. Cependant, ce taux diminue légèrement à 100 000 parties avant de remonter légèrement et finit à environ 73% après 200 000 parties. Cette évolution suggère que l'IA ajuste et stabilise ses stratégies au fil des entraînements.
+###### **RANDOM commence :**
+Lorsque RANDOM commence, l'IA reste dominante, mais son taux de victoire est légèrement inférieur. On observe également une baisse des performances à 100 000 parties, suivie d'une augmentation progressive à mesure que l'entraînement se poursuit. Finalement, l'IA atteint un meilleur score qu'à 50 000 parties, ce qui reflète une amélioration continue malgré le désavantage initial.
+###### Impact des hyperparamètres (Alpha et Gamma)
+- *Alpha (taux d'apprentissage, ici 0.9)* : Un Alpha de 0.9 signifie que l'IA met davantage l'accent sur les nouvelles informations par rapport aux anciennes. Cela lui permet de s’adapter rapidement, particulièrement en début d'entraînement. Cependant, un Alpha élevé peut introduire une instabilité si l’environnement ou les comportements adverses changent.
+
+- *Gamma (facteur de discount, ici 0.9)* : Une valeur élevée de Gamma indique que l'IA accorde une grande importance aux récompenses futures. Cela favorise une planification à long terme, essentielle dans des jeux stratégiques où les décisions immédiates ont un impact sur plusieurs tours.
+
+Le choix de ces hyperparamètres semble judicieux, car il permet à l’IA de converger rapidement vers des performances stables et efficaces.
+
+###### Conclusion
+Les valeurs élevées de Gamma et d'Alpha favorisent une stratégie à long terme et une adaptation rapide. Cependant, des entraînements supplémentaires seraient nécessaires pour évaluer si l'IA peut continuer à améliorer ses performances. Bien que ses résultats soient impressionnants, il reste un potentiel d'optimisation.
 
 ---
 #### **Gamma = 0.9, Alpha = 0.1** (IA4)
