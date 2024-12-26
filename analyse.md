@@ -11,7 +11,7 @@
    - [Gamma = 0.3, Alpha = 0.3 (IA2)](#gamma--03-alpha--03-ia2)
    - [Gamma = 0.9, Alpha = 0.9 (IA3)](#gamma--09-alpha--09-ia3)
    - [Gamma = 0.9, Alpha = 0.1 (IA4)](#gamma--09-alpha--01-ia4)
-6. [Conclusion](#conclusion)
+6. [Conclusion finale](#conclusion-finale)
 
 ---
 ### **Définition de la méthodologie**
@@ -400,4 +400,4 @@ Les valeurs élevées de Gamma et d'Alpha favorisent une stratégie à long term
 ##### 200 000
 *(Données manquantes)*
 
-### **Conclusion**
+### **Conclusion finale**
