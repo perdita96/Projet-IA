@@ -371,73 +371,24 @@ La baisse des performances à 200 000 parties peut être expliquée par plusieur
 **BEST AI : AI**
 
 ##### 150 000
---------------------
-ia commence
-        RANDOM          AI
-        Games won : 1088                Games won : 3912
-        Games lost : 3912               Games lost : 1088
-        Win percentage : 21.76%         Win percentage : 78.24
-        Lose percentage : 78.24%                Lose percentage : 21.76
+###### IA commence 
+|Metric              | RANDOM          | AI             |
+|--------------------|-----------------|----------------|
+| Games won          | 1088            | 3912           |
+| Games lost         | 3912            | 1088           |
+| Win percentage     | 21.76%          | 78.24%         |
+| Lose percentage    | 78.24%          | 21.76%         |
 
-                BEST AI : AI
---------------------
-random commence
-        RANDOM          AI
-        Games won : 1880.0              Games won : 3120
-        Games lost : 3120               Games lost : 1880.0
-        Win percentage : 37.60%         Win percentage : 62.40
-        Lose percentage : 62.40%                Lose percentage : 37.60
+**BEST AI : AI**
 
-                BEST AI : AI
-
-##### 200 000
-
-#### **Gamma = 0.9, Alpha = 0.9**
-##### 50 000
-Lorsque l'IA commence : 82,58% de parties gagnées
-Lorsque l'IA ne commence pas : 61,84% de parties gagnées
-##### 100 000
-
-##### 150 000
+###### RANDOM commence 
+|Metric              | RANDOM          | AI             |
+|--------------------|-----------------|----------------|
+| Games won          | 1880            | 3120           |
+| Games lost         | 3120            | 1880           |
+| Win percentage     | 37.6 %          | 62.4 %         |
+| Lose percentage    | 62.40%          | 37.60%         |
+**BEST AI : AI**
 
 ##### 200 000
-
-#### **Gamma = 0.9, Alpha = 0.1**
-##### 50 000
---------------------
-ia commence
-        RANDOM          AI
-        Games won : 1652.0              Games won : 3348
-        Games lost : 3348               Games lost : 1652.0
-        Win percentage : 33.04%         Win percentage : 66.96
-        Lose percentage : 66.96%                Lose percentage : 33.04
-
-                BEST AI : AI
---------------------
-random commence
-        RANDOM          AI
-        Games won : 1981.0              Games won : 3019
-        Games lost : 3019               Games lost : 1981.0
-        Win percentage : 39.62%         Win percentage : 60.38
-        Lose percentage : 60.38%                Lose percentage : 39.62
-
-                BEST AI : AI
-##### 100 000
---------------------
-ia commence
-        RANDOM          AI
-        Games won : 1185.0              Games won : 3815
-        Games lost : 3815               Games lost : 1185.0
-        Win percentage : 23.70%         Win percentage : 76.30
-        Lose percentage : 76.30%                Lose percentage : 23.70
-
-                BEST AI : AI
---------------------
-random commence
-        RANDOM          AI
-        Games won : 1871.0              Games won : 3129
-        Games lost : 3129               Games lost : 1871.0
-        Win percentage : 37.42%         Win percentage : 62.58
-        Lose percentage : 62.58%                Lose percentage : 37.42
-
-                BEST AI : AI
+*(Données manquantes)*
