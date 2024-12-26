@@ -2,6 +2,7 @@
 __pycache__/
 BLOCKADE/__pycache__/
 BLOCKADE/app_models/__pycache__/
+logs.txt
 
 
 # Ignorer les fichiers

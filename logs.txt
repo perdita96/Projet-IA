@@ -1,0 +1,12 @@
+25/12/2024 14:51:18 : Appel de move(<Game 201013>, 4, ArrowDown) ==><Game 201013>
+25/12/2024 14:51:18 : Appel de move(<Game 201013>, 2, ArrowUp) ==><Game 201013>
+25/12/2024 14:51:18 : Appel de move(<Game 201013>, 4, ArrowDown) ==><Game 201013>
+25/12/2024 14:51:18 : Appel de move(<Game 201013>, 2, ArrowLeft) ==><Game 201013>
+25/12/2024 14:51:18 : Appel de move(<Game 201013>, 4, ArrowRight) ==><Game 201013>
+25/12/2024 14:51:18 : Appel de move(<Game 201013>, 2, ArrowLeft) ==><Game 201013>
+25/12/2024 14:51:19 : Appel de move(<Game 201013>, 4, ArrowRight) ==><Game 201013>
+25/12/2024 14:51:19 : Appel de move(<Game 201013>, 2, ArrowLeft) ==><Game 201013>
+25/12/2024 14:51:19 : Appel de move(<Game 201013>, 4, ArrowRight) ==><Game 201013>
+25/12/2024 14:51:19 : Appel de move(<Game 201013>, 2, ArrowDown) ==><Game 201013>
+25/12/2024 14:51:19 : Appel de move(<Game 201013>, 4, ArrowRight) ==><Game 201013>
+25/12/2024 14:51:19 : Appel de move(<Game 201013>, 2, ArrowLeft) ==><Game 201013>

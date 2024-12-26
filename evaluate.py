@@ -96,8 +96,8 @@ def evaluate_model(nb_games, nb_wins, ia_is_first):
     print('\tRANDOM' + (' ' * 10) + 'AI')
     print(f'\tGames won : {nb_loses}\t\tGames won : {nb_wins}')
     print(f'\tGames lost : {nb_wins}\t\tGames lost : {nb_loses}')
-    print(f'\tWin percentage : {100 - win_pct:.2f}%\t\tWin percentage : {win_pct:.2f}')
-    print(f'\tLose percentage : {win_pct:.2f}%\t\tLose percentage : {100 - win_pct:.2f}')
+    print(f'\tWin percentage : {100 - win_pct:.2f}%\t\tWin percentage : {win_pct:.2f}%')
+    print(f'\tLose percentage : {win_pct:.2f}%\t\tLose percentage : {100 - win_pct:.2f}%')
     print()
     print(f'\t\tBEST AI : {'RANDOM' if win_pct < 50 else 'AI' if win_pct > 50 else 'NONE'}')
 

@@ -1,5 +1,5 @@
 from flask import Flask
-from BLOCKADE.app_models.models import db, init_db  #
+from BLOCKADE.app_models.models import db, init_db 
 from BLOCKADE.views import app           
 import config
 
