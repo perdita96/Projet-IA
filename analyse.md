@@ -117,8 +117,36 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 
 
 ##### 200 000
-*(Données manquantes)*
+#### IA commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 670             | 4330           |
+| Games lost      | 4330            | 670            |
+| Win percentage  | 13.40%          | 86.60%         |
+| Lose percentage | 86.60%          | 13.40%         |
 
+**BEST AI : AI**
+
+#### RANDOM commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 1707            | 3293           |
+| Games lost      | 3293            | 1707           |
+| Win percentage  | 34.14%          | 64.12%         |
+| Lose percentage | 65.86%          | 34.14%         |
+
+**BEST AI : AI**
+
+##### Analyse globale des résultats 
+![image](https://github.com/user-attachments/assets/6f008634-4732-465f-ac00-e90f74215161)
+
+###### **IA commence :**
+
+###### **RANDOM commence :**
+
+###### Impact des hyperparamètres (Alpha et Gamma)
+
+###### Conclusion
 ---
 #### **Gamma = 0.3, Alpha = 0.3** (IA2)
 
@@ -450,3 +478,8 @@ Les valeurs élevées de Gamma et d'Alpha favorisent une stratégie à long term
 
 
 ### **Conclusion finale**
+##### **IA commence :**
+![image](https://github.com/user-attachments/assets/eff21534-5f18-42d0-aff0-6bd6cecd792b)
+
+##### **RANDOM commence :**
+![image](https://github.com/user-attachments/assets/c30cb843-8135-4c93-86ad-694d44dc7cba)
