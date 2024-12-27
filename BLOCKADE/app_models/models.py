@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 import logging as lg
 import random
 
+#créer instance de la base de données
 db = SQLAlchemy()
 
 def init_db():

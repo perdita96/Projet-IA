@@ -5,8 +5,11 @@ from .ai import*
 from . import business
 import config
 
+#créer une instance de l'application Flask.
 app = Flask(__name__)
+#chargement de la configuration de l'application flask
 app.config.from_object(config)
+#initialisation de l'instance de la base de données avec l'application flask
 db.init_app(app) 
 
 
