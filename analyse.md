@@ -95,7 +95,26 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 **BEST AI : AI**
 
 ##### 150 000
-*(Données manquantes)*
+#### IA commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 710             | 4290           |
+| Games lost      | 4290            | 710            |
+| Win percentage  | 14.20%          | 85.80%         |
+| Lose percentage | 85.80%          | 14.20%         |
+
+**BEST AI : AI**
+
+#### RANDOM commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 1794            | 3206           |
+| Games lost      | 3206            | 1794           |
+| Win percentage  | 35.88%          | 64.12%         |
+| Lose percentage | 64.12%          | 35.88%         |
+
+**BEST AI : AI**
+
 
 ##### 200 000
 *(Données manquantes)*
