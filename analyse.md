@@ -417,6 +417,36 @@ Les valeurs élevées de Gamma et d'Alpha favorisent une stratégie à long term
 **BEST AI : AI**
 
 ##### 200 000
-*(Données manquantes)*
+###### IA commence 
+|Metric              | RANDOM          | AI             |
+|--------------------|-----------------|----------------|
+| Games won          | 1346            | 3654           |
+| Games lost         | 3654            | 1346           |
+| Win percentage     | 26.92%          | 73.08%         |
+| Lose percentage    | 73.08%          | 26.92%         |
+
+**BEST AI : AI**
+
+###### RANDOM commence 
+|Metric              | RANDOM          | AI             |
+|--------------------|-----------------|----------------|
+| Games won          | 1703            | 3297           |
+| Games lost         | 3297            | 1703           |
+| Win percentage     | 34.06%          | 65.94%         |
+| Lose percentage    | 65.94%          | 34.06%         |
+
+**BEST AI : AI**
+
+##### Analyse globale des résultats 
+![image](https://github.com/user-attachments/assets/ffc7ac0f-64cc-4f16-a202-b831f1b9a018)
+
+###### **IA commence :**
+
+###### **RANDOM commence :**
+
+###### Impact des hyperparamètres (Alpha et Gamma)
+
+###### Conclusion
+
 
 ### **Conclusion finale**
