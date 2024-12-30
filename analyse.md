@@ -505,12 +505,14 @@ L'IA a démontré une amélioration continue de sa performance, et son taux de v
 
 #### **IA commence :**
 ![image](https://github.com/user-attachments/assets/89e46699-ca49-43cd-b594-177c59e0c63c)
+
 Les résultats obtenus lorsque l'IA commence les parties montrent une domination claire dans toutes les configurations testées. Les meilleures performances sont observées dans les configurations avec un **Gamma élevé (0.9)**, favorisant une adaptation rapide aux récompenses à long terme, et un **Alpha modéré (0.3)**, permettant une exploration suffisante tout en favorisant l'exploitation.
 
 Cependant, il est à noter qu'avec un nombre de parties élevé, la performance peut légèrement diminuer, ce qui pourrait indiquer des effets de surapprentissage ou une saturation des stratégies. L'IA 4, étant plus lente dans son apprentissage, pourrait potentiellement devenir plus performante sur le long terme si l'entraînement est prolongé.
 
 #### **RANDOM commence :**
 ![image](https://github.com/user-attachments/assets/1b319099-ac76-4dcb-bbe5-4d25f5574f73)
+
 Dans le cas où **RANDOM commence**, l'IA reste dominante mais avec des taux de victoire relativement inférieurs à ceux où elle commence. Il est plus difficile de déterminer quelle est la meilleure IA, car les scores sont très proches.
 
 ---
