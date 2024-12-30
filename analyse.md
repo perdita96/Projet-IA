@@ -485,12 +485,21 @@ Les valeurs élevées de Gamma et d'Alpha favorisent une stratégie à long term
 ![image](https://github.com/user-attachments/assets/ffc7ac0f-64cc-4f16-a202-b831f1b9a018)
 
 ###### **IA commence :**
+- l'IA a systématiquement dominé le jeu avec un taux de victoire bien plus élevé que le joueur aléatoire (RANDOM). 
+- Plus le nombre d'itérations augmente, plus l'IA devenient performante, atteignant jusqu'à 78,24 % de victoires avec 150 000 parties. 
+- Baisse après 200 000 parties.
 
 ###### **RANDOM commence :**
+- Performance soit plus faible. Cependant, l'IA continue de maintenir un taux de victoire supérieur à 60 % même après 200 000 itérations, ce qui indique qu'elle conserve un avantage stratégique notable sur RANDOM. La performance de l'IA reste élevée même si elle part avec un désavantage initial.
+
 
 ###### Impact des hyperparamètres (Alpha et Gamma)
+- *Alpha (taux d'apprentissage, ici 0.1)* : Alpha faible (0.1) signifie que l'IA apprend de manière progressive, ce qui est un bon compromis pour éviter des mises à jour trop brusques qui pourraient nuire à l'apprentissage à long terme.
+
+- *Gamma (facteur de discount, ici 0.9)* :Gamma élevé (proche de 1) indique que l'IA valorise les récompenses futures presque autant que les récompenses immédiates, ce qui est un choix judicieux dans les environnements où la prise de décision à long terme est cruciale. 
 
 ###### Conclusion
+L'IA a démontré une amélioration continue de sa performance, et son taux de victoire augmente avec le nombre d'itérations, ce qui montre que l'algorithme d'apprentissage par renforcement est efficace pour optimiser les décisions au fil du temps.
 
 ### **Conclusion finale**
 ##### **IA commence :**
