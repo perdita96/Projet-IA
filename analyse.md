@@ -143,21 +143,20 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 
 ###### **IA commence :**
 
-- Peu importe le nombre de parties simulées, l'IA montre une performance remarquable lorsqu'elle commence, avec des taux de victoire dépassant **80 %** dans toutes les configurations.
+- L'IA atteint des performances exceptionnelles, avec un taux de victoire supérieur à 80% dans toutes les configurations. Le meilleur score est observé à 200 000 parties, avec 86,60% de victoires.
 - Le score baisse légèrement a 100 000 partie mais remonte directement à des valeurs supérieur
-- Le meilleur score est observé avec **200 000 parties**, où l'IA atteint **86,60 % de victoires** contre RANDOM.
 
 ###### **RANDOM commence :**
 
-- Le taux de victoire de l'IA est moins élevé dans cette configuration (environ **63-70 %**) mais reste supérieur à RANDOM, démontrant une capacité d'adaptation face à un départ défavorable.
-- Le taux de victoire de l'IA semble légèrement augmenter m(de **63,8 % à 64,12 %**) entre les simulations de **100k** et **200k parties** malgré une baisse entre 50K et 100K partie.
+- L'IA reste supérieure, bien que son taux de victoire soit plus faible.
+- Le taux de victoire de l'IA semble légèrement augmenter (de **63,8 % à 64,12 %**) entre les simulations de 100k et 200k parties 
+- Mais une baisse entre 50K et 100K partie (de **70.1 % à 63,8 %**) est observée.
 
 ###### Impact des hyperparamètres (Alpha et Gamma)
 
-- *Alpha (taux d'apprentissage, ici = 0.3)* : Un **Alpha modéré** permet à l'IA d'apprendre progressivement sans surécrire constamment les anciennes informations. Cela a probablement aidé à stabiliser les performances, permettant une bonne balance entre exploration et exploitation.
+- *Alpha (taux d'apprentissage, ici = 0.3)* : Un **Alpha modéré** permet à l'IA d'apprendre progressivement sans surécrire constamment les anciennes informations. Cela a probablement aidé à stabiliser les performances.
 
 - *Gamma (facteur d'actualisation, ici = 0.9)*: Une valeur de **Gamma élevée** favorise un apprentissage à long terme, où l'IA privilégie les récompenses futures plutôt qu'immédiates. Cela semble cohérent avec les performances observées : l'IA parvient à établir une stratégie gagnante même en simulant un grand nombre de parties.
-
 
 ###### Conclusion
 
@@ -256,8 +255,8 @@ La configuration (Gamma = 0.9, Alpha = 0.3) semble bien adaptée pour favoriser 
 -Après **200 000 parties**, le pourcentage de victoires diminue légèrement à **65.62%**.
 
 ###### **RANDOM commence :**
--Lorsque RANDOM commence, l'IA maintient une supériorité (jusqu'à 150 000 parties), bien que son taux de victoire soit plus faible qu'en jouant en premier.
--La performance augmente progressivement avec le nombre de parties, mais une baisse est observée à **200 000 parties** (**59.14%** → **58.60%**).
+-Le taux de victoire de l'IA augmente avec le nombre de parties, atteignant 71,08% après 150 000 parties.
+-Avant de diminuer légèrement à 65,62% après 200 000.
 
 ###### Pourquoi une baisse à 200 000 parties ?
 
@@ -271,20 +270,19 @@ La configuration (Gamma = 0.9, Alpha = 0.3) semble bien adaptée pour favoriser 
 
 ###### Impact des hyperparamètres (Alpha et Gamma)
 
-- *Alpha (taux d'apprentissage, ici = 0.3)* : Un alpha élevé permet une adaptation rapide, mais cela peut aussi rendre l'apprentissage instable.
+- *Alpha (taux d'apprentissage, ici = 0.3)* : Un alpha modéré permet une adaptation rapide, mais cela peut aussi rendre l'apprentissage instable.
 
-- *Gamma (facteur d'actualisation, ici = 0.3)* : Un gamma faible privilégie des récompenses immédiates, ce qui peut limiter l'optimisation globale des stratégies à llong terme. Cela pourrait limiter la capacité de l'IA à anticiper les conséquences de ses actions sur le long terme, surtout dans des scénarios avec un grand nombre de parties.
+- *Gamma (facteur d'actualisation, ici = 0.3)* : Un gamma faible privilégie des récompenses immédiates, ce qui peut limiter l'optimisation globale des stratégies à long terme. Cela pourrait limiter la capacité de l'IA à anticiper les conséquences de ses actions sur le long terme.
 
 ###### Conclusion
 
 Cette IA apprend rapidement, mais son apprentissage privilégie les récompenses immédiates. Cela limite sa capacité à développer des stratégies à long terme, pourtant essentielles pour ce type de jeu. 
-En conséquence, son taux de réussite reste plafonné sous les 70 %.
 
 La baisse des performances à 200 000 parties peut être expliquée par plusieurs facteurs combinés :
 
 1. **Limitations des hyperparamètres :**
 
-- Un alpha élevé (taux d'apprentissage) favorise des ajustements rapides mais peut provoquer une instabilité ou un surapprentissage.
+- Un alpha modére (taux d'apprentissage) favorise des ajustements rapides mais peut provoquer une instabilité ou un surapprentissage.
 - Un gamma faible (facteur d'actualisation) empêche l'IA d'optimiser les actions sur le long terme, en limitant son anticipation des récompenses différées.
 
 2. **Manque de diversité dans l'entraînement :**
@@ -382,18 +380,20 @@ La baisse des performances à 200 000 parties peut être expliquée par plusieur
 ##### Analyse globale des résultats 
 ![image](https://github.com/user-attachments/assets/be62e986-9892-42f4-8e23-c8ff109a2b77)
 ###### **IA commence :**
-Lorsque l'IA commence, elle démontre un taux de victoire moyen supérieur à 80% dès 50 000 parties. Cependant, ce taux diminue légèrement à 100 000 parties avant de remonter légèrement et finit à environ 73% après 200 000 parties. Cette évolution suggère que l'IA ajuste et stabilise ses stratégies au fil des entraînements.
+-Taux de victoire moyen supérieur à 80% dès 50 000 parties. Cependant
+-Baisse légèrement à 100 000 parties 
+-Remonter légèrement et finit à environ 73% après 200 000 parties.
+
 ###### **RANDOM commence :**
-Lorsque RANDOM commence, l'IA reste dominante, mais son taux de victoire est légèrement inférieur. On observe également une baisse des performances à 100 000 parties, suivie d'une augmentation progressive à mesure que l'entraînement se poursuit. Finalement, l'IA atteint un meilleur score qu'à 50 000 parties, ce qui reflète une amélioration continue malgré le désavantage initial.
+- Baisse des performances à 100 000 parties, suivie d'une augmentation progressive à mesure que l'entraînement se poursuit. Finalement, l'IA atteint un meilleur score qu'à 50 000 parties.
 ###### Impact des hyperparamètres (Alpha et Gamma)
+
 - *Alpha (taux d'apprentissage, ici 0.9)* : Un Alpha de 0.9 signifie que l'IA met davantage l'accent sur les nouvelles informations par rapport aux anciennes. Cela lui permet de s’adapter rapidement, particulièrement en début d'entraînement. Cependant, un Alpha élevé peut introduire une instabilité si l’environnement ou les comportements adverses changent.
 
 - *Gamma (facteur de discount, ici 0.9)* : Une valeur élevée de Gamma indique que l'IA accorde une grande importance aux récompenses futures. Cela favorise une planification à long terme, essentielle dans des jeux stratégiques où les décisions immédiates ont un impact sur plusieurs tours.
 
-Le choix de ces hyperparamètres semble judicieux, car il permet à l’IA de converger rapidement vers des performances stables et efficaces.
-
 ###### Conclusion
-Les valeurs élevées de Gamma et d'Alpha favorisent une stratégie à long terme et une adaptation rapide. Cependant, des entraînements supplémentaires seraient nécessaires pour évaluer si l'IA peut continuer à améliorer ses performances. Bien que ses résultats soient impressionnants, il reste un potentiel d'optimisation.
+Les valeurs élevées de Gamma et d'Alpha favorisent une stratégie à long terme et une adaptation rapide. Cependant, des entraînements supplémentaires seraient nécessaires pour évaluer si l'IA peut continuer à améliorer ses performances ou fini par devenir instable.
 
 ---
 #### **Gamma = 0.9, Alpha = 0.1** (IA4)
@@ -490,7 +490,7 @@ Les valeurs élevées de Gamma et d'Alpha favorisent une stratégie à long term
 - Baisse après 200 000 parties.
 
 ###### **RANDOM commence :**
-- Performance soit plus faible. Cependant, l'IA continue de maintenir un taux de victoire supérieur à 60 % même après 200 000 itérations, ce qui indique qu'elle conserve un avantage stratégique notable sur RANDOM. La performance de l'IA reste élevée même si elle part avec un désavantage initial.
+- Taux de victoire supérieur à 60 % même après 200 000 itérations, ce qui indique qu'elle conserve un avantage stratégique notable sur RANDOM. 
 
 
 ###### Impact des hyperparamètres (Alpha et Gamma)
@@ -499,14 +499,25 @@ Les valeurs élevées de Gamma et d'Alpha favorisent une stratégie à long term
 - *Gamma (facteur de discount, ici 0.9)* :Gamma élevé (proche de 1) indique que l'IA valorise les récompenses futures presque autant que les récompenses immédiates, ce qui est un choix judicieux dans les environnements où la prise de décision à long terme est cruciale. 
 
 ###### Conclusion
-L'IA a démontré une amélioration continue de sa performance, et son taux de victoire augmente avec le nombre d'itérations, ce qui montre que l'algorithme d'apprentissage par renforcement est efficace pour optimiser les décisions au fil du temps.
+L'IA a démontré une amélioration continue de sa performance, et son taux de victoire augmente avec le nombre d'itérations.
 
 ### **Conclusion finale**
-##### **IA commence :**
+
+#### **IA commence :**
 ![image](https://github.com/user-attachments/assets/89e46699-ca49-43cd-b594-177c59e0c63c)
+Les résultats obtenus lorsque l'IA commence les parties montrent une domination claire dans toutes les configurations testées. Les meilleures performances sont observées dans les configurations avec un **Gamma élevé (0.9)**, favorisant une adaptation rapide aux récompenses à long terme, et un **Alpha modéré (0.3)**, permettant une exploration suffisante tout en favorisant l'exploitation.
 
+Cependant, il est à noter qu'avec un nombre de parties élevé, la performance peut légèrement diminuer, ce qui pourrait indiquer des effets de surapprentissage ou une saturation des stratégies. L'IA 4, étant plus lente dans son apprentissage, pourrait potentiellement devenir plus performante sur le long terme si l'entraînement est prolongé.
 
-##### **RANDOM commence :**
+#### **RANDOM commence :**
 ![image](https://github.com/user-attachments/assets/1b319099-ac76-4dcb-bbe5-4d25f5574f73)
+Dans le cas où **RANDOM commence**, l'IA reste dominante mais avec des taux de victoire relativement inférieurs à ceux où elle commence. Il est plus difficile de déterminer quelle est la meilleure IA, car les scores sont très proches.
 
+---
 
+### **Synthèse générale** :
+Les paramètres **Gamma** et **Alpha** jouent un rôle crucial dans la performance, et une configuration équilibrée permet à l'IA d'atteindre ses meilleures performances.
+
+En résumé, pour maximiser les performances de l'IA, il est recommandé de privilégier des valeurs **Gamma** élevées pour un apprentissage plus efficace à long terme et un **Alpha** modéré.
+
+Dans notre cas, la configuration **Gamma élevé (0.9)** et **Alpha modéré (0.3)** semble être la meilleure, mais il serait intéressant d'augmenter la durée d'entraînement pour observer si d'autres IA, comme l'IA 4, ne deviendraient pas meilleures. En effet, l'IA 4 ayant un apprentissage plus lent, elle pourrait se révéler plus performante à plus long terme.
