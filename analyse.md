@@ -492,7 +492,6 @@ Les valeurs élevées de Gamma et d'Alpha favorisent une stratégie à long term
 
 ###### Conclusion
 
-
 ### **Conclusion finale**
 ##### **IA commence :**
 ![image](https://github.com/user-attachments/assets/89e46699-ca49-43cd-b594-177c59e0c63c)
