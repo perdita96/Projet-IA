@@ -132,13 +132,14 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 |-----------------|-----------------|----------------|
 | Games won       | 1707            | 3293           |
 | Games lost      | 3293            | 1707           |
-| Win percentage  | 34.14%          | 64.12%         |
+| Win percentage  | 34.14%          | 65.86%         |
 | Lose percentage | 65.86%          | 34.14%         |
 
 **BEST AI : AI**
 
 ##### Analyse globale des résultats 
-![image](https://github.com/user-attachments/assets/6f008634-4732-465f-ac00-e90f74215161)
+![image](https://github.com/user-attachments/assets/353a716b-42a2-48a0-ad6e-07455e71b7aa)
+
 
 ###### **IA commence :**
 
