@@ -143,11 +143,26 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 
 ###### **IA commence :**
 
+- Peu importe le nombre de parties simulées, l'IA montre une performance remarquable lorsqu'elle commence, avec des taux de victoire dépassant **80 %** dans toutes les configurations.
+- Le score baisse légèrement a 100 000 partie mais remonte directement à des valeurs supérieur
+- Le meilleur score est observé avec **200 000 parties**, où l'IA atteint **86,60 % de victoires** contre RANDOM.
+
 ###### **RANDOM commence :**
+
+- Le taux de victoire de l'IA est moins élevé dans cette configuration (environ **63-70 %**) mais reste supérieur à RANDOM, démontrant une capacité d'adaptation face à un départ défavorable.
+- Le taux de victoire de l'IA semble légèrement augmenter m(de **63,8 % à 64,12 %**) entre les simulations de **100k** et **200k parties** malgré une baisse entre 50K et 100K partie.
 
 ###### Impact des hyperparamètres (Alpha et Gamma)
 
+- *Alpha (taux d'apprentissage, ici = 0.3)* : Un **Alpha modéré** permet à l'IA d'apprendre progressivement sans surécrire constamment les anciennes informations. Cela a probablement aidé à stabiliser les performances, permettant une bonne balance entre exploration et exploitation.
+
+- *Gamma (facteur d'actualisation, ici = 0.9)*: Une valeur de **Gamma élevée** favorise un apprentissage à long terme, où l'IA privilégie les récompenses futures plutôt qu'immédiates. Cela semble cohérent avec les performances observées : l'IA parvient à établir une stratégie gagnante même en simulant un grand nombre de parties.
+
+
 ###### Conclusion
+
+La configuration (Gamma = 0.9, Alpha = 0.3) semble bien adaptée pour favoriser un apprentissage à long terme tout en conservant une capacité d'adaptation stable.
+
 ---
 #### **Gamma = 0.3, Alpha = 0.3** (IA2)
 
@@ -237,12 +252,12 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 ![image](https://github.com/user-attachments/assets/a453495f-4666-40de-a55b-4fa0790e6dd7)
 
 ###### **IA commence :**
-À mesure que le nombre de parties augmente (jusqu'à 150 000), les performances augmentent, suggérant que l'IA apprend efficacement les meilleures actions dans l'environnement.
-Cependant, après **200 000 parties**, le pourcentage de victoires diminue légèrement à **65.62%**.
+-À mesure que le nombre de parties augmente (jusqu'à 150 000), les performances augmentent, suggérant que l'IA apprend efficacement les meilleures actions dans l'environnement.
+-Après **200 000 parties**, le pourcentage de victoires diminue légèrement à **65.62%**.
 
 ###### **RANDOM commence :**
-Lorsque RANDOM commence, l'IA maintient une supériorité (jusqu'à 150 000 parties), bien que son taux de victoire soit plus faible qu'en jouant en premier.
-La performance augmente progressivement avec le nombre de parties, mais une baisse est observée à **200 000 parties** (**59.14%** → **58.60%**).
+-Lorsque RANDOM commence, l'IA maintient une supériorité (jusqu'à 150 000 parties), bien que son taux de victoire soit plus faible qu'en jouant en premier.
+-La performance augmente progressivement avec le nombre de parties, mais une baisse est observée à **200 000 parties** (**59.14%** → **58.60%**).
 
 ###### Pourquoi une baisse à 200 000 parties ?
 
