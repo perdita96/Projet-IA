@@ -59,9 +59,9 @@ def log_function_call(func):
         
         result = func(*args, **kwargs)
 
-        logs_file = open("logs.txt", "a")  
-        logs_file.write(f"{date} : Appel de {func_name}({args_str}{', ' + kwargs_str if kwargs_str != '' else ''}) {'==>' + repr(result) if result is not None else ''}\n")
-        logs_file.close()
+        with open("logs.txt", "a") as logs_file:
+            logs_file.write(f"{date} : Appel de {func_name}({args_str}{', ' + kwargs_str if kwargs_str != '' else ''}) {'==>' + repr(result) if result is not None else ''}\n")
+
         return result
 
     return decorated_function
