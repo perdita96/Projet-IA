@@ -137,6 +137,27 @@ Les conclusions détaillées seront fournies après l’exécution des tests et 
 
 **BEST AI : AI**
 
+##### 400 000
+#### IA commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 864             | 4136           |
+| Games lost      | 4136            | 864            |
+| Win percentage  | 17.28%          | 82.72%         |
+| Lose percentage | 82.72%          | 17.28%         |
+
+**BEST AI : AI**
+
+#### RANDOM commence
+| Metric          | RANDOM          | AI             |
+|-----------------|-----------------|----------------|
+| Games won       | 1839            | 3161           |
+| Games lost      | 3161            | 1839           |
+| Win percentage  | 36.78%          | 63.22%         |
+| Lose percentage | 63.22%          | 36.78%         |
+
+**BEST AI : AI**
+
 ## Analyse globale des résultats 
 ![image](https://github.com/user-attachments/assets/353a716b-42a2-48a0-ad6e-07455e71b7aa)
 
@@ -468,6 +489,27 @@ Les valeurs élevées de Gamma et d'Alpha favorisent une stratégie à long term
 | Games lost         | 3654            | 1346           |
 | Win percentage     | 26.92%          | 73.08%         |
 | Lose percentage    | 73.08%          | 26.92%         |
+
+**BEST AI : AI**
+
+###### RANDOM commence 
+|Metric              | RANDOM          | AI             |
+|--------------------|-----------------|----------------|
+| Games won          | 1703            | 3297           |
+| Games lost         | 3297            | 1703           |
+| Win percentage     | 34.06%          | 65.94%         |
+| Lose percentage    | 65.94%          | 34.06%         |
+
+**BEST AI : AI**
+
+##### 400 000
+###### IA commence 
+|Metric              | RANDOM          | AI             |
+|--------------------|-----------------|----------------|
+| Games won          | 561             | 4439           |
+| Games lost         | 4439            | 561            |
+| Win percentage     | 11.22%          | 88.78%         |
+| Lose percentage    | 88.78%          | 11.22%         |
 
 **BEST AI : AI**
 
