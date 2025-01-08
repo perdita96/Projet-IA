@@ -24,10 +24,10 @@ Avant de procéder aux tests, il est essentiel de définir une méthodologie rig
 Trois configurations de Gamma (facteur d'actualisation) et Alpha (facteur d'apprentissage) ont été définies. 
 Chaque configuration est pensée pour représenter une stratégie d'apprentissage distincte, mettant en lumière les compromis entre récompenses immédiates et futures, ainsi que la vitesse d'intégration des nouvelles informations. Cette approche aide à mieux comprendre comment optimiser ces paramètres en fonction des objectifs du système.
 
-1. **Gamma = 0.9, Alpha = 0.3**
+1. **Gamma(facteur d'actualisation) = 0.9, Alpha(learning rate) = 0.3**
 2. **Gamma = 0.3, Alpha = 0.3**
 3. **Gamma = 0.9, Alpha = 0.9**
-4. **Gamma = 0.9, Alpha = 0.1**
+4. **Gamma = 0.9, Alpha = 0.1 ==> tient compte des récompenses futur et apprend lentement** 
 
 ---
 ### **Méthodologie des tests**
